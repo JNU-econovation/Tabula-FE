@@ -6,5 +6,11 @@ interface ButtonProps {
  * Primary UI component for user interaction
  */
 export const Button = ({ label }: ButtonProps) => {
-  return <button>{label}</button>;
+  return (
+    <button>
+      {label}
+
+      <div></div>
+    </button>
+  );
 };
