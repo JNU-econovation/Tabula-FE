@@ -4,7 +4,7 @@ import Logo from '../../../../assets/logo.png'
 
 interface HeaderProps {
   isLogin: boolean;
-  username: string;
+  username?: string;
 }
 
 const Header = ({ isLogin, username }: HeaderProps) => {
@@ -21,7 +21,7 @@ const Header = ({ isLogin, username }: HeaderProps) => {
           </button>
         </div>
         
-        {isLogin ? (
+        {isLogin && username ? (
           <div className='text-[#292929] mr-5'>{username}님</div>
         ) : (
             <Link href='login'>
