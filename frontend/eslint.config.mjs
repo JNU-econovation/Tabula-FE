@@ -20,6 +20,11 @@ const typescriptConfig = compat.extends(
   'plugin:@typescript-eslint/recommended-requiring-type-checking',
 );
 
+// Storybook 설정
+const storybookConfig = compat.extends(
+  'plugin:storybook/recommended',
+)
+
 // 추가 커스텀 설정
 const customConfig = compat.config({
   env: {
