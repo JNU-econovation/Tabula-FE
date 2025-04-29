@@ -1,4 +1,8 @@
 module.exports = {
+  content: [
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
   theme: {
     screens: {
       sm: '480px',
@@ -47,4 +51,5 @@ module.exports = {
       },
     },
   },
+  plugins: [],
 };
