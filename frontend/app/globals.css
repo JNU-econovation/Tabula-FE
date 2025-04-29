@@ -6,7 +6,6 @@
 }
 
 @theme {
-  --*: initial;
   --color-primary: #4917ff;
   --color-primary-gradient-from: #4917ff;
   --color-primary-gradient-to: #7b1eff;
