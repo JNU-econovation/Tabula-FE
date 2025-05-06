@@ -1,5 +1,5 @@
-import ProgressBar from '@/common/Loading/ProgressBar';
-import Spinner from '@/common/Loading/Spinner';
+import ProgressBar from '@/components/common/Loading/ProgressBar';
+import Spinner from '@/components/common/Loading/Spinner';
 
 interface LoadingProps {
   type?: 'progress' | 'spinner';
