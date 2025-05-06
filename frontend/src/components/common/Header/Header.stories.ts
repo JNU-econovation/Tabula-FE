@@ -1,14 +1,14 @@
-import { Meta, StoryObj } from "@storybook/react";
-import Header from "./Header";
+import { Meta, StoryObj } from '@storybook/react';
+import Header from './Header';
 
 const meta = {
-  title: 'Header',
+  title: 'common/Header',
   component: Header,
   parameters: {
-    layout: 'fullscreen'
+    layout: 'fullscreen',
   },
   tags: ['autodocs'],
-  args: {}
+  args: {},
 } satisfies Meta<typeof Header>;
 
 export default meta;
@@ -18,5 +18,5 @@ export const Primary: Story = {
   args: {
     isLogin: true,
     username: '홍길동',
-  }
-}
+  },
+};
