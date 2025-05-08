@@ -68,7 +68,9 @@ const Upload = ({ height, width, processFile, handleFile }: UploadProps) => {
       onDrop={handleDrop}
     >
       <>
-        <img className="w-7 h-7" src={uploadIcon.src} alt="Upload Icon" />
+        {height !== 'sm' && (
+          <img className="w-7 h-7" src={uploadIcon.src} alt="Upload Icon" />
+        )}
         <input
           type="file"
           ref={fileInputRef}
