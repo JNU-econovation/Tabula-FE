@@ -61,7 +61,7 @@ const buttonVariants = cva(
       {
         variant: "line",
         colorScheme: "gray",
-        class: "border-[#656565] text-[#656565] hover:bg-gray-100",
+        class: "border-[#656565] text-[#212121] hover:bg-gray-100",
       },
       {
         variant: "filled",
