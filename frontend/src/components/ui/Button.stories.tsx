@@ -19,7 +19,7 @@ const meta: Meta<typeof Button> = {
 export default meta
 type Story = StoryObj<typeof Button>
 
-export const FilledButton: Story = {
+export const FilledGradientButton: Story = {
   args: {
     variant: "filled",
     colorScheme: "gradient",
@@ -27,7 +27,7 @@ export const FilledButton: Story = {
   },
 }
 
-export const LineButton: Story = {
+export const LineGrayButton: Story = {
   args: {
     variant: "line",
     colorScheme: "secondary",
@@ -35,7 +35,7 @@ export const LineButton: Story = {
   }
 }
 
-export const IconLineButton: Story = {
+export const LineGradientButton: Story = {
   args: {
     variant: "line",
     colorScheme: "gradient",
@@ -54,7 +54,7 @@ export const UploadButton: Story = {
   },
 }
 
-export const Variants: Story = {
+export const LoginButton: Story = {
   args: {
     variant: "filled",
     colorScheme: "secondary",
