@@ -10,14 +10,14 @@ type Toast = {
 
 type ToastStore = {
   toasts: Toast[];
-  addTost: (text: string, sec?: number, type?: "error" | "default") => void;
+  addToast: (text: string, sec?: number, type?: "error" | "default") => void;
 }
 
 export const useToastStore = create<ToastStore>() (
   devtools((set) => ({
     toasts: [],
 
-    addTost: (text, sec = 3, type="error") => {
+    addToast: (text, sec = 3, type="error") => {
       const id = Date.now().toString();
       set((state) => ({
         toasts: [...state.toasts, {id, text, sec, type}].slice(-3),
