@@ -6,12 +6,48 @@
 }
 
 @theme {
-  --color-primary: #4917ff;
-  --color-primary-gradient-from: #4917ff;
-  --color-primary-gradient-to: #1761ff;
-  --color-secondary: #f5f5f5;
-}
+  /* Primary Colors */
+  --color-primary-50: #f4f1ff;
+  --color-primary-100: #e8e1ff;
+  --color-primary-200: #d1c3ff;
+  --color-primary-300: #b49aff;
+  --color-primary-400: #926cff;
+  --color-primary-500: #6c3eff;
+  --color-primary-600: #4917ff; /* Base primary color */
+  --color-primary-700: #3b12d9;
+  --color-primary-800: #3112b0;
+  --color-primary-900: #291084;
+  --color-primary-950: #190656;
+  --color-primary-gradient-to: #7b1eff;
+  --color-primary-gradient: linear-gradient(
+    90deg,
+    var(--color-primary-gradient-from) 0%,
+    var(--color-primary-gradient-to) 100%
+  );
 
+  /* Secondary Colors */
+  --color-secondary-50: #ffffff;
+  --color-secondary-100: #fafafa;
+  --color-secondary-200: #f5f5f5; /* Base secondary color */
+  --color-secondary-300: #e5e5e5;
+  --color-secondary-400: #d4d4d4;
+  --color-secondary-500: #a3a3a3;
+  --color-secondary-600: #737373;
+  --color-secondary-700: #525252;
+  --color-secondary-800: #404040;
+  --color-secondary-900: #262626;
+  --color-secondary-950: #171717;
+
+  /* Secondary Gradient */
+  --color-secondary-gradient-from: #f5f5f5;
+  --color-secondary-gradient-to: #ffffff;
+  --color-secondary-gradient: linear-gradient(
+    90deg,
+    var(--color-secondary-gradient-from) 0%,
+    var(--color-secondary-gradient-to) 100%
+  );
+  
+  
 @layer utilities {
   .spinner-container {
     @apply relative w-12 h-12;
