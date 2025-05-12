@@ -96,7 +96,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps & { width?: numbe
       <Comp
         ref={ref}
         data-slot="button"
-        className={cn(buttonVariants({ variant, colorScheme, size, radius }), className)}
+        className={cn(buttonVariants({ variant, colorScheme, size, radius }), className) as string}
         style={width ? { width: `${width}px` } : undefined}
         {...props}
       >
@@ -111,7 +111,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps & { width?: numbe
                   variant === "line" && colorScheme === "gradient"
                     ? "text-[#4917FF]"
                     : "text-inherit"
-                )}
+                ) as string}
               >
                 {icon}
               </div>
@@ -121,7 +121,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps & { width?: numbe
                 variant === "line" && colorScheme === "gradient"
                   ? "bg-clip-text text-transparent bg-gradient-to-r from-[#4917FF] to-[#1761FF]"
                   : undefined
-              )}
+              ) as string}
             >
               {children}
             </div>
