@@ -21,9 +21,7 @@ const typescriptConfig = compat.extends(
 );
 
 // Storybook 설정
-const storybookConfig = compat.extends(
-  'plugin:storybook/recommended',
-)
+const storybookConfig = compat.extends('plugin:storybook/recommended');
 
 // 추가 커스텀 설정
 const customConfig = compat.config({
@@ -67,6 +65,14 @@ const customConfig = compat.config({
   overrides: [
     {
       files: ['**/*.ts', '**/*.tsx'],
+      rules: {
+        '@typescript-eslint/no-unsafe-assignment': [
+          'error',
+          {
+            allowedVariables: ['className', 'classNames'],
+          },
+        ],
+      },
       parserOptions: {
         project: './tsconfig.json',
       },
