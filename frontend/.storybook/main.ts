@@ -17,5 +17,15 @@ const config: StorybookConfig = {
     autodocs: "tag",
   },
   staticDirs: ["../public"],
+  webpackFinal: (config) => {
+    if(config.resolve) {
+      config.resolve.alias = {
+        ...(config.resolve?.alias || {}),
+        "@/lib/utils": require.resolve("../src/lib/utils.ts"),
+        "tailwind-merge": require.resolve("tailwind-merge"),
+      };
+    }
+    return config;
+  },
 };
 export default config;
