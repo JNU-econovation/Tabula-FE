@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-type Toast = {
+export type ToastProps = {
   id: string;
   text: string;
   sec?: number;
@@ -9,7 +9,7 @@ type Toast = {
 }
 
 type ToastStore = {
-  toasts: Toast[];
+  toasts: ToastProps[];
   addToast: (text: string, sec?: number, type?: "error" | "default") => void;
 }
 
