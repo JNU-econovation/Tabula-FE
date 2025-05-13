@@ -64,7 +64,7 @@
     var(--color-secondary-gradient-from) 0%,
     var(--color-secondary-gradient-to) 100%
   );
-  
+}  
   
 @layer utilities {
   .spinner-container {
