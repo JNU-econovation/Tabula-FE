@@ -5,7 +5,7 @@
   --foreground: #171717;
 }
 
-@theme {
+:root {
   /* Primary Colors */
   --color-primary-50: #f4f1ff;
   --color-primary-100: #e8e1ff;
