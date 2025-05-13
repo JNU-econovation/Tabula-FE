@@ -1,22 +1,22 @@
+import Loading from '@/components/common/Loading/Loading';
 import { Meta, StoryObj } from '@storybook/react';
-import Header from './Header';
 
 const meta = {
-  title: 'common/Header',
-  component: Header,
+  title: 'common/Loading',
+  component: Loading,
   parameters: {
     layout: 'fullscreen',
   },
   tags: ['autodocs'],
   args: {},
-} satisfies Meta<typeof Header>;
+} satisfies Meta<typeof Loading>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
-    isLogin: true,
-    username: '홍길동',
+    text: 'Loading...',
+    percent: 50,
   },
 };
