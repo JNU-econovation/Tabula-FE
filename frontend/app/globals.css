@@ -23,7 +23,7 @@
   --ring: oklch(0.708 0 0);
 }
 
-@theme {
+:root {
   /* Primary Colors */
   --color-primary-50: #f4f1ff;
   --color-primary-100: #e8e1ff;
@@ -181,3 +181,36 @@
     @apply bg-[color:var(--background)] text-[color:var(--foreground)];
   }
 }
+
+/* Toast 애니메이션 */
+@keyframes toast-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toast-exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
+
+/* Toast 애니메이션 클래스 */
+.toast-enter {
+  animation: toast-enter 0.3s ease-out forwards;
+}
+
+.toast-exit {
+  animation: toast-exit 0.5s ease-in forwards;
+}
+
