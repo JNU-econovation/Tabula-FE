@@ -13,7 +13,8 @@ const Toast = () => {
           key={toast.id}
           id={toast.id}
           text={toast.text}
-          type={toast.type} />
+          type={toast.type}
+          isExit={toast.isExit} />
       ))}
     </div>
   )

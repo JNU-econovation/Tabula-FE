@@ -50,3 +50,36 @@
     var(--color-secondary-gradient-to) 100%
   );
 }
+
+/* Toast 애니메이션 */
+@keyframes toast-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toast-exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
+
+/* Toast 애니메이션 클래스 */
+.toast-enter {
+  animation: toast-enter 0.3s ease-out forwards;
+}
+
+.toast-exit {
+  animation: toast-exit 0.5s ease-in forwards;
+}
+

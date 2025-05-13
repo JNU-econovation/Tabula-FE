@@ -6,6 +6,7 @@ export type ToastProps = {
   text: string;
   sec?: number;
   type?: "error" | "default";
+  isExit? :boolean;
 }
 
 type ToastStore = {
@@ -20,14 +21,23 @@ export const useToastStore = create<ToastStore>() (
     addToast: (text, sec = 3, type="error") => {
       const id = Date.now().toString();
       set((state) => ({
-        toasts: [...state.toasts, {id, text, sec, type}].slice(-3),
+        toasts: [...state.toasts, {id, text, sec, type, isExit: false}].slice(-3),
       }));
 
+      // 애니메이션 시작 타이머
       setTimeout(() => {
         set((state) => ({
-          toasts: state.toasts.filter((toast) => toast.id !== id),
+          toasts: state.toasts.map((toast) =>
+          toast.id === id ? { ...toast, isExit: true } : toast)
         }))
-      }, sec * 1000);
+
+        // 실제 요소 제거 타이머
+        setTimeout(() => {
+          set((state) => ({
+            toasts: state.toasts.filter((toast) => toast.id !== id),
+          }))
+        }, 500);
+      }, sec * 1000)
     },
   }))
 );
