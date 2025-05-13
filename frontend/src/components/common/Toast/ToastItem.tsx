@@ -11,8 +11,8 @@ const ToastItem: React.FC<ToastProps> = ({ id, text, type = "error", isExit }) =
         ${isExit === true ? "toast-exit" : "toast-enter" } 
         opacity-100 will-change-opacity 
       `}>
-      {type === "error" && <LuCircleAlert className=" text-lg font-bold" />}
-      {type === "default" && <AiOutlineNotification className=" text-xl font-bold" />}
+      {type === "error" && <LuCircleAlert className=" text-xl font-bold flex-shrink-0" />}
+      {type === "default" && <AiOutlineNotification className=" text-xl font-bold flex-shrink-0" />}
       
       <div>{text}</div>
     </div>
