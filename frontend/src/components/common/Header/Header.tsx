@@ -1,13 +1,12 @@
+"use client"
+
 import Image from 'next/image'
 import Link from 'next/link'
 import Logo from '../../../../assets/logo.png'
+import { AuthStore } from '@/stores/authStore'
 
-interface HeaderProps {
-  isLogin: boolean;
-  username?: string;
-}
-
-const Header = ({ isLogin, username }: HeaderProps) => {
+const Header = () => {
+  const { isLogin, username } = AuthStore();
   return (
     <div className='w-full h-18 flex items-center bg-white justify-between px-8 border-b border-gray-200'>
       <Link href='/' className='flex items-center hover:scale-105 transition-transform duration-300'>
