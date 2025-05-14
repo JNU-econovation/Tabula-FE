@@ -150,3 +150,45 @@
 .toast-exit {
   animation: toast-exit 0.5s ease-in forwards;
 }
+
+/* wave 애니메이션 */
+@layer utilities {
+  @keyframes wave-slow {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(-25%);
+    }
+  }
+
+  @keyframes wave-normal {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(-15%);
+    }
+  }
+
+  @keyframes wave-fast {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(-10%);
+    }
+  }
+
+  .animate-wave-slow {
+    animation: wave-slow 20s ease-in-out infinite;
+  }
+
+  .animate-wave-normal {
+    animation: wave-normal 15s ease-in-out infinite;
+  }
+
+  .animate-wave-fast {
+    animation: wave-fast 12s ease-in-out infinite;
+  }
+}
