@@ -46,7 +46,7 @@ const buttonVariants = cva(
       {
         variant: "line",
         colorScheme: "gradient",
-        class: "border border-[#4917FF] hover:bg-[#f0f4ff] hover:text-[#3a0eff] hover:border-[#3a0eff]",
+        class: "border border-[#4917FF] bg-white hover:bg-[#f0f4ff] hover:text-[#3a0eff] hover:border-[#3a0eff]",
       },
       {
         variant: "filled",
@@ -56,12 +56,12 @@ const buttonVariants = cva(
       {
         variant: "line",
         colorScheme: "primary",
-        class: "border border-blue-600 text-blue-600 hover:bg-blue-50"
+        class: "border border-blue-600 text-blue-600 bg-white hover:bg-blue-50"
       },      
       {
         variant: "line",
         colorScheme: "gray",
-        class: "border-[#656565] text-[#212121] hover:bg-gray-100",
+        class: "border-[#656565] text-[#212121] bg-white hover:bg-gray-100",
       },
       {
         variant: "filled",
