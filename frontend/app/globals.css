@@ -1,71 +1,42 @@
 @import 'tailwindcss';
 
-
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --radius: 0.625rem;
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  @theme {
+    /* Primary Colors */
+    --color-primary-50: #f4f1ff;
+    --color-primary-100: #e8e1ff;
+    --color-primary-200: #d1c3ff;
+    --color-primary-300: #b49aff;
+    --color-primary-400: #926cff;
+    --color-primary-500: #6c3eff;
+    --color-primary-600: #4917ff; /* Base primary color */
+    --color-primary-700: #3b12d9;
+    --color-primary-800: #3112b0;
+    --color-primary-900: #291084;
+    --color-primary-950: #190656;
+
+    /* Secondary Colors */
+    --color-secondary-100: #e6f0ff;
+    --color-secondary-200: #cce0ff;
+    --color-secondary-300: #99c2ff;
+    --color-secondary-400: #6699ff;
+    --color-secondary-500: #1761ff; /* Base secondary color */
+    --color-secondary-600: #0052e6;
+    --color-secondary-700: #0047cc;
+    --color-secondary-800: #003399;
+    --color-secondary-900: #002266;
+  }
 }
 
-:root {
-  /* Primary Colors */
-  --color-primary-50: #f4f1ff;
-  --color-primary-100: #e8e1ff;
-  --color-primary-200: #d1c3ff;
-  --color-primary-300: #b49aff;
-  --color-primary-400: #926cff;
-  --color-primary-500: #6c3eff;
-  --color-primary-600: #4917ff; /* Base primary color */
-  --color-primary-700: #3b12d9;
-  --color-primary-800: #3112b0;
-  --color-primary-900: #291084;
-  --color-primary-950: #190656;
-  --color-primary-gradient-to: #7b1eff;
-  --color-primary-gradient: linear-gradient(
-    90deg,
-    var(--color-primary-gradient-from) 0%,
-    var(--color-primary-gradient-to) 100%
-  );
+@layer base {
+  * {
+    @apply border-[color];
+  }
+  body {
+    @apply bg-[color:var(--background)] text-[color:var(--foreground)];
+  }
+}
 
-  /* Secondary Colors */
-  --color-secondary-50: #ffffff;
-  --color-secondary-100: #fafafa;
-  --color-secondary-200: #f5f5f5; /* Base secondary color */
-  --color-secondary-300: #e5e5e5;
-  --color-secondary-400: #d4d4d4;
-  --color-secondary-500: #a3a3a3;
-  --color-secondary-600: #737373;
-  --color-secondary-700: #525252;
-  --color-secondary-800: #404040;
-  --color-secondary-900: #262626;
-  --color-secondary-950: #171717;
-
-  /* Secondary Gradient */
-  --color-secondary-gradient-from: #f5f5f5;
-  --color-secondary-gradient-to: #ffffff;
-  --color-secondary-gradient: linear-gradient(
-    90deg,
-    var(--color-secondary-gradient-from) 0%,
-    var(--color-secondary-gradient-to) 100%
-  );
-  
-  
 @layer utilities {
   .spinner-container {
     @apply relative w-12 h-12;
@@ -81,104 +52,70 @@
     transform-origin: 1px 0px;
   }
 
+  /* 스피너 애니메이션을 위한 기본 스타일 및 애니메이션 정의 */
+  .spinner-line {
+    animation: fade 1.2s linear infinite;
+  }
+
+  /* 12개의 스피너 선 각도 및 지연 시간 설정 */
   .spinner-line:nth-child(1) {
     transform: rotate(0deg) translateY(-20px);
-    animation: fade 1.2s linear 0s infinite;
+    animation-delay: 0s;
   }
-
   .spinner-line:nth-child(2) {
     transform: rotate(30deg) translateY(-20px);
-    animation: fade 1.2s linear 0.1s infinite;
+    animation-delay: 0.1s;
   }
-
   .spinner-line:nth-child(3) {
     transform: rotate(60deg) translateY(-20px);
-    animation: fade 1.2s linear 0.2s infinite;
+    animation-delay: 0.2s;
   }
-
   .spinner-line:nth-child(4) {
     transform: rotate(90deg) translateY(-20px);
-    animation: fade 1.2s linear 0.3s infinite;
+    animation-delay: 0.3s;
   }
-
   .spinner-line:nth-child(5) {
     transform: rotate(120deg) translateY(-20px);
-    animation: fade 1.2s linear 0.4s infinite;
+    animation-delay: 0.4s;
   }
-
   .spinner-line:nth-child(6) {
     transform: rotate(150deg) translateY(-20px);
-    animation: fade 1.2s linear 0.5s infinite;
+    animation-delay: 0.5s;
   }
-
   .spinner-line:nth-child(7) {
     transform: rotate(180deg) translateY(-20px);
-    animation: fade 1.2s linear 0.6s infinite;
+    animation-delay: 0.6s;
   }
-
   .spinner-line:nth-child(8) {
     transform: rotate(210deg) translateY(-20px);
-    animation: fade 1.2s linear 0.7s infinite;
+    animation-delay: 0.7s;
   }
-
   .spinner-line:nth-child(9) {
     transform: rotate(240deg) translateY(-20px);
-    animation: fade 1.2s linear 0.8s infinite;
+    animation-delay: 0.8s;
   }
-
   .spinner-line:nth-child(10) {
     transform: rotate(270deg) translateY(-20px);
-    animation: fade 1.2s linear 0.9s infinite;
+    animation-delay: 0.9s;
   }
-
   .spinner-line:nth-child(11) {
     transform: rotate(300deg) translateY(-20px);
-    animation: fade 1.2s linear 1s infinite;
+    animation-delay: 1s;
   }
-
   .spinner-line:nth-child(12) {
     transform: rotate(330deg) translateY(-20px);
-    animation: fade 1.2s linear 1.1s infinite;
-  }
-
-  @keyframes fade {
-    0%,
-    100% {
-      opacity: 0.15;
-    }
-    50% {
-      opacity: 1;
-    }
+    animation-delay: 1.1s;
   }
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-}
-
-@layer base {
-  * {
-    @apply border-[color];
+/* 애니메이션 정의 */
+@keyframes fade {
+  0%,
+  100% {
+    opacity: 0.15;
   }
-  body {
-    @apply bg-[color:var(--background)] text-[color:var(--foreground)];
+  50% {
+    opacity: 1;
   }
 }
 
@@ -214,3 +151,44 @@
   animation: toast-exit 0.5s ease-in forwards;
 }
 
+/* wave 애니메이션 */
+@layer utilities {
+  @keyframes wave-slow {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(-25%);
+    }
+  }
+
+  @keyframes wave-normal {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(-15%);
+    }
+  }
+
+  @keyframes wave-fast {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(-10%);
+    }
+  }
+
+  .animate-wave-slow {
+    animation: wave-slow 20s ease-in-out infinite;
+  }
+
+  .animate-wave-normal {
+    animation: wave-normal 15s ease-in-out infinite;
+  }
+
+  .animate-wave-fast {
+    animation: wave-fast 12s ease-in-out infinite;
+  }
+}

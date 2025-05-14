@@ -18,9 +18,9 @@ const buttonVariants = cva(
         gray: "",
       },
       size: {
-        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        md: "h-9 px-4 py-2 has-[>svg]:px-3",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+        sm: "h-9 gap-1.5 px-5 has-[>svg]:px-2.5 text-sm",
+        md: "h-12 px-8 py-2 has-[>svg]:px-3 text-md",
+        lg: "h-16 px-12 has-[>svg]:px-4 text-xl",
         icon: "size-9",
       },
       radius: {
@@ -46,7 +46,7 @@ const buttonVariants = cva(
       {
         variant: "line",
         colorScheme: "gradient",
-        class: "border border-[#4917FF] hover:bg-[#f0f4ff] hover:text-[#3a0eff] hover:border-[#3a0eff]",
+        class: "border border-[#4917FF] bg-white hover:bg-[#f0f4ff] hover:text-[#3a0eff] hover:border-[#3a0eff]",
       },
       {
         variant: "filled",
@@ -56,12 +56,12 @@ const buttonVariants = cva(
       {
         variant: "line",
         colorScheme: "primary",
-        class: "border border-blue-600 text-blue-600 hover:bg-blue-50"
+        class: "border border-blue-600 text-blue-600 bg-white hover:bg-blue-50"
       },      
       {
         variant: "line",
         colorScheme: "gray",
-        class: "border-[#656565] text-[#212121] hover:bg-gray-100",
+        class: "border-[#656565] text-[#212121] bg-white hover:bg-gray-100",
       },
       {
         variant: "filled",

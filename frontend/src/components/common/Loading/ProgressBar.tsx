@@ -9,10 +9,10 @@ const ProgressBar = ({ text, percent }: ProgressbarProps) => {
       <span className="text-lg font-light text-gray-600">{text}</span>
       <div className="w-full bg-gray-200 rounded-full h-6">
         <div
-          className="h-6 rounded-full transition-all duration-300 ease-in-out relative bg-gradient-to-r from-primary-gradient-from to-primary-gradient-to"
+          className="h-6 rounded-full transition-all duration-300 ease-in-out relative bg-gradient-to-r from-primary-600 to-secondary-500"
           style={{ width: `${percent}%` }}
         >
-          <div className="absolute inset-0 rounded-full shadow-xl shadow-primary/30"></div>
+          <div className="absolute inset-0 rounded-full shadow-xl shadow-primary-200"></div>
         </div>
       </div>
       <span className="text-lg text-gray-700">{percent}%</span>
