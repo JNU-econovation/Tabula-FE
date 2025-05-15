@@ -1,7 +1,7 @@
 import Toast from '@/components/common/Toast/Toast';
 import './globals.css';
 import Header from '@/components/common/Header/Header';
-import { MSWComponent } from '@/components/MSWComponent';
+import { MockInitComponent } from '@/components/MockInitComponent';
 
 export default function RootLayout({
   children,
@@ -11,11 +11,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <MSWComponent>
+        <MockInitComponent>
           <Header />
           {children}
           <Toast />
-        </MSWComponent>
+        </MockInitComponent>
       </body>
     </html>
   );
