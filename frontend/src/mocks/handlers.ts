@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
-import workspaceList from './workspaceList.json';
+import workspaceList from './data/workspaceList.json';
 import { BASE_URL, END_POINT } from '@/api';
 
 export const handlers = [
