@@ -1,6 +1,13 @@
 import axios from 'axios';
-const AxiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+
+export const BASE_URL = '/api';
+
+export const END_POINT = {
+  workspaceList: `/v1/spaces/`,
+};
+
+export const AxiosInstance = axios.create({
+  baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',

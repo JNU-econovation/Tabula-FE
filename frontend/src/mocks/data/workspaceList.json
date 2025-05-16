@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "response": [
+    {
+      "spaceId": 101,
+      "spaceName": "Introduction to Cognitive Science"
+    },
+    {
+      "spaceId": 102,
+      "spaceName": "Fundamentals of Data Structures"
+    },
+    {
+      "spaceId": 103,
+      "spaceName": "Modern European History"
+    },
+    {
+      "spaceId": 104,
+      "spaceName": "Principles of Microeconomics"
+    },
+    {
+      "spaceId": 105,
+      "spaceName": "Digital Logic Design"
+    },
+    {
+      "spaceId": 106,
+      "spaceName": "Environmental Chemistry and Society"
+    },
+    {
+      "spaceId": 107,
+      "spaceName": "Psychology of Learning"
+    },
+    {
+      "spaceId": 108,
+      "spaceName": "Advanced Topics in AI Ethics"
+    }
+  ],
+  "error": null
+}
