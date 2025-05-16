@@ -1,3 +1,6 @@
+import { COLOR_PALETTE } from "@/constants/color";
+import { darkenColor } from "@/util/colorUtils";
+
 interface SubjectFolderProps {
   title?: string;
   isAddCard?: boolean;
@@ -5,19 +8,33 @@ interface SubjectFolderProps {
   onClick?: () => void;
 }
 
-const colorArray = ['#999CD0', '#A6D0DD', '#859EDF', '#BBBDE1', '#DBB9F3', '#B9C6EA']
+const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIndex = 0, onClick }) => {
+  const baseColor = isAddCard ? COLOR_PALETTE.folderColors[0] : COLOR_PALETTE.folderColors[colorIndex]
+  const hoverColor = darkenColor(baseColor, 0.15)
 
-const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIndex =0, onClick }) => {
   return (
-    <div className={`relative w-45 h-60 flex justify-center rounded-lg shadow-md mb-14
-      ${isAddCard ? "border-dashed border-2 border-primary-600 items-center" : ""}`}
-      style={{ backgroundColor: isAddCard ? "transparent" : colorArray[colorIndex] }}
+    <div className={`relative w-45 h-60 flex justify-center rounded-lg shadow-md mb-14 group
+      ${isAddCard ? "border-dashed border-2 border-primary-600 items-center hover:bg-violet-100" : ""}`}
+      style={{
+        backgroundColor: isAddCard ? '' : baseColor,
+        transition: "background-color 0.3s ease",
+      }}
+      onMouseEnter={(e) => {
+        if (!isAddCard) {
+          (e.currentTarget as HTMLElement).style.backgroundColor = hoverColor;
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!isAddCard) {
+          (e.currentTarget as HTMLElement).style.backgroundColor = baseColor;
+        }
+      }}
       onClick={onClick}
     >
       {isAddCard ? (
         <div className="text-5xl text-primary-600">+</div>
       ) : (
-        <div className="absolute bottom-[-40px] text-center text-gray-700">{title}</div>
+        <div className="absolute bottom-[-40px] text-center text-gray-700 group-hover:font-semibold">{title}</div>
       )}
     </div>
   )
