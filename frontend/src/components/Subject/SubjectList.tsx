@@ -1,7 +1,7 @@
 "use client"
 
 import SubjectFolder from "./SubjectFolder"
-import { FolderProps, useGetFolderList } from "@/hooks/Folder/useGetFolderList"
+import { FolderProps, useGetFolderList } from "@/hooks/query/useGetFolderList"
 
 const SubjectList = () => {
   const { data, isLoading, error } = useGetFolderList()
