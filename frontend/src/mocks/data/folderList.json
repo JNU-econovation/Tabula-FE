@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "response": [
+    {
+      "folderId": 1,
+      "folderName": "CS",
+      "folderColor": 0
+    },
+    {
+      "folderId": 2,
+      "folderName": "프론트엔드",
+      "folderColor": 1
+    },
+    {
+      "folderId": 3,
+      "folderName": "백엔드",
+      "folderColor": 2
+    },
+    {
+      "folderId": 4,
+      "folderName": "알고리즘",
+      "folderColor": 3
+    },
+    {
+      "folderId": 5,
+      "folderName": "네트워크",
+      "folderColor": 4
+    },
+    {
+      "folderId": 6,
+      "folderName": "데이터베이스",
+      "folderColor": 5
+    },
+    {
+      "folderId": 7,
+      "folderName": "디자인 패턴",
+      "folderColor": 0
+    }
+  ],
+  "error": null
+}
