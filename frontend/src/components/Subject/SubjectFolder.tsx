@@ -9,15 +9,17 @@ import { usePostFolder } from "@/hooks/query/usePostFolder";
 import { AiOutlineMore } from "react-icons/ai";
 import FloatingMenu from "../common/FloatingMenu/FloatingMenu";
 import MenuItem from "../common/FloatingMenu/MenuItem";
+import { useDeleteFolder } from "@/hooks/query/useDeleteFolder";
 
 interface SubjectFolderProps {
   title?: string;
   isAddCard?: boolean;
   colorIndex?: number;
   onClick?: () => void;
+  folderId?: string;
 }
 
-const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIndex = 0, onClick }) => {
+const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIndex = 0, onClick, folderId }) => {
   const { isModalOpen, openModal, closeModal } = useModal()
   const addToast = useToastStore((state) => state.addToast)
   const { mutate: createFolder } = usePostFolder()
@@ -25,6 +27,7 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIn
   const [folderTitle, setFolderTitle] = useState<string>("")
   const [selectedColor, setSelectedColor] = useState<number | null>(null)
   const [isEditModal, setIsEditModal] = useState(false)
+  const [isDeleteModal, setIsDeleteModal] = useState(false)
 
   const baseColor = isAddCard ? COLOR_PALETTE.folderColors[0] : COLOR_PALETTE.folderColors[colorIndex]
   const hoverColor = darkenColor(baseColor, 0.15)
@@ -78,6 +81,14 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIn
     openModal()
   }
 
+  const openDeleteModal = () => {
+    setIsDeleteModal(true)
+  }
+
+  const handleDelete = () => {
+    // 삭제 로직
+  }
+
   const toggleMenu = () => {
     setShowMenu((prev) => !prev)
   }
@@ -126,13 +137,26 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIn
       {showMenu && (
         <FloatingMenu menuRef={menuRef} buttonRef={moreButtonRef}>
           <MenuItem onClick={openEditModal}>폴더 수정</MenuItem>
-          <MenuItem>폴더 삭제</MenuItem>
+          <MenuItem onClick={openDeleteModal}>폴더 삭제</MenuItem>
         </FloatingMenu>
+      )}
+
+      {isDeleteModal && (
+        <Modal isOpen={isDeleteModal} close={() => setIsDeleteModal(false)}>
+          <div className="flex flex-col items-center gap-4 p-4">
+            <div className="text-lg text-gray-800 mt-15 mb-4">
+              {title ? `${title}` : ''} 폴더를 삭제하시겠습니까?
+              </div>
+            <div className="flex gap-4 mt-4">
+              <Button colorScheme="gray" size="sm" width={100} onClick={() => setIsDeleteModal(false)}>취소</Button>
+              <Button colorScheme="red" size="sm" width={100} onClick={handleDelete}>삭제</Button>
+            </div>
+          </div>
+        </Modal>
       )}
 
       {isModalOpen && (
         <Modal isOpen={isModalOpen} close={closeModal} size="lg" color="blue">
-          <div></div>
           <div className="flex flex-col items-center justify-center gap-4 w-[80%]">
             <div className="text-xl font-semibold mt-4 mb-8 text-gray-700">
               {isEditModal ? "폴더 수정" : "폴더 생성"}
