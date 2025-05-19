@@ -1,6 +1,7 @@
 import Toast from '@/components/common/Toast/Toast';
 import './globals.css';
 import Header from '@/components/common/Header/Header';
+import { MockInitComponent } from '@/components/MockInitComponent';
 
 export default function RootLayout({
   children,
@@ -10,9 +11,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
-        <Toast />
+        <MockInitComponent>
+          <Header />
+          {children}
+          <Toast />
+        </MockInitComponent>
       </body>
     </html>
   );
