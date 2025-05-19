@@ -5,6 +5,7 @@ import Modal from "../common/Modal/Modal";
 import { Button } from "../common/Button/Button";
 import { useEffect, useState } from "react";
 import { useToastStore } from "@/stores/toastStore";
+import { usePostFolder } from "@/hooks/query/usePostFolder";
 
 interface SubjectFolderProps {
   title?: string;
@@ -16,6 +17,7 @@ interface SubjectFolderProps {
 const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIndex = 0, onClick }) => {
   const { isModalOpen, openModal, closeModal } = useModal()
   const addToast = useToastStore((state) => state.addToast)
+  const { mutate: createFolder } = usePostFolder()
 
   const [folderTitle, setFolderTitle] = useState<string>("")
   const [selectedColor, setSelectedColor] = useState<number | null>(null)
@@ -36,12 +38,23 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIn
   
   const handleConfirm = () => {
     if (selectedColor === null || folderTitle.trim() === "") {
-      addToast("제목과 색상을 모두 입력하세요")
+      addToast("폴더 이름과 색상은 필수입니다")
       return
     }
-    console.log('폴더 제목: ', folderTitle)
-    console.log('선택된 색상 인덱스: ', selectedColor)
-    closeModal()
+    createFolder(
+      {
+        folderName: folderTitle.trim(),
+        folderColor: selectedColor
+      },
+      {
+        onSuccess: () => {
+          closeModal()
+        },
+        onError: () => {
+          addToast('폴더 생성에 실패하였습니다')
+        }
+      }
+    )
   }
 
   return (

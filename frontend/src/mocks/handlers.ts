@@ -3,6 +3,7 @@ import { http, HttpResponse } from 'msw';
 import workspaceList from './data/workspaceList.json';
 import folderList from './data/folderList.json';
 import { BASE_URL, END_POINT } from '@/api';
+import { PostFolderProps } from '@/hooks/query/usePostFolder';
 
 export const handlers = [
   http.get(`${BASE_URL}${END_POINT.workspaceList}:id`, async () => {
@@ -16,6 +17,22 @@ export const handlers = [
   http.get('/api/v1/folders', async () => {
     return HttpResponse.json(folderList.response, {
       status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }),
+  http.post('/api/v1/folders', async ({ request }) => {
+    const data = (await request.json()) as PostFolderProps;
+    const { folderName, folderColor } = data;
+    
+    const newFolder = {
+      name: folderName,
+      color: folderColor,
+    };
+
+    return HttpResponse.json(newFolder, {
+      status: 201,
       headers: {
         'Content-Type': 'application/json',
       },
