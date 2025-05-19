@@ -3,9 +3,12 @@ import useModal from "@/hooks/Modal/useModal";
 import { darkenColor } from "@/util/colorUtils";
 import Modal from "../common/Modal/Modal";
 import { Button } from "../common/Button/Button";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useToastStore } from "@/stores/toastStore";
 import { usePostFolder } from "@/hooks/query/usePostFolder";
+import { AiOutlineMore } from "react-icons/ai";
+import FloatingMenu from "../common/FloatingMenu/FloatingMenu";
+import MenuItem from "../common/FloatingMenu/MenuItem";
 
 interface SubjectFolderProps {
   title?: string;
@@ -21,14 +24,20 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIn
 
   const [folderTitle, setFolderTitle] = useState<string>("")
   const [selectedColor, setSelectedColor] = useState<number | null>(null)
+  const [isEditModal, setIsEditModal] = useState(false)
 
   const baseColor = isAddCard ? COLOR_PALETTE.folderColors[0] : COLOR_PALETTE.folderColors[colorIndex]
   const hoverColor = darkenColor(baseColor, 0.15)
+
+  const [showMenu, setShowMenu] = useState(false)
+  const moreButtonRef = useRef<HTMLDivElement | null>(null)
+  const menuRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     if (!isModalOpen) {
       setFolderTitle("")
       setSelectedColor(null)
+      setIsEditModal(false)
     }
   }, [isModalOpen])
 
@@ -41,6 +50,11 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIn
       addToast("폴더 이름과 색상은 필수입니다")
       return
     }
+
+    if (isEditModal) {
+      // 실제 수정 로직
+    }
+
     createFolder(
       {
         folderName: folderTitle.trim(),
@@ -57,12 +71,23 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIn
     )
   }
 
+  const openEditModal = () => {
+    setIsEditModal(true)
+    setFolderTitle(title || "")
+    setSelectedColor(colorIndex ?? 0)
+    openModal()
+  }
+
+  const toggleMenu = () => {
+    setShowMenu((prev) => !prev)
+  }
+
   return (
     <div className={`relative w-45 h-60 flex justify-center rounded-lg shadow-md mb-14 group
       ${isAddCard ? "border-dashed border-2 border-primary-600 items-center hover:bg-violet-100" : ""}`}
       style={{
         backgroundColor: isAddCard ? '' : baseColor,
-        transition: "background-color 0.3s easeㅇ",
+        transition: "background-color 0.3s ease",
       }}
       onMouseEnter={(e) => {
         if (!isAddCard) {
@@ -87,11 +112,31 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIn
         <div className="absolute bottom-[-40px] text-center text-gray-700 group-hover:font-semibold">{title}</div>
       )}
 
+      {!isAddCard && (
+        <div className="absolute top-2 right-2 text-3xl text-gray-700 opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer p-2"
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleMenu()
+          }}
+        >
+          <AiOutlineMore className="hover:scale-110 transition-transform duration-300" />
+        </div>
+      )}
+
+      {showMenu && (
+        <FloatingMenu menuRef={menuRef} buttonRef={moreButtonRef}>
+          <MenuItem onClick={openEditModal}>폴더 수정</MenuItem>
+          <MenuItem>폴더 삭제</MenuItem>
+        </FloatingMenu>
+      )}
+
       {isModalOpen && (
         <Modal isOpen={isModalOpen} close={closeModal} size="lg" color="blue">
           <div></div>
           <div className="flex flex-col items-center justify-center gap-4 w-[80%]">
-            <div className="text-xl font-semibold mt-4 mb-8 text-gray-700">폴더 이름</div>
+            <div className="text-xl font-semibold mt-4 mb-8 text-gray-700">
+              {isEditModal ? "폴더 수정" : "폴더 생성"}
+            </div>
             <input type="text" value={folderTitle || ""} placeholder="제목을 입력하세요"
               onChange={(e) => setFolderTitle(e.target.value)}
               className="w-full px-4 py-3 border-2 border-[#7AA3C3] bg-[#D3DCEF] rounded-md focus:outline-none " />
@@ -112,7 +157,7 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIn
             <div className="mt-8 w-full flex justify-center">
               <Button colorScheme="primary" size="sm" width={150}
                  onClick={handleConfirm}
-              >확인</Button>
+              >완료</Button>
             </div>
           </div>
         </Modal>
