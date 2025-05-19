@@ -7,7 +7,7 @@ const ToastItem: React.FC<ToastProps> = ({ id, text, type = "error", isExit }) =
     <div
       key={id}
       className={`flex items-center gap-3 px-5 py-2 text-base text-white shadow-md rounded-md 
-        sm:w-[400px] md:w-[450px] lg:w-[550px]
+        w-[32rem] max-w-[100%]
         ${type === "error" ? "bg-[#EE8282]" : "bg-gray-500"}
         ${isExit === true ? "toast-exit" : "toast-enter" } 
         opacity-100 will-change-opacity 

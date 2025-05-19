@@ -7,7 +7,7 @@ const Toast = () => {
   const toasts = useToastStore((state) => state.toasts);
 
   return (
-    <div className="fixed top-5 left-1/2 -translate-x-1/2 space-y-2 z-50">
+    <div className="fixed top-5 left-1/2 -translate-x-1/2 space-y-2 z-100">
       {toasts.map((toast) => (
         <ToastItem
           key={toast.id}
