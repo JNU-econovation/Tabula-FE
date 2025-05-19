@@ -1,5 +1,5 @@
 'use client';
-import usePreventScroll from '@/hooks/Modal/usePreventScroll';
+import usePreventScroll from '@/hooks/common/usePreventScroll';
 import { createPortal } from 'react-dom';
 import { cva } from 'class-variance-authority';
 import { IoMdClose } from 'react-icons/io';
