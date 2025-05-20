@@ -29,7 +29,7 @@ export const useFolder = ({ folderId, isAddCard, initialTitle = "", initialColor
 
   const handleConfirm = () => {
       if (selectedColor === null || folderTitle.trim() === "") {
-        addToast("폴더 이름과 색상은 필수입니다")
+        addToast("폴더 이름을 입력해주세요")
         return
       }
   

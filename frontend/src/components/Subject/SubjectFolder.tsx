@@ -84,16 +84,17 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({
       {openMenuId === folderId && (
         <FloatingMenu menuRef={menuRef} buttonRef={moreButtonRef} offset={{ x:- 40, y: -54 }}>
           <MenuItem onClick={openModal}>폴더 수정</MenuItem>
-          <MenuItem onClick={openDeleteModal}>폴더 삭제</MenuItem>
+          <MenuItem danger={true} onClick={openDeleteModal}>폴더 삭제</MenuItem>
         </FloatingMenu>
       )}
 
       {isDeleteModal && (
         <Modal isOpen={isDeleteModal} close={() => setIsDeleteModal(false)}>
           <div className="flex flex-col items-center gap-4 p-4">
-            <div className="text-lg text-gray-800 mt-15 mb-4">
+            <div className="text-lg text-gray-800 mt-4 mb-2 font-semibold">
               {title ? `${title}` : ''} 폴더를 삭제하시겠습니까?
-              </div>
+            </div>
+            <div className="flex text-gray-800 px-4 text-center">삭제한 폴더는 복구가 불가하며, 해당 <br/> 폴더의 워크스페이스도 함께 삭제됩니다.</div>
             <div className="flex gap-4 mt-4">
               <Button colorScheme="gray" size="sm" width={100} onClick={() => setIsDeleteModal(false)}>취소</Button>
               <Button colorScheme="red" size="sm" width={100} onClick={handleDelete}>삭제</Button>
@@ -104,7 +105,7 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({
 
       {isModalOpen && (
         <Modal isOpen={isModalOpen} close={closeModal} size="lg" color="blue">
-          <div className="flex flex-col items-center justify-center gap-4 w-[80%]">
+          <div className="flex flex-col items-c5nter justify-center gap-4 w-[80%]">
             <div className="text-xl font-semibold mt-4 mb-8 text-gray-700">
               {isEditModal ? "폴더 수정" : "폴더 생성"}
             </div>
