@@ -42,7 +42,7 @@ export const handlers = [
     const { folderId } = params
 
     return HttpResponse.json(
-      { message: "폴더가 삭제되었습니다."},
+      { message: `${folderId} 폴더가 삭제되었습니다.`},
       {
         status: 200,
         headers: {
@@ -50,5 +50,31 @@ export const handlers = [
         },
       }
     )
+  }),
+  http.put(`/api/v1/folders/:folderId`, async ({ params }) => {
+    const { folderId } = params
+
+    if (!folderId) {
+      return HttpResponse.json(
+        { error: "폴더 ID가 없습니다." },
+        {
+          status: 400,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+    }
+
+    return HttpResponse.json({
+      success: true,
+      response: null,
+      error: null
+    }, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
   })
 ];

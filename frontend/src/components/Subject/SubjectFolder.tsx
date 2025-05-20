@@ -10,6 +10,7 @@ import { AiOutlineMore } from "react-icons/ai";
 import FloatingMenu from "../common/FloatingMenu/FloatingMenu";
 import MenuItem from "../common/FloatingMenu/MenuItem";
 import { useDeleteFolder } from "@/hooks/query/useDeleteFolder";
+import { usePutFolder } from "@/hooks/query/usePutFolder";
 
 interface SubjectFolderProps {
   title?: string;
@@ -24,6 +25,7 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIn
   const addToast = useToastStore((state) => state.addToast)
   const { mutate: createFolder } = usePostFolder()
   const { mutate: deleteFolder } = useDeleteFolder()
+  const { mutate: updateFolder } = usePutFolder()
 
   const [folderTitle, setFolderTitle] = useState<string>("")
   const [selectedColor, setSelectedColor] = useState<number | null>(null)
@@ -56,7 +58,27 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIn
     }
 
     if (isEditModal) {
-      // 실제 수정 로직
+      if (!isAddCard  && (!folderId || typeof folderId !== "string")) {
+        addToast("폴더 ID가 존재하지 않아 수정이 불가합니다")
+        return
+      }
+      
+      updateFolder(
+        {
+          folderId: folderId as string,
+          folderName: folderTitle,
+          folderColor: selectedColor
+        },
+        {
+          onSuccess: () => {
+            addToast("폴더가 수정되었습니다", 3, "default")
+            closeModal()
+          },
+          onError: () => {
+            addToast("폴더 수정에 실패하였습니다")
+          }
+        }
+      )
     }
 
     createFolder(
