@@ -1,17 +1,14 @@
 'use client';
 
-import { Button } from '@/components/common/Button/Button';
 import FloatingMenu from '@/components/common/FloatingMenu/FloatingMenu';
 import MenuItem from '@/components/common/FloatingMenu/MenuItem';
 
-import Modal from '@/components/common/Modal/Modal';
+import DeleteWorkspaceModal from '@/components/Workspace/Sidebar/DeleteWorkspaceModal';
 
 import { useHandleOutside } from '@/hooks/common/useHandleOutside';
 import useModal from '@/hooks/common/useModal';
-import {
-  useUpdateWorkspaceName,
-  useDeleteWorkspace,
-} from '@/hooks/query/workspace/mutation';
+
+import { useEditSpaceName } from '@/hooks/workspace/useEditSpaceName';
 import Link from 'next/link';
 import { useState } from 'react';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
@@ -21,34 +18,25 @@ interface WorkspaceItemProps {
   spaceName: string;
 }
 
-//TODO: 리팩토링 필요
 const WorkspaceItem = ({ spaceId, spaceName }: WorkspaceItemProps) => {
-  const [isSpaceOpen, setIsSpaceOpen] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-  const { mutate: updateWorkspace } = useUpdateWorkspaceName();
-  const { mutate: deleteWorkspace } = useDeleteWorkspace();
-  const [spaceNameValue, setSpaceNameValue] = useState(spaceName);
-  const { isModalOpen, openModal, closeModal } = useModal();
+  const {
+    spaceNameValue,
+    updateWorkspaceName,
+    isEditingToggle,
+    isEditing,
+    resetInputValue,
+    handleInputChange,
+  } = useEditSpaceName(spaceName, spaceId);
 
-  const { menuRef, buttonRef } = useHandleOutside(isSpaceOpen, () => {
-    setIsSpaceOpen(false);
+  const { isModalOpen, openModal, closeModal } = useModal();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { menuRef, buttonRef } = useHandleOutside(isMenuOpen, () => {
+    setIsMenuOpen(false);
   });
 
-  const toggleSpaceOpen = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    event.preventDefault();
-    setSpaceNameValue(spaceName);
-    setIsSpaceOpen(!isSpaceOpen);
-  };
-
-  const handleDelete = async () => {
-    await deleteWorkspace(spaceId);
-    closeModal();
-  };
-
-  const handleEdit = () => {
-    setIsEditing(true);
-    setIsSpaceOpen(false);
+  const menuOpenToggle = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
@@ -67,33 +55,29 @@ const WorkspaceItem = ({ spaceId, spaceName }: WorkspaceItemProps) => {
             type="text"
             className="border border-gray-300 rounded-md px-2 py-1 w-full text-sm"
             placeholder="폴더 이름을 입력하세요"
-            onBlur={() => setIsEditing(false)}
+            onBlur={() => {
+              isEditingToggle();
+              resetInputValue();
+            }}
             onKeyDown={async (e) => {
               if (e.key === 'Enter') {
-                setIsEditing(false);
-                await updateWorkspace({
-                  spaceId,
-                  newSpaceName: spaceNameValue,
-                });
-                setSpaceNameValue('');
-                setIsSpaceOpen(false);
+                updateWorkspaceName();
               }
-              e.stopPropagation();
             }}
             value={spaceNameValue}
-            onChange={(e) => setSpaceNameValue(e.target.value)}
+            onChange={handleInputChange}
             onClick={(e) => e.preventDefault()}
             autoFocus
           />
         ) : (
           <>
-            <div className="text-sm text-gray-700 truncate w-4/5">
+            <div className="text-sm text-gray-700 truncate w-50">
               {spaceName}
             </div>
             <div className="absolute right-1 pr-2">
               <button
                 className="flex items-center gap-2 cursor-pointer hover:bg-gray-300 rounded-2xl p-2"
-                onClick={toggleSpaceOpen}
+                onClick={menuOpenToggle}
                 ref={buttonRef}
               >
                 <HiOutlineDotsHorizontal />
@@ -102,52 +86,25 @@ const WorkspaceItem = ({ spaceId, spaceName }: WorkspaceItemProps) => {
           </>
         )}
       </Link>
-
-      {isSpaceOpen && (
+      {isMenuOpen && (
         <FloatingMenu
           menuRef={menuRef}
           buttonRef={buttonRef}
           width="8rem"
           offset={{ x: -35, y: -10 }}
         >
-          <MenuItem onClick={handleEdit}>이름 수정하기</MenuItem>
+          <MenuItem onClick={isEditingToggle}>이름 수정하기</MenuItem>
           <MenuItem onClick={openModal} danger>
             삭제하기
           </MenuItem>
         </FloatingMenu>
       )}
 
-      <Modal
-        isOpen={isModalOpen}
-        close={closeModal}
-        size="sm"
-        isXButton={false}
-      >
-        <div className="flex flex-col items-center justify-center h-full">
-          <h2 className="text-lg font-semibold mb-4">정말 삭제하시겠습니까?</h2>
-          <p className="text-sm text-gray-600 mb-4">
-            삭제된 폴더는 복구할 수 없어요
-          </p>
-          <div className="flex gap-4">
-            <Button
-              size="sm"
-              onClick={handleDelete}
-              colorScheme="secondary"
-              className="hover:bg-red-300"
-            >
-              삭제
-            </Button>
-            <Button
-              size="sm"
-              onClick={closeModal}
-              colorScheme="gray"
-              variant="line"
-            >
-              취소
-            </Button>
-          </div>
-        </div>
-      </Modal>
+      <DeleteWorkspaceModal
+        spaceId={spaceId}
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+      />
     </div>
   );
 };

@@ -5,8 +5,8 @@ export const useHandleOutside = (
   isOpen: boolean,
   setIsOpen: (isOpen: boolean) => void,
 ) => {
-  const menuRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
