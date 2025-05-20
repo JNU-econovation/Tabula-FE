@@ -3,14 +3,11 @@ import useModal from "@/hooks/Modal/useModal";
 import { darkenColor } from "@/util/colorUtils";
 import Modal from "../common/Modal/Modal";
 import { Button } from "../common/Button/Button";
-import { useEffect, useRef, useState } from "react";
-import { useToastStore } from "@/stores/toastStore";
-import { usePostFolder } from "@/hooks/query/usePostFolder";
 import { AiOutlineMore } from "react-icons/ai";
 import FloatingMenu from "../common/FloatingMenu/FloatingMenu";
 import MenuItem from "../common/FloatingMenu/MenuItem";
-import { useDeleteFolder } from "@/hooks/query/useDeleteFolder";
-import { usePutFolder } from "@/hooks/query/usePutFolder";
+import { useFolder } from "@/hooks/Folder/useFolder";
+import { useFolderFloatingMenu } from "@/hooks/Folder/useFolderFloatingMenu";
 
 interface SubjectFolderProps {
   title?: string;
@@ -20,126 +17,25 @@ interface SubjectFolderProps {
   folderId?: string;
 }
 
-const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIndex = 0, onClick, folderId }) => {
+const SubjectFolder: React.FC<SubjectFolderProps> = ({
+  title,
+  isAddCard,
+  colorIndex = 0,
+  onClick,
+  folderId
+}) => {
   const { isModalOpen, openModal, closeModal } = useModal()
-  const addToast = useToastStore((state) => state.addToast)
-  const { mutate: createFolder } = usePostFolder()
-  const { mutate: deleteFolder } = useDeleteFolder()
-  const { mutate: updateFolder } = usePutFolder()
-
-  const [folderTitle, setFolderTitle] = useState<string>("")
-  const [selectedColor, setSelectedColor] = useState<number | null>(null)
-  const [isEditModal, setIsEditModal] = useState(false)
-  const [isDeleteModal, setIsDeleteModal] = useState(false)
-
   const baseColor = isAddCard ? COLOR_PALETTE.folderColors[0] : COLOR_PALETTE.folderColors[colorIndex]
   const hoverColor = darkenColor(baseColor, 0.15)
 
-  const [openMenuId, setOpenMenuId] = useState<string | null>(null)
-  const moreButtonRef = useRef<HTMLDivElement | null>(null)
-  const menuRef = useRef<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    if (!isModalOpen) {
-      setFolderTitle("")
-      setSelectedColor(null)
-      setIsEditModal(false)
-    }
-  }, [isModalOpen])
-
-  const handleSelectColor = (index: number) => {
-    setSelectedColor(index)
-  }
-  
-  const handleConfirm = () => {
-    if (selectedColor === null || folderTitle.trim() === "") {
-      addToast("폴더 이름과 색상은 필수입니다")
-      return
-    }
-
-    if (isEditModal) {
-      if (!isAddCard  && (!folderId || typeof folderId !== "string")) {
-        addToast("폴더 ID가 존재하지 않아 수정이 불가합니다")
-        return
-      }
-
-      updateFolder(
-        {
-          folderId: folderId as string,
-          folderName: folderTitle,
-          folderColor: selectedColor
-        },
-        {
-          onSuccess: () => {
-            addToast("폴더가 수정되었습니다", 3, "default")
-            closeModal()
-          },
-          onError: () => {
-            addToast("폴더 수정에 실패하였습니다")
-          }
-        }
-      )
-    }
-
-    createFolder(
-      {
-        folderName: folderTitle.trim(),
-        folderColor: selectedColor
-      },
-      {
-        onSuccess: () => {
-          closeModal()
-        },
-        onError: () => {
-          addToast('폴더 생성에 실패하였습니다')
-        }
-      }
-    )
-  }
-
-  const openEditModal = () => {
-    setIsEditModal(true)
-    setFolderTitle(title || "")
-    setSelectedColor(colorIndex ?? 0)
-    openModal()
-  }
-
-  const openDeleteModal = () => {
-    setIsDeleteModal(true)
-  }
-
-  const handleDelete = () => {
-    if (!folderId) {
-      console.error('삭제 실패: 폴더 ID가 없습니다')
-      return;
-    }
-    deleteFolder(folderId, {
-      onSuccess: () => {
-        addToast("폴더가 삭제되었습니다", 3, "default")
-        setIsDeleteModal(false)
-      },
-      onError: () => {
-        addToast("폴더 삭제에 실패하였습니다")
-      }
-    })
-  }
-
-  const toggleMenu = (id: string) => {
-    setOpenMenuId((prev) => (prev === id ? null : id))
-  }
-
-  useEffect(() => {
-    const handleClickOutSide = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setOpenMenuId(null)
-      }
-    }
-
-    document.addEventListener("click", handleClickOutSide)
-    return () => {
-      document.removeEventListener("click", handleClickOutSide)
-    }
+  const {
+    folderTitle, selectedColor, setFolderTitle, handleSelectColor, handleConfirm, handleDelete,
+    isEditModal, isDeleteModal, setIsDeleteModal, openDeleteModal
+  } = useFolder({
+    folderId, isAddCard, initialTitle: title, initialColor: colorIndex, closeModal
   })
+
+  const { openMenuId, toggleMenu, menuRef, moreButtonRef } = useFolderFloatingMenu()
 
   return (
     <div className={`relative w-45 h-60 flex justify-center rounded-lg shadow-md mb-14 group
@@ -187,7 +83,7 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIn
 
       {openMenuId === folderId && (
         <FloatingMenu menuRef={menuRef} buttonRef={moreButtonRef} offset={{ x:- 40, y: -54 }}>
-          <MenuItem onClick={openEditModal}>폴더 수정</MenuItem>
+          <MenuItem onClick={openModal}>폴더 수정</MenuItem>
           <MenuItem onClick={openDeleteModal}>폴더 삭제</MenuItem>
         </FloatingMenu>
       )}
