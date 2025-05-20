@@ -32,7 +32,7 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({
     folderTitle, selectedColor, setFolderTitle, handleSelectColor, handleConfirm, handleDelete,
     isEditModal, isDeleteModal, setIsDeleteModal, openDeleteModal
   } = useFolder({
-    folderId, isAddCard, initialTitle: title, initialColor: colorIndex, closeModal
+    folderId, isAddCard, initialTitle: title, initialColor: colorIndex, closeModal, isModalOpen
   })
 
   const { openMenuId, toggleMenu, menuRef, moreButtonRef } = useFolderFloatingMenu()
@@ -105,7 +105,7 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({
 
       {isModalOpen && (
         <Modal isOpen={isModalOpen} close={closeModal} size="lg" color="blue">
-          <div className="flex flex-col items-c5nter justify-center gap-4 w-[80%]">
+          <div className="flex flex-col items-center justify-center gap-4 w-[80%]">
             <div className="text-xl font-semibold mt-4 mb-8 text-gray-700">
               {isEditModal ? "폴더 수정" : "폴더 생성"}
             </div>

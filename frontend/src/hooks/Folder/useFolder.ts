@@ -10,9 +10,10 @@ interface UseFolderProps {
   initialTitle?: string;
   initialColor?: number;
   closeModal: () => void;
+  isModalOpen: boolean;
 }
 
-export const useFolder = ({ folderId, isAddCard, initialTitle = "", initialColor = 0, closeModal }: UseFolderProps) => {
+export const useFolder = ({ folderId, isAddCard, initialTitle = "", initialColor = 0, closeModal, isModalOpen }: UseFolderProps) => {
   const addToast = useToastStore((state) => state.addToast)
 
   const { mutate: createFolder } = usePostFolder({
@@ -47,6 +48,13 @@ export const useFolder = ({ folderId, isAddCard, initialTitle = "", initialColor
   const [selectedColor, setSelectedColor] = useState<number | null>(initialColor)
   const [isEditModal, setIsEditModal] = useState(false)
   const [isDeleteModal, setIsDeleteModal] = useState(false)
+
+  useEffect(() => {
+    if (isModalOpen) {
+      setFolderTitle(initialTitle)
+      setSelectedColor(initialColor)
+    }
+  }, [isModalOpen, initialTitle, initialColor])
 
   const handleSelectColor = (index: number) => {
     setSelectedColor(index)
