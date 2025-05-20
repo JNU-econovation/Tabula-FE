@@ -13,22 +13,6 @@ export const workspaceHandler = [
     });
   }),
 
-  http.post(`${BASE_URL}${END_POINT.workspaceList}:id`, async () => {
-    const newWorkspace = {
-      spaceId: workspaceList.response.length + 101,
-      spaceName: `New Workspace ${workspaceList.response.length + 1}`,
-    };
-
-    workspaceList.response.push(newWorkspace);
-
-    return HttpResponse.json(workspaceList, {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-  }),
-
   http.put(
     `${BASE_URL}${END_POINT.workspaceList}:id`,
     async ({ request, params }) => {
