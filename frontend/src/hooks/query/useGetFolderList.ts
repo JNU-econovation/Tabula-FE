@@ -2,7 +2,7 @@ import { getFolderList } from "@/api/folder"
 import { useQuery } from "@tanstack/react-query"
 
 export interface FolderProps {
-  folderId: number;
+  folderId: string;
   folderName: string;
   folderColor: number;
 }

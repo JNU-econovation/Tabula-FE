@@ -23,6 +23,7 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIn
   const { isModalOpen, openModal, closeModal } = useModal()
   const addToast = useToastStore((state) => state.addToast)
   const { mutate: createFolder } = usePostFolder()
+  const { mutate: deleteFolder } = useDeleteFolder()
 
   const [folderTitle, setFolderTitle] = useState<string>("")
   const [selectedColor, setSelectedColor] = useState<number | null>(null)
@@ -86,7 +87,19 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIn
   }
 
   const handleDelete = () => {
-    // 삭제 로직
+    if (!folderId) {
+      console.error('삭제 실패: 폴더 ID가 없습니다')
+      return;
+    }
+    deleteFolder(folderId, {
+      onSuccess: () => {
+        addToast("폴더가 삭제되었습니다", 3, "default")
+        setIsDeleteModal(false)
+      },
+      onError: () => {
+        addToast("폴더 삭제에 실패하였습니다")
+      }
+    })
   }
 
   const toggleMenu = () => {

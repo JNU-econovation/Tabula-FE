@@ -38,4 +38,17 @@ export const handlers = [
       },
     })
   }),
+  http.delete(`/api/v1/folders/:folderId`, async({ params }) => {
+    const { folderId } = params
+
+    return HttpResponse.json(
+      { message: "폴더가 삭제되었습니다."},
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    )
+  })
 ];
