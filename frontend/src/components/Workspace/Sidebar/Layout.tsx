@@ -12,7 +12,7 @@ const Layout = ({ isOpen, onToggle, children }: LayoutProps) => {
     <>
       <div
         className={`
-          flex flex-col gap-2
+          flex flex-col
           fixed top-18 left-0 h-[calc(100vh-4.5rem)] z-50 w-72
           transform transition-transform duration-300 ease-in-out
           bg-gray-100
