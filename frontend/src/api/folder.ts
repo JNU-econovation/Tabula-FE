@@ -1,12 +1,12 @@
-import { AxiosInstance } from "."
+import { AxiosInstance, END_POINT } from "."
 
 export const getFolderList = async () => {
-  const response = await AxiosInstance.get(`/v1/folders`);
+  const response = await AxiosInstance.get(END_POINT.folderList);
   return response.data;
 }
 
 export const postFolder = async (folderName: string, folderColor: number) => {
-  const response = await AxiosInstance.post('/v1/folders', {
+  const response = await AxiosInstance.post(END_POINT.folderList, {
     folderName,
     folderColor
   });
@@ -14,7 +14,7 @@ export const postFolder = async (folderName: string, folderColor: number) => {
 }
 
 export const putFolder = async (folderId: string, folderName: string, folderColor: number) => {
-  const response = await AxiosInstance.put(`/v1/folders/${folderId}`, {
+  const response = await AxiosInstance.put(`${END_POINT.folderList}/${folderId}`, {
     folderName,
     folderColor
   });
@@ -22,6 +22,6 @@ export const putFolder = async (folderId: string, folderName: string, folderColo
 }
 
 export const deleteFolder = async (folderId: string) => {
-  const response = await AxiosInstance.delete(`/v1/folders/${folderId}`);
+  const response = await AxiosInstance.delete(`${END_POINT.folderList}/${folderId}`);
   return response.data
 }

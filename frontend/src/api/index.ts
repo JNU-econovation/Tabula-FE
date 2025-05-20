@@ -4,7 +4,7 @@ export const BASE_URL = '/api';
 
 export const END_POINT = {
   workspaceList: `/v1/spaces/`,
-  folderList: `/v1/folders/`,
+  folderList: `/v1/folders`,
 };
 
 export const AxiosInstance = axios.create({
