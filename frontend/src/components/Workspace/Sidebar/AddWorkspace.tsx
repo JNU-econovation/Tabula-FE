@@ -1,13 +1,21 @@
+import { useCreateWorkspace } from '@/hooks/query/workspace/mutation';
 import { FaCirclePlus } from 'react-icons/fa6';
 
 interface AddWorkspaceProps {
-  isOpen: boolean;
+  folderId: string;
 }
 
-const AddWorkspace = ({ isOpen }: AddWorkspaceProps) => {
-  // 워크스페이스 추가
+const AddWorkspace = ({ folderId }: AddWorkspaceProps) => {
+  const { mutate: createWorkspace } = useCreateWorkspace(folderId);
+  const handleCreateWorkspace = () => {
+    createWorkspace(folderId);
+  };
+
   return (
-    <div className="group cursor-pointer flex gap-4 items-center hover:bg-primary-100 rounded-md py-1 transition ease-in-out duration-100 h-10 flex-none">
+    <div
+      onClick={handleCreateWorkspace}
+      className="group cursor-pointer flex gap-4 items-center hover:bg-primary-100 rounded-md py-1 transition ease-in-out duration-100 h-10 flex-none"
+    >
       <button>
         <FaCirclePlus
           size={28}
