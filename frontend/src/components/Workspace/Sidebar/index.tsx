@@ -13,11 +13,10 @@ interface WorkspaceType {
 
 interface SidebarProps {
   workspaceList: WorkspaceType[];
-  folderId: string;
   folderName: string;
 }
 
-const Sidebar = ({ workspaceList, folderId, folderName }: SidebarProps) => {
+const Sidebar = ({ workspaceList, folderName }: SidebarProps) => {
   const [isOpen, setIsOpen] = useState(true);
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
@@ -33,8 +32,12 @@ const Sidebar = ({ workspaceList, folderId, folderName }: SidebarProps) => {
 
   return (
     <Layout isOpen={isOpen} onToggle={handleToggle}>
-      <FolderName folderName={folderName} />
-      <AddWorkspace folderId={folderId} />
+      <p
+        className={`h-5 flex justify-between items-center px-2 text-sm flex-none`}
+      >
+        {folderName}
+      </p>
+      <AddWorkspace />
       {isOpen && (
         <div className="flex flex-col gap-2 flex-1">
           <div className="text-sm px-2 mt-6 text-gray-500 flex-none">

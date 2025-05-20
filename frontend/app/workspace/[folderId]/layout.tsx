@@ -14,7 +14,6 @@ const layout = () => {
       {!isLoading && (
         <Sidebar
           workspaceList={workspaceList}
-          folderId={folderId as string}
           folderName={folderName}
         ></Sidebar>
       )}
