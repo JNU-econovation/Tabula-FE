@@ -8,7 +8,12 @@ export interface PutFolderProps {
   folderColor: number;
 }
 
-export const usePutFolder = () => {
+export const usePutFolder = (
+  options?: {
+    onSuccess?: () => void;
+    onError?: () => void;
+  }
+) => {
   const queryClient = useQueryClient();
 
   return useMutation<FolderProps, Error, PutFolderProps>({
@@ -17,6 +22,10 @@ export const usePutFolder = () => {
       queryClient.invalidateQueries({
         queryKey: ['folder']
       });
+      options?.onSuccess?.()
     },
+    onError: () => {
+      options?.onError?.()
+    }
   })
 }

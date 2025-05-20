@@ -14,9 +14,34 @@ interface UseFolderProps {
 
 export const useFolder = ({ folderId, isAddCard, initialTitle = "", initialColor = 0, closeModal }: UseFolderProps) => {
   const addToast = useToastStore((state) => state.addToast)
-  const { mutate: createFolder } = usePostFolder()
-  const { mutate: deleteFolder } = useDeleteFolder()
-  const { mutate: updateFolder } = usePutFolder()
+
+  const { mutate: createFolder } = usePostFolder({
+    onSuccess: () => {
+      closeModal()
+    },
+    onError: () => {
+      addToast('폴더 생성에 실패하였습니다. 다시 시도해주세요!')
+    }
+  })
+  const { mutate: updateFolder } = usePutFolder({
+    onSuccess: () => {
+      addToast("폴더가 수정되었습니다", 3, "default")
+      closeModal()
+    },
+    onError: () => {
+      addToast('폴더 수정에 실패하였습니다. 다시 시도해주세요!')
+    }
+  })
+  const { mutate: deleteFolder } = useDeleteFolder({
+    onSuccess: () => {
+      addToast("폴더가 삭제되었습니다", 3, "default")
+      closeModal()
+      setIsDeleteModal(false)
+    },
+    onError: () => {
+      addToast("폴더 삭제에 실패하였습니다")
+    }
+  })
 
   const [folderTitle, setFolderTitle] = useState<string>(initialTitle)
   const [selectedColor, setSelectedColor] = useState<number | null>(initialColor)
@@ -38,14 +63,6 @@ export const useFolder = ({ folderId, isAddCard, initialTitle = "", initialColor
           {
             folderName: folderTitle.trim(),
             folderColor: selectedColor
-          },
-          {
-            onSuccess: () => {
-              closeModal()
-            },
-            onError: () => {
-              addToast('폴더 생성에 실패하였습니다')
-            }
           }
         )
       } else if (folderId) {
@@ -54,15 +71,6 @@ export const useFolder = ({ folderId, isAddCard, initialTitle = "", initialColor
             folderId: folderId as string,
             folderName: folderTitle,
             folderColor: selectedColor
-          },
-          {
-            onSuccess: () => {
-              addToast("폴더가 수정되었습니다", 3, "default")
-              closeModal()
-            },
-            onError: () => {
-              addToast("폴더 수정에 실패하였습니다")
-            }
           }
         )
       }
@@ -77,16 +85,7 @@ export const useFolder = ({ folderId, isAddCard, initialTitle = "", initialColor
         console.error('삭제 실패: 폴더 ID가 없습니다')
         return;
       }
-      deleteFolder(folderId, {
-        onSuccess: () => {
-          addToast("폴더가 삭제되었습니다", 3, "default")
-          closeModal()
-          setIsDeleteModal(false)
-        },
-        onError: () => {
-          addToast("폴더 삭제에 실패하였습니다")
-        }
-      })
+      deleteFolder(folderId)
     }
 
     return {

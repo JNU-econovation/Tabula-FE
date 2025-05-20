@@ -7,7 +7,12 @@ export interface PostFolderProps {
   folderColor: number;
 }
 
-export const usePostFolder = () => {
+export const usePostFolder = (
+  options?: {
+    onSuccess?: () => void;
+    onError?: () => void;
+  }
+) => {
   const queryClient = useQueryClient();
 
   return useMutation<FolderProps, Error, PostFolderProps>({
@@ -16,6 +21,10 @@ export const usePostFolder = () => {
       queryClient.invalidateQueries({
         queryKey: ['folder']
       });
+      options?.onSuccess?.()
     },
+    onError: () => {
+      options?.onError?.()
+    }
   })
 }

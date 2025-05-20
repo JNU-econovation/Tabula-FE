@@ -1,7 +1,12 @@
 import { deleteFolder } from "@/api/folder"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
-export const useDeleteFolder = () => {
+export const useDeleteFolder = (
+  options?: {
+    onSuccess?: () => void;
+    onError?: () => void;
+  }
+) => {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -10,9 +15,10 @@ export const useDeleteFolder = () => {
       queryClient.invalidateQueries({
         queryKey: ['folder']
       })
+      options?.onSuccess?.()
     },
     onError: (error) => {
-      console.error('폴더 삭제 실패: ', error)
+      options?.onError?.()
     }
   })
 }
