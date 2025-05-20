@@ -35,7 +35,7 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIn
   const baseColor = isAddCard ? COLOR_PALETTE.folderColors[0] : COLOR_PALETTE.folderColors[colorIndex]
   const hoverColor = darkenColor(baseColor, 0.15)
 
-  const [showMenu, setShowMenu] = useState(false)
+  const [openMenuId, setOpenMenuId] = useState<string | null>(null)
   const moreButtonRef = useRef<HTMLDivElement | null>(null)
   const menuRef = useRef<HTMLDivElement | null>(null)
 
@@ -62,7 +62,7 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIn
         addToast("폴더 ID가 존재하지 않아 수정이 불가합니다")
         return
       }
-      
+
       updateFolder(
         {
           folderId: folderId as string,
@@ -124,9 +124,22 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIn
     })
   }
 
-  const toggleMenu = () => {
-    setShowMenu((prev) => !prev)
+  const toggleMenu = (id: string) => {
+    setOpenMenuId((prev) => (prev === id ? null : id))
   }
+
+  useEffect(() => {
+    const handleClickOutSide = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setOpenMenuId(null)
+      }
+    }
+
+    document.addEventListener("click", handleClickOutSide)
+    return () => {
+      document.removeEventListener("click", handleClickOutSide)
+    }
+  })
 
   return (
     <div className={`relative w-45 h-60 flex justify-center rounded-lg shadow-md mb-14 group
@@ -159,18 +172,21 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({ title, isAddCard, colorIn
       )}
 
       {!isAddCard && (
-        <div className="absolute top-2 right-2 text-3xl text-gray-700 opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer p-2"
+        <div ref={moreButtonRef}
+          className={`absolute top-2 right-2 text-3xl text-gray-700 opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer p-2
+            ${openMenuId === folderId ? "opacity-100" : "opacity-0 group-hover:opacity-100"}  
+          `}
           onClick={(e) => {
             e.stopPropagation();
-            toggleMenu()
+            toggleMenu(folderId || "")
           }}
         >
           <AiOutlineMore className="hover:scale-110 transition-transform duration-300" />
         </div>
       )}
 
-      {showMenu && (
-        <FloatingMenu menuRef={menuRef} buttonRef={moreButtonRef}>
+      {openMenuId === folderId && (
+        <FloatingMenu menuRef={menuRef} buttonRef={moreButtonRef} offset={{ x:- 40, y: -54 }}>
           <MenuItem onClick={openEditModal}>폴더 수정</MenuItem>
           <MenuItem onClick={openDeleteModal}>폴더 삭제</MenuItem>
         </FloatingMenu>
