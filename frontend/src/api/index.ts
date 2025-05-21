@@ -15,3 +15,12 @@ export const AxiosInstance = axios.create({
   },
   timeout: 3000,
 });
+
+export const AxiosInstanceFormData = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    'Content-Type': 'multipart/form-data',
+    Accept: 'application/json',
+  },
+  timeout: 3000,
+});

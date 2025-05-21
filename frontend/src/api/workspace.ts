@@ -1,4 +1,4 @@
-import { AxiosInstance, END_POINT } from '@/api';
+import { AxiosInstance, AxiosInstanceFormData, END_POINT } from '@/api';
 
 interface WorkspaceList {
   spaceId: string;
@@ -33,4 +33,20 @@ export const updateWorkspaceName = async (
   });
 
   return data.data;
+};
+
+export interface UploadLearningFileResponse {
+  formdata: FormData;
+  folderId: string;
+}
+export const uploadLearningFile = async (
+  folderId: string,
+  formData: FormData,
+) => {
+  const response = await AxiosInstanceFormData.post(
+    `${END_POINT.workspaceList}${folderId}`,
+    formData,
+  );
+
+  return response.data;
 };

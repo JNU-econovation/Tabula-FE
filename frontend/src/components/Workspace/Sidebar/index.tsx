@@ -11,16 +11,18 @@ interface WorkspaceType {
 }
 
 interface SidebarProps {
+  isOpen: boolean;
+  handleToggle: () => void;
   workspaceList: WorkspaceType[];
   folderName: string;
 }
 
-const Sidebar = ({ workspaceList, folderName }: SidebarProps) => {
-  const [isOpen, setIsOpen] = useState(true);
-  const handleToggle = () => {
-    setIsOpen((prev) => !prev);
-  };
-
+const Sidebar = ({
+  isOpen,
+  handleToggle,
+  workspaceList,
+  folderName,
+}: SidebarProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
