@@ -61,8 +61,24 @@ export const useFolder = ({ folderId, isAddCard, initialTitle = "", initialColor
   }
 
   const handleConfirm = () => {
-      if (selectedColor === null || folderTitle.trim() === "") {
+    const trimTitle = folderTitle.trim()
+      if (trimTitle === "") {
         addToast("폴더 이름을 입력해주세요")
+        return
+      }
+
+      if (trimTitle.length > 20) {
+        addToast("폴더 이름은 20자 이하로 입력해주세요")
+        return
+      }
+      
+      if(!isAddCard && trimTitle === initialTitle.trim()) {
+        addToast("이전 폴더 이름과 동일합니다")
+        return
+      }
+
+      if (selectedColor === null) {
+        addToast("색상을 선택해주세요")
         return
       }
   
