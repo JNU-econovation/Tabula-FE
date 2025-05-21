@@ -1,13 +1,9 @@
-'use client';
-
 import LearningFileUpload from '@/components/Workspace/LearningFileUpload';
-import { useParams } from 'next/navigation';
+import React from 'react';
 
 const page = () => {
-  const { spaceId } = useParams();
-
   return (
-    <div className={`w-full flex justify-center items-center p-8 relative`}>
+    <div className="w-full flex justify-center items-center p-8">
       <LearningFileUpload />
     </div>
   );
