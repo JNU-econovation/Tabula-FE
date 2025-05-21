@@ -1,5 +1,4 @@
 import { COLOR_PALETTE } from "@/constants/color";
-import useModal from "@/hooks/Modal/useModal";
 import { darkenColor } from "@/util/colorUtils";
 import Modal from "../common/Modal/Modal";
 import { Button } from "../common/Button/Button";
@@ -8,6 +7,7 @@ import FloatingMenu from "../common/FloatingMenu/FloatingMenu";
 import MenuItem from "../common/FloatingMenu/MenuItem";
 import { useFolder } from "@/hooks/Folder/useFolder";
 import { useFolderFloatingMenu } from "@/hooks/Folder/useFolderFloatingMenu";
+import useModal from "@/hooks/common/useModal";
 
 interface SubjectFolderProps {
   title?: string;
