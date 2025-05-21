@@ -5,18 +5,18 @@ export const getFolderList = async () => {
   return response.data;
 }
 
-export const postFolder = async (folderName: string, folderColor: number) => {
+export const postFolder = async (folderName: string, colorIndex: number) => {
   const response = await AxiosInstance.post(END_POINT.folderList, {
     folderName,
-    folderColor
+    colorIndex
   });
   return response.data;
 }
 
-export const putFolder = async (folderId: string, folderName: string, folderColor: number) => {
+export const putFolder = async (folderId: string, folderName: string, colorIndex: number) => {
   const response = await AxiosInstance.put(`${END_POINT.folderList}/${folderId}`, {
     folderName,
-    folderColor
+    colorIndex
   });
   return response.data;
 }

@@ -4,7 +4,7 @@ import { FolderProps } from "./useGetFolderList";
 
 export interface PostFolderProps {
   folderName: string;
-  folderColor: number;
+  colorIndex: number;
 }
 
 export const usePostFolder = (
@@ -16,7 +16,7 @@ export const usePostFolder = (
   const queryClient = useQueryClient();
 
   return useMutation<FolderProps, Error, PostFolderProps>({
-    mutationFn: (newFolder: PostFolderProps) => postFolder(newFolder.folderName, newFolder.folderColor),
+    mutationFn: (newFolder: PostFolderProps) => postFolder(newFolder.folderName, newFolder.colorIndex),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['folder']

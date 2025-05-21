@@ -24,11 +24,11 @@ export const handlers = [
   }),
   http.post('/api/v1/folders', async ({ request }) => {
     const data = (await request.json()) as PostFolderProps;
-    const { folderName, folderColor } = data;
+    const { folderName, colorIndex } = data;
     
     const newFolder = {
-      name: folderName,
-      color: folderColor,
+      folderName,
+      colorIndex,
     };
 
     return HttpResponse.json(newFolder, {

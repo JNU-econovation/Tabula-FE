@@ -70,7 +70,7 @@ export const useFolder = ({ folderId, isAddCard, initialTitle = "", initialColor
         createFolder(
           {
             folderName: folderTitle.trim(),
-            folderColor: selectedColor
+            colorIndex: selectedColor
           }
         )
       } else if (folderId) {
@@ -78,7 +78,7 @@ export const useFolder = ({ folderId, isAddCard, initialTitle = "", initialColor
           {
             folderId: folderId as string,
             folderName: folderTitle,
-            folderColor: selectedColor
+            colorIndex: selectedColor
           }
         )
       }

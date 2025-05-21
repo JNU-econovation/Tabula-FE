@@ -5,7 +5,7 @@ import { putFolder } from "@/api/folder";
 export interface PutFolderProps {
   folderId: string;
   folderName: string;
-  folderColor: number;
+  colorIndex: number;
 }
 
 export const usePutFolder = (
@@ -17,7 +17,7 @@ export const usePutFolder = (
   const queryClient = useQueryClient();
 
   return useMutation<FolderProps, Error, PutFolderProps>({
-    mutationFn: (newFolder: PutFolderProps) => putFolder(newFolder.folderId, newFolder.folderName, newFolder.folderColor),
+    mutationFn: (newFolder: PutFolderProps) => putFolder(newFolder.folderId, newFolder.folderName, newFolder.colorIndex),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['folder']
