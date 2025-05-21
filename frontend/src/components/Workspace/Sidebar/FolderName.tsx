@@ -22,7 +22,6 @@ const FolderName = ({ folderName }: FolderNameProps) => {
     >
       {isEditing ? (
         <>
-          {/* TODO: form 넣어야할지,,, */}
           <input
             type="text"
             className="border border-gray-300 rounded-md px-2 py-1"

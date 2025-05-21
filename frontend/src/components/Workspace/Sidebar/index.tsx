@@ -1,7 +1,6 @@
 'use client';
 
 import AddWorkspace from '@/components/Workspace/Sidebar/AddWorkspace';
-import FolderName from '@/components/Workspace/Sidebar/FolderName';
 import Layout from '@/components/Workspace/Sidebar/Layout';
 import WorkspaceItem from '@/components/Workspace/Sidebar/WorkspaceItem';
 import { useEffect, useRef, useState } from 'react';
