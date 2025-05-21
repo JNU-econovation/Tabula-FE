@@ -1,8 +1,12 @@
 import { useUploadLearningFile } from '@/hooks/query/workspace/mutation';
 import { useState } from 'react';
 
-const useLearningFile = (folderId: string, file: File | null) => {
-  const { mutate } = useUploadLearningFile();
+const useLearningFile = (
+  folderId: string,
+  file: File | null,
+  onSuccess: () => void,
+) => {
+  const { mutate } = useUploadLearningFile(onSuccess);
   const [subjectName, setSubjectName] = useState('');
   const [language, setLanguage] = useState<'english' | 'korean' | 'japanese'>(
     'korean',

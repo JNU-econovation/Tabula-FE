@@ -12,7 +12,10 @@ import SelectLanguage from '@/components/Workspace/LearningFileUpload/SelectLang
 import SubjectNameInput from '@/components/Workspace/LearningFileUpload/SubjectNameInput';
 import SelectedFileItem from '@/components/Workspace/LearningFileUpload/SelectedFileItem';
 
-const LearningFileUpload = () => {
+interface LearningFileUploadProps {
+  onSubmit: () => void;
+}
+const LearningFileUpload = ({ onSubmit }: LearningFileUploadProps) => {
   const { folderId } = useParams();
   const { isSidebarOpen } = useContext(SidebarContext);
   const inputRef = React.useRef<HTMLInputElement>(null);
@@ -24,7 +27,7 @@ const LearningFileUpload = () => {
     handleLanguageChange,
     handleSubjectNameChange,
     resetSubjectName,
-  } = useLearningFile(folderId as string, selectedFile);
+  } = useLearningFile(folderId as string, selectedFile, () => onSubmit());
 
   return (
     <div
@@ -58,9 +61,9 @@ const LearningFileUpload = () => {
           <Button
             size="md"
             colorScheme="gradient"
-            onClick={() =>
-              inputRef.current && uploadLearningFile(inputRef.current)
-            }
+            onClick={() => {
+              inputRef.current && uploadLearningFile(inputRef.current);
+            }}
           >
             <div className="flex items-center gap-2">
               <CiLocationArrow1 size={30} />
