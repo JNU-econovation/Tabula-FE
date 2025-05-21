@@ -16,6 +16,7 @@ const buttonVariants = cva(
         secondary: "",
         gradient: "",
         gray: "",
+        red: ""
       },
       size: {
         sm: "h-9 gap-1.5 px-5 has-[>svg]:px-2.5 text-sm",
@@ -57,7 +58,12 @@ const buttonVariants = cva(
         variant: "line",
         colorScheme: "primary",
         class: "border border-blue-600 text-blue-600 bg-white hover:bg-blue-50"
-      },      
+      },
+      {
+        variant: "filled",
+        colorScheme: "gray",
+        class: "bg-[#656565] text-white hover:bg-[#4A4A4A] border-blue-600"
+      },  
       {
         variant: "line",
         colorScheme: "gray",
@@ -67,6 +73,11 @@ const buttonVariants = cva(
         variant: "filled",
         colorScheme: "secondary",
         class: "bg-[#E7EAFF] text-[#292929] hover:bg-[#DDE1FA] border-[#E7EAFF]",
+      },
+      {
+        variant: "filled",
+        colorScheme: "red",
+        class: "bg-[#FF7C7C] text-white hover:bg-[#FA5D5D] border-[#FF7C7C]",
       },
     ],
   }
