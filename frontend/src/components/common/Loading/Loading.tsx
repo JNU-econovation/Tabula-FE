@@ -8,7 +8,7 @@ interface LoadingProps {
 }
 const Loading = ({ type = 'progress', percent, text }: LoadingProps) => {
   return (
-    <div>
+    <div className="w-full flex items-center justify-center p-8 relative">
       {type === 'progress' && <ProgressBar text={text} percent={percent} />}
       {type === 'spinner' && <Spinner text={text} percent={percent} />}
     </div>

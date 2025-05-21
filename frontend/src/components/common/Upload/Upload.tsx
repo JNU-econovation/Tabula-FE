@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import uploadIcon from '../../../../assets/uploadIcon.png';
 import { cva } from 'class-variance-authority';
 import { SizeType } from '@/type';
-import useDragFile from '@/hooks/upload/useDragFile';
+import useDragFile from '@/hooks/common/useDragFile';
 
 interface UploadProps {
   height?: SizeType;
