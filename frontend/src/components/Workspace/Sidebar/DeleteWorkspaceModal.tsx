@@ -29,19 +29,19 @@ const DeleteWorkspaceModal = ({
         <div className="flex gap-4">
           <Button
             size="sm"
-            onClick={handleDelete}
-            colorScheme="secondary"
-            className="hover:bg-red-300"
-          >
-            삭제
-          </Button>
-          <Button
-            size="sm"
             onClick={closeModal}
             colorScheme="gray"
             variant="line"
           >
             취소
+          </Button>
+          <Button
+            size="sm"
+            onClick={handleDelete}
+            colorScheme="secondary"
+            className="hover:bg-red-300"
+          >
+            삭제
           </Button>
         </div>
       </div>
