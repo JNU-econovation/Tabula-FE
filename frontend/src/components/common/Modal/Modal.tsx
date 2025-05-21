@@ -1,5 +1,5 @@
 'use client';
-import usePreventScroll from '@/hooks/Modal/usePreventScroll';
+import usePreventScroll from '@/hooks/common/usePreventScroll';
 import { createPortal } from 'react-dom';
 import { cva } from 'class-variance-authority';
 import { IoMdClose } from 'react-icons/io';
@@ -9,6 +9,7 @@ interface ModalProps {
   close: () => void;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   color?: 'white' | 'blue';
+  isXButton?: boolean;
 }
 
 const Modal = ({
@@ -17,6 +18,7 @@ const Modal = ({
   size,
   children,
   color,
+  isXButton = true,
 }: React.PropsWithChildren<ModalProps>) => {
   usePreventScroll(isOpen);
 
@@ -54,12 +56,14 @@ const Modal = ({
         className={`${modalVariants({ size, color })}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-          onClick={close}
-        >
-          <IoMdClose size={24} />
-        </button>
+        {isXButton && (
+          <button
+            className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+            onClick={close}
+          >
+            <IoMdClose size={24} />
+          </button>
+        )}
         {children}
       </div>
     </div>,

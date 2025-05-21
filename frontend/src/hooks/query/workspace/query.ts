@@ -1,13 +1,15 @@
 import { getWorkspaceList } from '@/api/workspace';
 import { useQuery } from '@tanstack/react-query';
 
-const useGetWorkspaceList = (spaceId: string) => {
+const useGetWorkspaceList = (folderId: string) => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['workspaceList'],
-    queryFn: () => getWorkspaceList(spaceId),
+    queryFn: () => getWorkspaceList(folderId),
   });
 
-  return { data, isLoading, isError };
+  const workspaceList = data?.response || [];
+
+  return { workspaceList, isLoading, isError };
 };
 
 export default useGetWorkspaceList;

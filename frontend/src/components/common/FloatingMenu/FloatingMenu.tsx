@@ -34,7 +34,7 @@ const FloatingMenu = ({
   const [showAbove, setShowAbove] = useState(false);
 
   const calculatePosition = () => {
-    if (!buttonRef.current) return;
+    if (!buttonRef.current) return null;
 
     const rect = buttonRef.current.getBoundingClientRect();
     const windowHeight = window.innerHeight;
