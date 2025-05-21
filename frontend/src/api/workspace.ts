@@ -1,4 +1,4 @@
-import { AxiosInstance } from '@/api';
+import { AxiosInstance, END_POINT } from '@/api';
 
 interface WorkspaceList {
   spaceId: string;
@@ -11,13 +11,15 @@ interface WorkspaceListResponse {
 export const getWorkspaceList = async (
   folderId: string,
 ): Promise<WorkspaceListResponse> => {
-  const data = await AxiosInstance.get(`/v1/spaces/${folderId}`);
+  const data = await AxiosInstance.get(`${END_POINT.workspaceList}${folderId}`);
 
   return data.data;
 };
 
 export const deleteWorkspace = async (spaceId: string) => {
-  const data = await AxiosInstance.delete(`/v1/spaces/${spaceId}`);
+  const data = await AxiosInstance.delete(
+    `${END_POINT.workspaceList}${spaceId}`,
+  );
 
   return data.data;
 };
@@ -26,7 +28,7 @@ export const updateWorkspaceName = async (
   spaceId: string,
   newSpaceName: string,
 ) => {
-  const data = await AxiosInstance.put(`/v1/spaces/${spaceId}`, {
+  const data = await AxiosInstance.put(`${END_POINT.workspaceList}${spaceId}`, {
     newSpaceName,
   });
 
