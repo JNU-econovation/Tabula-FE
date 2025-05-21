@@ -57,4 +57,18 @@ export const workspaceHandler = [
       });
     },
   ),
+
+  http.post(`${BASE_URL}${END_POINT.workspaceList}:id`, async ({ request }) => {
+    const formData = await request.formData();
+
+    return HttpResponse.json(
+      { message: 'File uploaded successfully' },
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+  }),
 ];
