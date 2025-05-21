@@ -10,7 +10,7 @@ const layout = () => {
   const folderName = '폴더 이름'; // TODO: 폴더 이름 api 추가 시 연동
 
   return (
-    <div className="flex h-full">
+    <div className="flex flex-1 h-full">
       {!isLoading && (
         <Sidebar
           workspaceList={workspaceList}
