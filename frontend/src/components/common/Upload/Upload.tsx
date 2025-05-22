@@ -11,9 +11,10 @@ interface UploadProps {
   width?: SizeType | 'full';
   processFile: (file: File) => void;
   handleFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  mode?: 'pdf-type'| 'multi-type';
 }
 
-const Upload = ({ height, width, processFile, handleFile }: UploadProps) => {
+const Upload = ({ height, width, processFile, handleFile, mode = 'pdf-type' }: UploadProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const {
     isDragging,
@@ -75,7 +76,12 @@ const Upload = ({ height, width, processFile, handleFile }: UploadProps) => {
           type="file"
           ref={fileInputRef}
           className="hidden"
-          accept=".pdf"
+          accept={
+            mode === 'pdf-type'
+              ? ".pdf"
+              : ".pdf,.png,.jpg,.jpeg"
+          }
+          multiple={mode === 'multi-type'}
           onChange={handleFile}
         />
         <div className="flex flex-col gap-1 items-center">
