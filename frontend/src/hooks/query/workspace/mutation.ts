@@ -2,7 +2,7 @@ import {
   deleteWorkspace,
   updateWorkspaceName,
   uploadLearningFile,
-} from '@/api/workspace';
+} from '@/api/http/workspace';
 import { useToastStore } from '@/stores/toastStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { on } from 'events';

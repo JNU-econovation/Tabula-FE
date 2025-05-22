@@ -1,5 +1,5 @@
-import { getFolderList } from "@/api/folder"
-import { useQuery } from "@tanstack/react-query"
+import { getFolderList } from '@/api/http/folder';
+import { useQuery } from '@tanstack/react-query';
 
 export interface FolderProps {
   folderId: string;
@@ -10,6 +10,6 @@ export interface FolderProps {
 export const useGetFolderList = () => {
   return useQuery<FolderProps[]>({
     queryKey: ['folder'],
-    queryFn: getFolderList
-  })
-}
+    queryFn: getFolderList,
+  });
+};

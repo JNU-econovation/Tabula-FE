@@ -1,4 +1,4 @@
-import { AxiosInstance, AxiosInstanceFormData, END_POINT } from '@/api';
+import { AxiosInstance, AxiosInstanceFormData, END_POINT } from '@/api/http';
 
 interface WorkspaceList {
   spaceId: string;
