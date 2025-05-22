@@ -27,7 +27,7 @@ const LearningFileUpload = ({ onSubmit }: LearningFileUploadProps) => {
     handleLanguageChange,
     handleSubjectNameChange,
     resetSubjectName,
-  } = useLearningFile(folderId as string, selectedFile, () => onSubmit());
+  } = useLearningFile(folderId as string, selectedFile as File | null, () => onSubmit());
 
   return (
     <div
@@ -72,7 +72,7 @@ const LearningFileUpload = ({ onSubmit }: LearningFileUploadProps) => {
           </Button>
         </>
       ) : (
-        <Upload processFile={processFile} handleFile={handleFile} />
+        <Upload processFile={processFile} handleFile={handleFile}/>
       )}
     </div>
   );
