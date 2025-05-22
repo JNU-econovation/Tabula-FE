@@ -24,7 +24,7 @@ const useUploadFile = (mode: UploadMode = 'pdf-type') => {
 
     for (const f of files) {
       const isPdf = f.type === 'application/pdf';
-      const isImage = f.type.startsWith('image/');
+      const isImage = f.type === 'image/png' || f.type === 'image/jpg' || f.type === 'image/jpeg'
 
       if (mode === 'pdf-type') {
         if (isPdf) {
