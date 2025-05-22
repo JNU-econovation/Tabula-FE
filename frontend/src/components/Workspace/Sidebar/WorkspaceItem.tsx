@@ -35,7 +35,8 @@ const WorkspaceItem = ({ spaceId, spaceName }: WorkspaceItemProps) => {
     setIsMenuOpen(false);
   });
 
-  const menuOpenToggle = () => {
+  const menuOpenToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     setIsMenuOpen(!isMenuOpen);
   };
 
@@ -66,7 +67,6 @@ const WorkspaceItem = ({ spaceId, spaceName }: WorkspaceItemProps) => {
             }}
             value={spaceNameValue}
             onChange={handleInputChange}
-            onClick={(e) => e.preventDefault()}
             autoFocus
           />
         ) : (
