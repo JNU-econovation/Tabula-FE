@@ -1,7 +1,8 @@
+import { getLearningResultList } from '@/api/workspace';
 import { getWorkspaceList } from '@/api/workspace';
 import { useQuery } from '@tanstack/react-query';
 
-const useGetWorkspaceList = (folderId: string) => {
+export const useGetWorkspaceList = (folderId: string) => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['workspaceList'],
     queryFn: () => getWorkspaceList(folderId),
@@ -12,4 +13,13 @@ const useGetWorkspaceList = (folderId: string) => {
   return { workspaceList, isLoading, isError };
 };
 
-export default useGetWorkspaceList;
+export const useGetLearningResultList = (spaceId: string) => {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['learningResultList'],
+    queryFn: () => getLearningResultList(spaceId),
+  });
+
+  const learningResultList = data?.response || [];
+
+  return { learningResultList, isLoading, isError };
+};
