@@ -1,4 +1,4 @@
-import { deleteFolder } from '@/api/http/folder';
+import { deleteFolder } from '@/api/folder';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const useDeleteFolder = (options?: {

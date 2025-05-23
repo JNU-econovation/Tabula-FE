@@ -1,4 +1,4 @@
-import { postFolder } from '@/api/http/folder';
+import { postFolder } from '@/api/folder';
 import {
   useMutation,
   UseMutationResult,

@@ -1,4 +1,4 @@
-import { getWorkspaceList } from '@/api/http/workspace';
+import { getWorkspaceList } from '@/api/workspace';
 import { useQuery } from '@tanstack/react-query';
 
 const useGetWorkspaceList = (folderId: string) => {

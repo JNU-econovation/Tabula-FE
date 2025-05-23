@@ -2,7 +2,7 @@ import { http, HttpResponse } from 'msw';
 
 import workspaceList from './data/workspaceList.json';
 import folderList from './data/folderList.json';
-import { BASE_URL, END_POINT } from '@/api/http';
+import { BASE_URL, END_POINT } from '@/api';
 import { PostFolderProps } from '@/hooks/query/usePostFolder';
 
 export const handlers = [

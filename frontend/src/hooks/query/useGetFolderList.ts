@@ -1,4 +1,4 @@
-import { getFolderList } from '@/api/http/folder';
+import { getFolderList } from '@/api/folder';
 import { useQuery } from '@tanstack/react-query';
 
 export interface FolderProps {

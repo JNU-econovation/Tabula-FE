@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FolderProps } from './useGetFolderList';
-import { putFolder } from '@/api/http/folder';
+import { putFolder } from '@/api/folder';
 
 export interface PutFolderProps {
   folderId: string;
