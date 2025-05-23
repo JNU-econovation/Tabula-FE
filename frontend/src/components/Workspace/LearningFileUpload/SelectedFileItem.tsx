@@ -16,7 +16,7 @@ const SelectedFileItem = ({
         <FaFileAlt />
       </div>
 
-      <div className="flex flex-col flex-1 ml-4">
+      <div className="flex flex-col flex-1 ml-4 max-w-80">
         <p className="text-sm font-medium text-gray-800 truncate">
           {selectedFile.name}
         </p>
