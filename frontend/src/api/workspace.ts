@@ -11,7 +11,9 @@ interface WorkspaceListResponse {
 export const getWorkspaceList = async (
   folderId: string,
 ): Promise<WorkspaceListResponse> => {
-  const data = await AxiosInstance.get(`${END_POINT.workspaceList}${folderId}`);
+  const data = await AxiosInstance.get(
+    `${END_POINT.workspaceList}${folderId}/lists`,
+  );
 
   return data.data;
 };
@@ -46,6 +48,14 @@ export const uploadLearningFile = async (
   const response = await AxiosInstanceFormData.post(
     `${END_POINT.workspaceList}${folderId}`,
     formData,
+  );
+
+  return response.data;
+};
+
+export const getLearningResultList = async (spaceId: string) => {
+  const response = await AxiosInstance.get(
+    `${END_POINT.workspaceList}${spaceId}`,
   );
 
   return response.data;
