@@ -3,8 +3,7 @@
 import { postAuth } from "@/api/login"
 import { AuthStore } from "@/stores/authStore"
 import { useToastStore } from "@/stores/toastStore"
-import { useSearchParams } from "next/navigation"
-import { useRouter } from "next/router"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect } from "react"
 
 const CallbackPage = () => {
