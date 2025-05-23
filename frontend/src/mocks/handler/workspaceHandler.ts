@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw';
 import workspaceList from '../data/workspaceList.json';
 
-import { BASE_URL, END_POINT } from '@/api';
+import { BASE_URL, END_POINT } from '@/api/http';
 
 export const workspaceHandler = [
   http.get(`${BASE_URL}${END_POINT.workspaceList}:id`, async () => {
@@ -70,5 +70,57 @@ export const workspaceHandler = [
         },
       },
     );
+  }),
+
+  http.get('/sse/ai-progress/:id', ({ params }) => {
+    const encoder = new TextEncoder();
+    let progress = 10;
+
+    const stream = new ReadableStream({
+      start(controller) {
+        const interval = setInterval(() => {
+          progress += 10;
+
+          if (progress >= 100) {
+            const completeResponse = {
+              success: true,
+              response: {
+                spaceId: Math.random(),
+                spaceName: '운영체제를 딥하게 배우기',
+                keywords: [
+                  { id: 1, keyword: '운영체제란?' },
+                  { id: 2, keyword: '멀티 프로세싱' },
+                  { id: 3, keyword: '멀티 쓰레딩' },
+                ],
+              },
+              error: null,
+            };
+            controller.enqueue(
+              encoder.encode(`data: ${JSON.stringify(completeResponse)}\n\n`),
+            );
+            controller.close();
+            clearInterval(interval);
+          } else {
+            controller.enqueue(encoder.encode(`data: ${progress}\n\n`));
+          }
+        }, 500);
+      },
+    });
+
+    workspaceList.response = [
+      ...workspaceList.response,
+      {
+        spaceId: 1,
+        spaceName: '운영체제를 딥하게 배우기',
+      },
+    ];
+
+    return new Response(stream, {
+      headers: {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        Connection: 'keep-alive',
+      },
+    });
   }),
 ];
