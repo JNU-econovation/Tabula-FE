@@ -1,3 +1,4 @@
+import { AuthStore } from '@/stores/authStore';
 import axios from 'axios';
 
 export const BASE_URL = '/api';
@@ -24,3 +25,25 @@ export const AxiosInstanceFormData = axios.create({
   },
   timeout: 3000,
 });
+
+AxiosInstance.interceptors.request.use(
+  (config) => {
+    const accessToken = AuthStore.getState().accessToken
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`
+    }
+    return config
+  },
+  (error) => Promise.reject(error)
+)
+
+AxiosInstanceFormData.interceptors.request.use(
+  (config) => {
+    const accessToken = AuthStore.getState().accessToken
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`
+    }
+    return config
+  },
+  (error) => Promise.reject(error)
+)
