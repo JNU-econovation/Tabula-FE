@@ -2,16 +2,14 @@ export const useLearningResultUpload = (
   folderId: string,
   spaceId: string,
   file: File | File[] | null,
-  onSuccess: () => void
+  onSuccess: () => void,
 ) => {
-
-  const uploadLearningResultFile = async (ref: HTMLInputElement) => {
-    
+  const uploadLearningResultFile = async () => {
     if (!file) {
       alert('파일을 선택해주세요.');
       return;
     }
-    
+
     const formData = new FormData();
 
     if (file instanceof File) {
@@ -22,18 +20,18 @@ export const useLearningResultUpload = (
       formData.append('file', file);
     } else if (Array.isArray(file)) {
       for (const image of file) {
-        formData.append('file', image)
+        formData.append('file', image);
       }
     }
-    
+
     formData.append('folderId', folderId);
     formData.append('spaceId', spaceId);
 
     console.log('[UPLOAD]', Object.fromEntries(formData.entries()));
 
     onSuccess();
-  }
+  };
   return {
-    uploadLearningResultFile
-  }
-}
+    uploadLearningResultFile,
+  };
+};
