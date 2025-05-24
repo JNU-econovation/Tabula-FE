@@ -1,6 +1,7 @@
 import { useSSE } from '@/hooks/common/useSSE';
 import { useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
+
 import { useState } from 'react';
 
 interface ResponseType {
@@ -18,20 +19,20 @@ export const useLoadingSSE = (url: string) => {
 
   useSSE<ResponseType, ProgressData>({
     url,
-    onSuccess: (data) => {
-      const spaceId = data.spaceId;
+    onSuccess: (response) => {
+      const spaceId = response.spaceId;
       queryClient.invalidateQueries({ queryKey: ['workspaceList'] });
       router.push(`./${spaceId}`);
     },
     onError: (error) => {
       console.error('SSE Error:', error);
     },
-    onProgress: (parsedData) => {
+    onProgress: (response) => {
       let progress = 0;
-      if (typeof parsedData === 'number') {
-        progress = parsedData;
-      } else if (typeof parsedData.progress === 'number') {
-        progress = parsedData.progress;
+      if (typeof response === 'number') {
+        progress = response;
+      } else if (typeof response.progress === 'number') {
+        progress = response.progress;
       }
 
       if (progress > 0) {

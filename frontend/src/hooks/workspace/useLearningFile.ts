@@ -1,19 +1,22 @@
-import { useUploadLearningFile } from '@/hooks/query/workspace/mutation';
+import {
+  UploadLearningFileResponse,
+  useUploadLearningFile,
+} from '@/hooks/query/workspace/mutation';
 import { useState } from 'react';
+
+type LangType = 'english' | 'korean' | 'japanese';
 
 const useLearningFile = (
   folderId: string,
   file: File | null,
-  onSuccess: () => void,
+  onSuccess: (data: UploadLearningFileResponse) => void,
 ) => {
   const { mutate } = useUploadLearningFile(onSuccess);
   const [subjectName, setSubjectName] = useState('');
-  const [language, setLanguage] = useState<'english' | 'korean' | 'japanese'>(
-    'korean',
-  );
+  const [language, setLanguage] = useState<LangType>('korean');
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setLanguage(e.target.value as 'english' | 'korean' | 'japanese');
+    setLanguage(e.target.value as LangType);
   };
   const handleSubjectNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSubjectName(e.target.value);

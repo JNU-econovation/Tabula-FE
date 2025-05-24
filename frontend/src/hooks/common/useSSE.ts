@@ -22,6 +22,7 @@ export interface SSEState<T = any> {
  * 각 상태에 따라 onError, onSuccess, onComplete, onProgress 콜백 함수를 호출합니다.
  * onComplete는 성공, 실패 여부와 관계없이 항상 호출됩니다.
  * onProgress는 데이터 수신 시마다 호출됩니다.
+ * sse 가 진행중일때는 응답값으로 status : 'processing' 를 포함해야합니다.
  *
  * @param config
  * @returns
@@ -66,15 +67,20 @@ export const useSSE = <T = any, P = any>(config: SSEConfig<T, P>) => {
         const parsedData = JSON.parse(e.data);
 
         if (parsedData.success) {
-          setState((prev) => ({
-            ...prev,
-            data: parsedData.response || parsedData,
-            isSuccess: true,
-          }));
-          onSuccess?.(parsedData.response || parsedData);
-          onComplete?.();
-          disconnect();
-          return;
+          if (parsedData.response.status === 'processing') {
+            onProgress?.(parsedData.response);
+            return;
+          } else {
+            setState((prev) => ({
+              ...prev,
+              data: parsedData.response,
+              isSuccess: true,
+            }));
+            onSuccess?.(parsedData.response);
+            onComplete?.();
+            disconnect();
+            return;
+          }
         }
 
         if (parsedData.error) {
@@ -89,8 +95,6 @@ export const useSSE = <T = any, P = any>(config: SSEConfig<T, P>) => {
           disconnect();
           return;
         }
-
-        onProgress?.(parsedData);
       } catch (error) {
         alert('Error: SSE data 파싱 에러');
 
