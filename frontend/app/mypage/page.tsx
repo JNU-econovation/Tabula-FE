@@ -8,7 +8,7 @@ import { IoIosArrowRoundForward, IoMdArrowDropright } from "react-icons/io"
 const page = () => {
   const { username } = AuthStore()
   return (
-    <div className="flex flex-col items-center p-20 min-h-calc(100vh-4.5rem)">
+    <div className="flex flex-col items-center p-15 min-h-calc(100vh-4.5rem)">
       <div className="flex flex-col items-start gap-8 min-w-110">
         <div className="flex relative items-center p-4">
           <div className="mr-8">
