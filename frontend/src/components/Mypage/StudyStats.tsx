@@ -11,6 +11,9 @@ const StudyStats = () => {
   const month = value.getMonth() + 1
   const levels = [0, 1, 2, 3]
 
+  const { response, isLoading } = useGetMypage(year, month)
+
+
   const handleChange = (
     nextValue: Value,
     _event: React.MouseEvent<HTMLButtonElement>
@@ -23,21 +26,27 @@ const StudyStats = () => {
   }
 
   return (
-    <div className='flex flex-col gap-1 mt-4 rounded-xl border border-gray-200 shadow-md p-4 w-fit'>
-      <Calendar
-        value={value}
-        onChange={handleChange}
-        formatDay={(locale, date) => date.toLocaleDateString('en', { day: 'numeric' })}
-        showNeighboringMonth={false}
-        minDetail="month"
-        maxDetail="month"
-        tileDisabled={({ date }) => date > new Date()}
-        selectRange={false}
-        prev2Label={null}
-        next2Label={null}
-        className='calendar-custom'
-      />
+    <div>
+      {isLoading ? (
+        <div>로딩중 ...</div>
+      ) : (
+        <div className='flex flex-col gap-1 mt-4 rounded-xl border border-gray-200 shadow-md p-4 w-fit'>
+          <Calendar
+            value={value}
+            onChange={handleChange}
+            formatDay={(locale, date) => date.toLocaleDateString('en', { day: 'numeric' })}
+            showNeighboringMonth={false}
+            minDetail="month"
+            maxDetail="month"
+            tileDisabled={({ date }) => date > new Date()}
+            selectRange={false}
+            prev2Label={null}
+            next2Label={null}
+            className='calendar-custom'
+          />
         </div>
+      )}
+    </div>
   )
 }
 
