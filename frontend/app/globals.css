@@ -218,5 +218,21 @@
 }
 
 .calendar-custom .today {
-  @apply border-3 border-[#283DA1] font-bold
+  @apply border-3 border-[#4C5EB1] font-bold
+}
+
+.calendar-custom .study-level-0 {
+  @apply bg-[#F6F7FD];
+}
+
+.calendar-custom .study-level-1 {
+  @apply bg-[#BDC5F2];
+}
+
+.calendar-custom .study-level-2 {
+  @apply bg-[#8796DF];
+}
+
+.calendar-custom .study-level-3 {
+  @apply bg-[#5D72D6];
 }
