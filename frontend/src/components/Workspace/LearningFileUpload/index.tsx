@@ -11,9 +11,10 @@ import { useParams } from 'next/navigation';
 import SelectLanguage from '@/components/Workspace/LearningFileUpload/SelectLanguage';
 import SubjectNameInput from '@/components/Workspace/LearningFileUpload/SubjectNameInput';
 import SelectedFileItem from '@/components/Workspace/LearningFileUpload/SelectedFileItem';
+import { UploadLearningFileResponse } from '@/hooks/query/workspace/mutation';
 
 interface LearningFileUploadProps {
-  onSubmit: () => void;
+  onSubmit: (data: UploadLearningFileResponse) => void;
 }
 const LearningFileUpload = ({ onSubmit }: LearningFileUploadProps) => {
   const { folderId } = useParams();
@@ -27,6 +28,7 @@ const LearningFileUpload = ({ onSubmit }: LearningFileUploadProps) => {
     handleLanguageChange,
     handleSubjectNameChange,
     resetSubjectName,
+
   } = useLearningFile(folderId as string, selectedFile as File | null, () => onSubmit());
 
   return (
