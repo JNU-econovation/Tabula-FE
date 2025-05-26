@@ -16,7 +16,8 @@ const buttonVariants = cva(
         secondary: "",
         gradient: "",
         gray: "",
-        red: ""
+        red: "",
+        purple: ""
       },
       size: {
         sm: "h-9 gap-1.5 px-5 has-[>svg]:px-2.5 text-sm",
@@ -79,6 +80,11 @@ const buttonVariants = cva(
         colorScheme: "red",
         class: "bg-[#FF7C7C] text-white hover:bg-[#FA5D5D] border-[#FF7C7C]",
       },
+      {
+        variant: "filled",
+        colorScheme: "purple",
+        class: "bg-[#7377B6] text-white hover:bg-[#5C639C] border-[#7377B6]"
+      }
     ],
   }
 )
