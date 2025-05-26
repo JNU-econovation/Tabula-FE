@@ -10,6 +10,7 @@ const StudyStats = () => {
   const year = value.getFullYear()
   const month = value.getMonth() + 1
   const levels = [0, 1, 2, 3]
+  const [activeStartDate, setActiveStartDate] = useState(new Date())
 
   const { response, isLoading } = useGetMypage(year, month)
 
@@ -24,6 +25,18 @@ const StudyStats = () => {
       .getDate()
       .toString()
       .padStart(2, '0')}`
+  }
+
+  const isNextMonthAfterToday = () => {
+    const nextMonth = new Date(activeStartDate)
+    nextMonth.setMonth(nextMonth.getMonth() + 1)
+  
+    const today = new Date()
+    return (
+      nextMonth.getFullYear() > today.getFullYear() ||
+      (nextMonth.getFullYear() === today.getFullYear() &&
+        nextMonth.getMonth() > today.getMonth())
+    )
   }
 
   const tileClassName = ({ date }: { date: Date }) => {
@@ -70,13 +83,17 @@ const StudyStats = () => {
             onChange={handleChange}
             formatDay={(locale, date) => date.toLocaleDateString('en', { day: 'numeric' })}
             showNeighboringMonth={false}
-            minDetail="month" // 상단 네비게이션에서 '월' 단위만 보이게 설정
+            minDetail="month"
             maxDetail="month"
             tileDisabled={({ date }) => date > new Date()}
             tileClassName={tileClassName}
             selectRange={false}
             prev2Label={null}
             next2Label={null}
+            onActiveStartDateChange={({ activeStartDate }) =>
+              setActiveStartDate(activeStartDate!)
+            }
+            nextLabel={isNextMonthAfterToday() ? null : '>'}
             className='calendar-custom'
           />
           <div className='flex items-center mt-4'>

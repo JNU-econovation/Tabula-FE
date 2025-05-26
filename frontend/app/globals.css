@@ -236,3 +236,11 @@
 .calendar-custom .study-level-3 {
   @apply bg-[#5D72D6];
 }
+
+.calendar-custom .react-calendar__navigation button {
+  @apply cursor-pointer text-gray-700;
+}
+
+.calendar-custom .react-calendar__navigation button:disabled {
+  @apply cursor-default
+}
