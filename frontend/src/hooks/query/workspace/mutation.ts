@@ -5,7 +5,6 @@ import {
 } from '@/api/workspace';
 import { useToastStore } from '@/stores/toastStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { on } from 'events';
 
 interface UpdateWorkspace {
   spaceId: string;
@@ -47,21 +46,28 @@ export const useDeleteWorkspace = () => {
   });
 };
 
-export interface UploadLearningFileResponse {
+export interface UploadLearningFileRequest {
   formData: FormData;
   folderId: string;
 }
-export const useUploadLearningFile = (onSuccess: () => void) => {
+
+export interface UploadLearningFileResponse {
+  task_id: string;
+}
+
+export const useUploadLearningFile = (
+  onSuccess: (data: UploadLearningFileResponse) => void,
+) => {
   const addToast = useToastStore.getState().addToast;
 
   return useMutation({
-    mutationFn: ({ folderId, formData }: UploadLearningFileResponse) =>
+    mutationFn: ({ folderId, formData }: UploadLearningFileRequest) =>
       uploadLearningFile(folderId, formData),
     onError: (error) => {
       addToast('파일 업로드에 실패했습니다.', 3, 'error');
     },
-    onSuccess: () => {
-      onSuccess();
+    onSuccess: (data) => {
+      onSuccess(data);
     },
   });
 };

@@ -37,10 +37,6 @@ export const updateWorkspaceName = async (
   return data.data;
 };
 
-export interface UploadLearningFileResponse {
-  formdata: FormData;
-  folderId: string;
-}
 export const uploadLearningFile = async (
   folderId: string,
   formData: FormData,
