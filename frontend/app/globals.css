@@ -192,3 +192,55 @@
     animation: wave-fast 12s ease-in-out infinite;
   }
 }
+
+/* 학습 통계 캘린더 스타일링 */
+/* 년/월 헤더 */
+.calendar-custom .react-calendar__navigation {
+  @apply mb-8 flex justify-center items-center gap-2 text-base font-semibold;
+}
+
+.calendar-custom .react-calendar__month-view__days {
+  min-height: 240px;
+}
+
+/* 요일 헤더 (월~일) */
+.calendar-custom .react-calendar__month-view__weekdays {
+  @apply grid grid-cols-7 text-center text-xs text-gray-500 mb-1;
+}
+
+.calendar-custom .react-calendar__month-view__weekdays abbr {
+  @apply no-underline;
+}
+
+/* 날짜 타일 */
+.calendar-custom .react-calendar__tile {
+  @apply relative w-8 h-12 flex items-center justify-center text-sm;
+}
+
+.calendar-custom .today {
+  @apply font-bold
+}
+
+.calendar-custom .study-level-0 {
+  @apply bg-[#F6F7FD];
+}
+
+.calendar-custom .study-level-1 {
+  @apply bg-[#BDC5F2];
+}
+
+.calendar-custom .study-level-2 {
+  @apply bg-[#8796DF];
+}
+
+.calendar-custom .study-level-3 {
+  @apply bg-[#5D72D6];
+}
+
+.calendar-custom .react-calendar__navigation button {
+  @apply cursor-pointer text-gray-700;
+}
+
+.calendar-custom .react-calendar__navigation button:disabled {
+  @apply cursor-default
+}

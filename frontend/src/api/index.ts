@@ -5,6 +5,7 @@ export const BASE_URL = '/api';
 export const END_POINT = {
   workspaceList: `/v1/spaces/`,
   folderList: `/v1/folders`,
+  mypage: `/v1/user/info`,
 };
 
 export const AxiosInstance = axios.create({
