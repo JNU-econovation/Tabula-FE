@@ -1,7 +1,7 @@
 import { StatsData } from '@/api/mypage'
 import { COLOR_PALETTE } from '@/constants/color'
-import { useGetMypage } from '@/hooks/query/mypage/query'
-import { useState } from 'react'
+import { useCalendarControl } from '@/hooks/mypage/useCalendarControl'
+import { useStudyStats } from '@/hooks/mypage/useStudyStats'
 import Calendar from 'react-calendar'
 
 const StudyStats = () => {
@@ -9,33 +9,15 @@ const StudyStats = () => {
   const year = value.getFullYear()
   const month = value.getMonth() + 1
   const levels = [0, 1, 2, 3]
-  const [activeStartDate, setActiveStartDate] = useState(new Date())
-
-  const { response, isLoading } = useGetMypage(year, month)
-
-  const studyStatsMap: Record<string, number> = {}
-  response?.data.forEach(({ date, cnt }: StatsData) => {
-    const dateStr = date.split('T') ? date.split('T')[0] : date
-    studyStatsMap[dateStr] = cnt
-  })
+  
+  const { studyStatsMap, isLoading } = useStudyStats(year, month)
+  const { activeStartDate, setActiveStartDate, isNextMonthAfterToday } = useCalendarControl()
 
   const getLocalDateStr = (d: Date) => {
     return `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d
       .getDate()
       .toString()
       .padStart(2, '0')}`
-  }
-
-  const isNextMonthAfterToday = () => {
-    const nextMonth = new Date(activeStartDate)
-    nextMonth.setMonth(nextMonth.getMonth() + 1)
-  
-    const today = new Date()
-    return (
-      nextMonth.getFullYear() > today.getFullYear() ||
-      (nextMonth.getFullYear() === today.getFullYear() &&
-        nextMonth.getMonth() > today.getMonth())
-    )
   }
 
   const tileClassName = ({ date }: { date: Date }) => {
