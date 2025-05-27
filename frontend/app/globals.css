@@ -218,7 +218,7 @@
 }
 
 .calendar-custom .today {
-  @apply border-3 border-[#4C5EB1] font-bold
+  @apply font-bold
 }
 
 .calendar-custom .study-level-0 {

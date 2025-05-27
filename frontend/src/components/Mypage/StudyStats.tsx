@@ -93,7 +93,7 @@ const StudyStats = () => {
             onActiveStartDateChange={({ activeStartDate }) =>
               setActiveStartDate(activeStartDate!)
             }
-            nextLabel={isNextMonthAfterToday() ? null : '>'}
+            nextLabel={isNextMonthAfterToday() ? null : undefined}
             className='calendar-custom'
           />
           <div className='flex items-center mt-4'>
