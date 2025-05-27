@@ -1,11 +1,11 @@
-import { StatsData } from '@/api/mypage'
 import { COLOR_PALETTE } from '@/constants/color'
 import { useCalendarControl } from '@/hooks/mypage/useCalendarControl'
 import { useStudyStats } from '@/hooks/mypage/useStudyStats'
+import { useState } from 'react'
 import Calendar from 'react-calendar'
 
 const StudyStats = () => {
-  const value = new Date()
+  const [value, setValue] = useState(new Date())
   const year = value.getFullYear()
   const month = value.getMonth() + 1
   const levels = [0, 1, 2, 3]
@@ -59,9 +59,10 @@ const StudyStats = () => {
             selectRange={false}
             prev2Label={null}
             next2Label={null}
-            onActiveStartDateChange={({ activeStartDate }) =>
+            onActiveStartDateChange={({ activeStartDate }) => {
               setActiveStartDate(activeStartDate!)
-            }
+              setValue(activeStartDate!)
+            }}
             nextLabel={isNextMonthAfterToday() ? null : undefined}
             className='calendar-custom'
           />
