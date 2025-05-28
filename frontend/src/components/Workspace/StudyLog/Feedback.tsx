@@ -2,12 +2,12 @@ import { Button } from '@/components/common/Button/Button';
 import LoadingSpinner from '@/components/Workspace/StudyLog/LoadingSpinner';
 import { FaSearchPlus } from 'react-icons/fa';
 
-interface ResultProps {
+interface FeedbackProps {
   status?: 'LOADING' | 'COMPLETED';
   id: string;
   children: React.ReactNode;
 }
-const Result = ({ status, id, children }: ResultProps) => {
+const Feedback = ({ status, id, children }: FeedbackProps) => {
   return (
     <div>
       {status === 'LOADING' ? (
@@ -40,4 +40,4 @@ const Result = ({ status, id, children }: ResultProps) => {
   );
 };
 
-export default Result;
+export default Feedback;

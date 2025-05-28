@@ -3,7 +3,7 @@ import LearningResultUpload from '@/components/Workspace/LearningResultUpload/Le
 import ChatBubble from '@/components/Workspace/StudyLog/ChatBubble';
 import Layout from '@/components/Workspace/StudyLog/Layout';
 import LearningFile from '@/components/Workspace/StudyLog/LearningFile';
-import Result from '@/components/Workspace/StudyLog/Result';
+import Feedback from '@/components/Workspace/StudyLog/Feedback';
 import { useGetLearningResultList } from '@/hooks/query/workspace/query';
 import { useLearningStore } from '@/stores/useLearningStore';
 import { useParams } from 'next/navigation';
@@ -37,7 +37,7 @@ const StudyLog = () => {
             </ChatBubble>
 
             <ChatBubble isUser={false}>
-              <Result status={result.resultStatus} id={result.resultId}>
+              <Feedback status={result.resultStatus} id={result.resultId}>
                 {result.resultImages.map((image, index) => {
                   return (
                     <img
@@ -48,7 +48,7 @@ const StudyLog = () => {
                     />
                   );
                 })}
-              </Result>
+              </Feedback>
             </ChatBubble>
           </div>
         );
