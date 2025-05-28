@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "response": {
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.guest-access-token.mocked.abc123",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.guest-refresh-token.mocked.xyz456"
+  },
+  "error": null
+}

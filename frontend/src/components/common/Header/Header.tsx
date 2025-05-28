@@ -1,23 +1,32 @@
 "use client"
 
 import Image from 'next/image'
-import Link from 'next/link'
 import Logo from '../../../../assets/logo.png'
 import { AuthStore } from '@/stores/authStore'
 import useModal from '@/hooks/common/useModal'
 import GuideModal from '@/components/Home/GuideModal'
 import { Button } from '../Button/Button'
 import { FaSearch } from 'react-icons/fa'
+import { useRouter } from 'next/navigation'
 
 const Header = () => {
   const { isLogin, username } = AuthStore();
   const { isModalOpen, openModal, closeModal } = useModal()
+  const router = useRouter()
+
+  const handleLogoClick = () => {
+    if (isLogin && username) {
+      router.push('/subject')
+    } else {
+      router.push('/')
+    }
+  }
 
   return (
     <div className='w-full h-18 flex items-center bg-white justify-between px-8 border-b border-gray-200'>
-      <Link href='/' className='flex items-center hover:scale-105 transition-transform duration-300'>
+      <div onClick={handleLogoClick} className='flex items-center hover:scale-105 transition-transform duration-300 hover:cursor-pointer'>
         <Image src={Logo} alt='logo' width={40} height={40} />
-      </Link>
+      </div>
 
       <div className='flex items-center gap-8'>
         <div>
