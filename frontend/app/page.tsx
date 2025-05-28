@@ -2,13 +2,17 @@
 
 import { Button } from "@/components/common/Button/Button";
 import WaveBackground from "@/components/Home/WaveBackground";
+import { useAuthRedirect } from "@/hooks/Login/useAuthRedirect";
 import { useGoogleLogin } from "@/hooks/Login/useGoogleLogin";
 import { useGoogleMessageListener } from "@/hooks/Login/useGoogleMessageListener";
 
-export default function Page() {
+const Page = () => {
 
   const { handleLogin } = useGoogleLogin()
   useGoogleMessageListener()
+
+  const shouldRender = useAuthRedirect()
+  if (!shouldRender) return null
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4.5rem)] px-4 text-center">
@@ -29,3 +33,5 @@ export default function Page() {
     </div>
   )
 }
+
+export default Page
