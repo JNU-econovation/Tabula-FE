@@ -8,6 +8,7 @@ import { useGetLearningResultList } from '@/hooks/query/workspace/query';
 import { useLearningStore } from '@/stores/useLearningStore';
 import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
+import Keyword from '@/components/Workspace/Keyword/Keyword';
 
 const StudyLog = () => {
   const { spaceId } = useParams();
@@ -26,6 +27,7 @@ const StudyLog = () => {
 
   return (
     <Layout>
+      <Keyword />
       <LearningFile fileName={fileName} />
       {learningResult.map((result, index) => {
         return (
