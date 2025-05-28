@@ -16,7 +16,7 @@ const GuideModal = ({ isModalOpen, closeModal }: GuideModalProps) => {
     <Modal isOpen={isModalOpen} close={closeModal} size="xl">
       <div className="flex flex-col items-center gap-4 p-4 max-h-[80vh]">
         <h2 className="text-xl font-semibold p-4 text-gray-800">Tabula 사용법 가이드라인</h2>
-        <div className="overflow-y-auto">
+        <div className="overflow-y-auto px-4">
           <ul className="flex flex-col list-disc list-inside text-sm text-gray-700 gap-4">
             <li>
               학습 중 막히는 부분이 있다면 <span className="font-semibold">'키워드 확인하기'</span> 토클을 통해 도움 받을 수 있어요.
