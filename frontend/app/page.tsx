@@ -5,10 +5,12 @@ import WaveBackground from "@/components/Home/WaveBackground";
 import { useAuthRedirect } from "@/hooks/Login/useAuthRedirect";
 import { useGoogleLogin } from "@/hooks/Login/useGoogleLogin";
 import { useGoogleMessageListener } from "@/hooks/Login/useGoogleMessageListener";
+import { useGuestLogin } from "@/hooks/query/login/useGuestLogin";
 
 const Page = () => {
 
   const { handleLogin } = useGoogleLogin()
+  const { mutate: handleGuestLogin } = useGuestLogin()
   useGoogleMessageListener()
 
   const shouldRender = useAuthRedirect()
@@ -25,7 +27,7 @@ const Page = () => {
       </div>
       <div className="flex gap-8 mt-8 z-10 transform -translate-y-13">
         <Button colorScheme="gradient" size="md" width={190} className="z-10" onClick={handleLogin}>로그인</Button>
-        <Button variant="line" colorScheme="gray" size="md" width={190} className="z-10">게스트로 시작하기</Button>
+        <Button variant="line" colorScheme="gray" size="md" width={190} className="z-10" onClick={() => handleGuestLogin()}>게스트로 시작하기</Button>
       </div>
       <div className="absolute bottom-0 left-0 w-full z-0">
         <WaveBackground />

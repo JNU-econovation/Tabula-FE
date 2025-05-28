@@ -6,6 +6,7 @@ export const BASE_URL = '/api';
 
 export const END_POINT = {
   authIssue: `/v1/auth/reissue`,
+  guestLogin: `/v1/auth/guest`,
   workspaceList: `/v1/spaces/`,
   folderList: `/v1/folders`,
 };
@@ -60,7 +61,8 @@ const handleTokenRefresh = (instance: ReturnType<typeof axios.create>) => {
           authState.setAuth({
             username: username!,
             accessToken: newAccessToken,
-            refreshToken: newRefreshToken
+            refreshToken: newRefreshToken,
+            loginType: 'user'
           })
  
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`

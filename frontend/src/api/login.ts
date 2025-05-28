@@ -15,3 +15,8 @@ export const postReissue = async (refreshToken: string) => {
   })
   return response.data
 }
+
+export const postGuestAuth = async () => {
+  const response = await AxiosInstance.post(END_POINT.guestLogin)
+  return response.data
+}
