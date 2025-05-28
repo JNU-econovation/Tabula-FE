@@ -3,10 +3,12 @@
 import { Button } from "@/components/common/Button/Button";
 import WaveBackground from "@/components/Home/WaveBackground";
 import { useGoogleLogin } from "@/hooks/Login/useGoogleLogin";
+import { useGoogleMessageListener } from "@/hooks/Login/useGoogleMessageListener";
 
 export default function Page() {
 
   const { handleLogin } = useGoogleLogin()
+  useGoogleMessageListener()
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4.5rem)] px-4 text-center">
