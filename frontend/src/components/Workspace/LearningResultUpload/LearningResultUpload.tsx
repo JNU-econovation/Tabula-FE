@@ -7,6 +7,9 @@ import SelectedFileItem from '../LearningFileUpload/SelectedFileItem';
 import { Button } from '@/components/common/Button/Button';
 import { HiOutlinePaperAirplane } from 'react-icons/hi';
 import UploadedImagePreview from './UploadImagePreview';
+import { useLearningStore } from '@/stores/useLearningStore';
+import { IoMdCloseCircleOutline } from 'react-icons/io';
+import { formatFileSize } from '@/util/formatFileSize';
 
 const LearningResultUpload = () => {
   const { folderId, spaceId } = useParams();
@@ -17,14 +20,16 @@ const LearningResultUpload = () => {
     deleteFile,
     deleteImageFile,
     processFile,
+    resetFiles,
   } = useUploadFile('multi-type');
 
   const { uploadLearningResultFile } = useLearningResultUpload(
     folderId as string,
     spaceId as string,
     selectedFile || imageFiles,
-    () => alert('업로드 완료'),
   );
+
+  const { isLoading } = useLearningStore();
 
   const isImageMode = imageFiles.length > 0;
   const isPdfMode = selectedFile && !isImageMode;
@@ -44,21 +49,36 @@ const LearningResultUpload = () => {
         )}
         {(selectedFile || imageFiles.length > 0) && (
           <div className={`absolute right-0 ${isPdfMode ? 'top-8' : ''}`}>
-            <Button
-              onClick={() => uploadLearningResultFile()}
-              colorScheme="purple"
-              size="icon"
-              icon={
-                <HiOutlinePaperAirplane className="rotate-45 -translate-y-0.5" />
-              }
-            />
+            {isLoading ? (
+              <Button
+                colorScheme="gray"
+                size="icon"
+                className="hover:cursor-not-allowed"
+                icon={<IoMdCloseCircleOutline />}
+              />
+            ) : (
+              <Button
+                onClick={() => {
+                  resetFiles();
+                  uploadLearningResultFile();
+                }}
+                colorScheme="purple"
+                size="icon"
+                icon={
+                  <HiOutlinePaperAirplane className="rotate-45 -translate-y-0.5" />
+                }
+              />
+            )}
+
+            {/* TODO: 로딩중일때 막기 */}
           </div>
         )}
       </div>
       <div className="z-20">
         {selectedFile ? (
           <SelectedFileItem
-            selectedFile={selectedFile}
+            fileName={selectedFile.name}
+            content={`PDF · ${formatFileSize(selectedFile.size)}`}
             deleteFile={deleteFile}
           />
         ) : (
