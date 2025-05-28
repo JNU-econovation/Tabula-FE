@@ -2,13 +2,13 @@
 
 import LearningResultUpload from '@/components/Workspace/LearningResultUpload/LearningResultUpload';
 import { useParams } from 'next/navigation';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { SidebarContext } from '../layout';
 import { useGetLearningResultList } from '@/hooks/query/workspace/query';
-import ChatBubble from '@/components/Workspace/LearningResult/ChatBubble';
+import ChatBubble from '@/components/Workspace/StudyLog/ChatBubble';
 import { Button } from '@/components/common/Button/Button';
 import { FaSearchPlus } from 'react-icons/fa';
-import LoadingSpinner from '@/components/Workspace/LearningResult/LoadingSpinner';
+import LoadingSpinner from '@/components/Workspace/StudyLog/LoadingSpinner';
 import { useLearningStore } from '@/stores/useLearningStore';
 import SelectedFileItem from '@/components/Workspace/LearningFileUpload/SelectedFileItem';
 
@@ -18,8 +18,15 @@ const page = () => {
   const { fileName } = useGetLearningResultList(spaceId as string);
   const { learningResult } = useLearningStore();
 
-  //업로드 시 파일 초기화 해줘야함
-  // 스크롤도 아래로
+  useEffect(() => {
+    const scrollToBottom = () => {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth',
+      });
+    };
+    scrollToBottom();
+  }, [learningResult]);
 
   return (
     <div className="relative w-full overflow-x-hidden">
@@ -96,8 +103,6 @@ const page = () => {
                     </Button>
                   </div>
                 )}
-
-                {/* {isUploading && <LoadingSpinner></LoadingSpinner>} */}
               </ChatBubble>
             </div>
           );
