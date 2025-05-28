@@ -16,10 +16,11 @@ export const useGuestLogin = () => {
       setAuth({
         username: '게스트',
         accessToken,
-        refreshToken
+        refreshToken,
+        loginType: 'guest'
       })
       router.replace('/workspace')
-      addToast('게스트 로그인 하였습니다.', 3, 'default')
+      addToast('환영합니다! 게스트 모드로 Tabula를 체험해보세요.', 3, 'default')
     },
     onError: () => {
       addToast('게스트 로그인에 실패했습니다. 다시 시도해주세요!')

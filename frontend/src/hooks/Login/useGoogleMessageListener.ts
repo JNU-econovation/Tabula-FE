@@ -19,7 +19,8 @@ export const useGoogleMessageListener = () => {
           setAuth({
             username: userName,
             accessToken,
-            refreshToken
+            refreshToken,
+            loginType: 'user'
           })
           router.replace('/subject')
           addToast(`로그인에 성공하였습니다. 안녕하세요 ${userName}님!`, 3, 'default')
