@@ -8,11 +8,16 @@ import GuideModal from '@/components/Home/GuideModal'
 import { Button } from '../Button/Button'
 import { FaSearch } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { useGoogleLogin } from '@/hooks/Login/useGoogleLogin'
+import { useGoogleMessageListener } from '@/hooks/Login/useGoogleMessageListener'
 
 const Header = () => {
   const { isLogin, username } = AuthStore();
   const { isModalOpen, openModal, closeModal } = useModal()
   const router = useRouter()
+  const { handleLogin } = useGoogleLogin()
+  useGoogleMessageListener()
 
   const handleLogoClick = () => {
     if (isLogin && username) {
@@ -36,9 +41,11 @@ const Header = () => {
         </div>
         
         {isLogin && username ? (
-          <div className='text-[#292929] mr-5'>{username}님</div>
+          <Link href={'/mypage'}>
+            <div className='text-[#292929] mr-5'>{username}님</div>
+          </Link>
         ) : (
-            <Button colorScheme="secondary" size="sm" radius="full">
+            <Button colorScheme="secondary" size="sm" radius="full" onClick={handleLogin}>
               로그인
             </Button>
           )
