@@ -12,6 +12,7 @@ import SelectLanguage from '@/components/Workspace/LearningFileUpload/SelectLang
 import SubjectNameInput from '@/components/Workspace/LearningFileUpload/SubjectNameInput';
 import SelectedFileItem from '@/components/Workspace/LearningFileUpload/SelectedFileItem';
 import { UploadLearningFileResponse } from '@/hooks/query/workspace/mutation';
+import { formatFileSize } from '@/util/formatFileSize';
 
 interface LearningFileUploadProps {
   onSubmit: (data: UploadLearningFileResponse) => void;
@@ -28,8 +29,11 @@ const LearningFileUpload = ({ onSubmit }: LearningFileUploadProps) => {
     handleLanguageChange,
     handleSubjectNameChange,
     resetSubjectName,
-
-  } = useLearningFile(folderId as string, selectedFile as File | null, () => onSubmit());
+  } = useLearningFile(
+    folderId as string,
+    selectedFile as File | null,
+    onSubmit,
+  );
 
   return (
     <div
@@ -57,7 +61,8 @@ const LearningFileUpload = ({ onSubmit }: LearningFileUploadProps) => {
       {selectedFile ? (
         <>
           <SelectedFileItem
-            selectedFile={selectedFile}
+            fileName={selectedFile.name}
+            content={`PDF · ${formatFileSize(selectedFile.size)}`}
             deleteFile={deleteFile}
           />
           <Button
@@ -74,7 +79,7 @@ const LearningFileUpload = ({ onSubmit }: LearningFileUploadProps) => {
           </Button>
         </>
       ) : (
-        <Upload processFile={processFile} handleFile={handleFile}/>
+        <Upload processFile={processFile} handleFile={handleFile} />
       )}
     </div>
   );

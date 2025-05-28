@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-const isMockEnabled = process.env.NEXT_PUBLIC_API_MOCKING === 'enabled';
-
 export const MockInitComponent = ({
   children,
 }: {
