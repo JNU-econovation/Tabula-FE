@@ -1,5 +1,6 @@
 import { AuthStore } from '@/stores/authStore';
-import axios, { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
+import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
+import { postReissue } from './login';
 
 export const BASE_URL = '/api';
 
@@ -27,15 +28,6 @@ export const AxiosInstanceFormData = axios.create({
   timeout: 3000,
 });
 
-export const postReissue = async (refreshToken: string) => {
-  const response = await AxiosInstance.post(END_POINT.authIssue, {}, {
-    headers: {
-      Authorization: `Bearer ${refreshToken}`
-    }
-  })
-  return response.data
-}
-
 const addAccessToken = (config: InternalAxiosRequestConfig) => {
   const accessToken = AuthStore.getState().accessToken
     if (accessToken && config.headers) {
@@ -54,23 +46,25 @@ const handleTokenRefresh = (instance: ReturnType<typeof axios.create>) => {
         originalRequest._isRetry = true
 
         try {
-          const { refreshToken, username } = AuthStore.getState()
+          const authState = AuthStore.getState()
+          const { refreshToken, username } = authState
 
           if (!refreshToken) {
             throw new Error('No refresh token available')
           }
 
           const { data } = await postReissue(refreshToken)
-
           const newAccessToken = data.response.accessToken
+          const newRefreshToken = data.response.refreshToken
 
-          AuthStore.getState().setAuth({
+          authState.setAuth({
             username: username!,
             accessToken: newAccessToken,
-            refreshToken: refreshToken!
+            refreshToken: newRefreshToken
           })
  
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`
+          
           return instance(originalRequest)
         } catch (e) {
           AuthStore.getState().logout()
