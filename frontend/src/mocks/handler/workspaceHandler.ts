@@ -73,6 +73,35 @@ export const workspaceHandler = [
     });
   }),
 
+  http.get(`${BASE_URL}${END_POINT.workspaceList}:id`, async () => {
+    return HttpResponse.json(learningResultList, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  }),
+
+  http.post(
+    `${BASE_URL}${END_POINT.workspaceList}:spaceId/result`,
+    async ({ request, params }) => {
+      const createdLearningResult = {
+        success: true,
+        response: {
+          taskId: '12413121',
+          fileName: `learning-result.zip`,
+        },
+        error: null,
+      };
+      return HttpResponse.json(createdLearningResult, {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    },
+  ),
+
   http.get(
     `${BASE_URL}${END_POINT.workspaceList}:folderId/progress/:task_id`,
     () => {
@@ -87,19 +116,41 @@ export const workspaceHandler = [
             if (progress >= 100) {
               const completeResponse = {
                 success: true,
+                status: 'complete',
+                progress: 100,
                 response: {
-                  progress: 100,
-                  status: 'complete',
-                  spaceId: 1000,
-                  spaceName: '운영체제를 딥하게 배우기',
-                  keywords: [
-                    { id: 1, keyword: '운영체제란?' },
-                    { id: 2, keyword: '멀티 프로세싱' },
-                    { id: 3, keyword: '멀티 쓰레딩' },
+                  resultId: 12020,
+                  resultFileName: 'os',
+                  results: [
+                    // results의 id는 이미지 순서 의미
+                    {
+                      id: 1111,
+                      resultImageUrl: 'https://picsum.photos/200/300?random=5',
+                    },
+                    {
+                      id: 2222,
+                      resultImageUrl: 'https://picsum.photos/200/300?random=5',
+                    },
                   ],
                 },
                 error: null,
               };
+              // TODO: 로딩 SSE API URI가 같고, return 하는 데이터 형태만 달라서 주석 처리
+              // {
+              //   success: true,
+              //   response: {
+              //     progress: 100,
+              //     status: 'complete',
+              //     spaceId: 1000,
+              //     spaceName: '운영체제를 딥하게 배우기',
+              //     keywords: [
+              //       { id: 1, keyword: '운영체제란?' },
+              //       { id: 2, keyword: '멀티 프로세싱' },
+              //       { id: 3, keyword: '멀티 쓰레딩' },
+              //     ],
+              //   },
+              //   error: null,
+              // };
               controller.enqueue(
                 encoder.encode(`data: ${JSON.stringify(completeResponse)}\n\n`),
               );
@@ -122,13 +173,13 @@ export const workspaceHandler = [
         },
       });
 
-      workspaceList.response = [
-        ...workspaceList.response,
-        {
-          spaceId: 1,
-          spaceName: '운영체제를 딥하게 배우기',
-        },
-      ];
+      // workspaceList.response = [
+      //   ...workspaceList.response,
+      //   {
+      //     spaceId: 1,
+      //     spaceName: '운영체제를 딥하게 배우기',
+      //   },
+      // ];
 
       return new Response(stream, {
         headers: {
@@ -139,13 +190,4 @@ export const workspaceHandler = [
       });
     },
   ),
-
-  http.get(`${BASE_URL}${END_POINT.workspaceList}:id`, async () => {
-    return HttpResponse.json(learningResultList, {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-  }),
 ];
