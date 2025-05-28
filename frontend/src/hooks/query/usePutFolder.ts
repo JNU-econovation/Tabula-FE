@@ -1,6 +1,6 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { FolderProps } from "./useGetFolderList";
-import { putFolder } from "@/api/folder";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { FolderProps } from './useGetFolderList';
+import { putFolder } from '@/api/folder';
 
 export interface PutFolderProps {
   folderId: string;
@@ -8,24 +8,23 @@ export interface PutFolderProps {
   colorIndex: number;
 }
 
-export const usePutFolder = (
-  options?: {
-    onSuccess?: () => void;
-    onError?: () => void;
-  }
-) => {
+export const usePutFolder = (options?: {
+  onSuccess?: () => void;
+  onError?: () => void;
+}) => {
   const queryClient = useQueryClient();
 
   return useMutation<FolderProps, Error, PutFolderProps>({
-    mutationFn: (newFolder: PutFolderProps) => putFolder(newFolder.folderId, newFolder.folderName, newFolder.colorIndex),
+    mutationFn: (newFolder: PutFolderProps) =>
+      putFolder(newFolder.folderId, newFolder.folderName, newFolder.colorIndex),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['folder']
+        queryKey: ['folder'],
       });
-      options?.onSuccess?.()
+      options?.onSuccess?.();
     },
     onError: () => {
-      options?.onError?.()
-    }
-  })
-}
+      options?.onError?.();
+    },
+  });
+};

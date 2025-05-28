@@ -2,19 +2,30 @@
 
 import LearningFileUpload from '@/components/Workspace/LearningFileUpload';
 import LoadingProgress from '@/components/Workspace/LoadingProgress/LoadingProgress';
+import { UploadLearningFileResponse } from '@/hooks/query/workspace/mutation';
 import { useState } from 'react';
 
 const page = () => {
   const [step, setStep] = useState<'upload' | 'loading' | 'result'>('upload');
+  const [taskId, setTaskId] = useState<string | null>(null);
+
+  const handleTaskId = (id: string) => {
+    setTaskId(id);
+  };
 
   return (
     <>
       {step === 'upload' && (
         <div className={`w-full flex justify-center items-center p-8 relative`}>
-          <LearningFileUpload onSubmit={() => setStep('loading')} />
+          <LearningFileUpload
+            onSubmit={(data: UploadLearningFileResponse) => {
+              handleTaskId(data.task_id);
+              setStep('loading');
+            }}
+          />
         </div>
       )}
-      {step === 'loading' && <LoadingProgress />}
+      {step === 'loading' && <LoadingProgress taskId={taskId} />}
     </>
   );
 };

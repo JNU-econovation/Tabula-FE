@@ -9,6 +9,7 @@ export const END_POINT = {
   guestLogin: `/v1/auth/guest`,
   workspaceList: `/v1/spaces/`,
   folderList: `/v1/folders`,
+  mypage: `/v1/user/info`,
 };
 
 export const AxiosInstance = axios.create({

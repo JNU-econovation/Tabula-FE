@@ -7,13 +7,16 @@ import { SizeType } from '@/type';
 import useDragFile from '@/hooks/common/useDragFile';
 
 interface UploadProps {
-  height?: SizeType;
+  height?: SizeType | 'xs';
   width?: SizeType | 'full';
   processFile: (file: File) => void;
   handleFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  mode?: 'pdf-type'| 'multi-type';
+  selectedFile?: File | null;
+  imageFiles?: File[]
 }
 
-const Upload = ({ height, width, processFile, handleFile }: UploadProps) => {
+const Upload = ({ height, width, processFile, handleFile, mode = 'pdf-type', selectedFile, imageFiles = [] }: UploadProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const {
     isDragging,
@@ -34,6 +37,7 @@ const Upload = ({ height, width, processFile, handleFile }: UploadProps) => {
     {
       variants: {
         height: {
+          xs: ['h-28', 'gap-1', 'text-sm', '[&>svg]:hidden'],
           sm: ['h-32', 'gap-1', 'text-sm', 'p-2', '[&>svg]:hidden'],
           md: ['h-64', 'gap-3', 'text-base', 'p-4'],
           lg: ['h-96', 'gap-6', 'text-lg', 'p-6'],
@@ -68,19 +72,30 @@ const Upload = ({ height, width, processFile, handleFile }: UploadProps) => {
       onDrop={handleDrop}
     >
       <>
-        {height !== 'sm' && (
+        {height !== 'sm' && height !== 'xs'  && (
           <img className="w-7 h-7" src={uploadIcon.src} alt="Upload Icon" />
         )}
         <input
           type="file"
           ref={fileInputRef}
           className="hidden"
-          accept=".pdf"
+          accept={
+            mode === 'pdf-type'
+              ? '.pdf'
+              : selectedFile
+                ? '.pdf'
+                : imageFiles?.length > 0
+                  ? ".png,.jpg,.jpeg"
+                  : ".pdf,.png,.jpg,.jpeg"
+          }
+          multiple={mode === 'multi-type'}
           onChange={handleFile}
         />
         <div className="flex flex-col gap-1 items-center">
-          <p className="text-base">Choose a file or drag & drop it here</p>
-          <p className="text-sm text-gray-400">pdf 파일을 업로드 해 주세요</p>
+        {height !== 'xs' && (
+          <p className="text-base description">Choose a file or drag & drop it here</p>
+        )}
+          <p className="text-sm text-gray-400 mb-2 whitespace-">{height === 'xs' ? 'pdf 또는 png / jpg 파일을 업로드 해 주세요  (png / jpg는 여러 장 업로드 가능)' : 'pdf 파일을 업로드 해 주세요'}</p>
         </div>
         <button
           className="cursor-pointer px-5 py-2 bg-white text-black border border-gray-300 rounded-lg text-sm hover:bg-gray-100 transition-colors duration-200"
