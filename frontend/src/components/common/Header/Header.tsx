@@ -6,6 +6,8 @@ import Logo from '../../../../assets/logo.png'
 import { AuthStore } from '@/stores/authStore'
 import useModal from '@/hooks/common/useModal'
 import GuideModal from '@/components/Home/GuideModal'
+import { Button } from '../Button/Button'
+import { FaSearch } from 'react-icons/fa'
 
 const Header = () => {
   const { isLogin, username } = AuthStore();
@@ -17,19 +19,19 @@ const Header = () => {
         <Image src={Logo} alt='logo' width={40} height={40} />
       </Link>
 
-      <div className='flex items-center gap-9'>
+      <div className='flex items-center gap-8'>
         <div>
-          <button onClick={openModal} className='flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 border rounded-full hover:cursor-pointer hover:bg-[#F4F6FF] hover:shadow-[0_0_0_0.5px_#4F46E5] hover:outline-indigo-600 hover:outline-offset-0 transition-all duration-200'>
-            🔍 Tabula 사용법 알아보기
-          </button>
+          <Button variant="line" colorScheme="gradient" onClick={openModal} icon={<FaSearch />} size="sm" radius="full">
+            Tabula 사용법 알아보기
+          </Button>
         </div>
         
         {isLogin && username ? (
           <div className='text-[#292929] mr-5'>{username}님</div>
         ) : (
-            <Link href='login'>
-              <button className='cursor-pointer bg-[#E7EAFF] px-5 py-2 rounded-full text-sm text-[#292929] hover:bg-[#d6d9f7] transition-all duration-300 hover:scale-103'>로그인</button>
-            </Link>
+            <Button colorScheme="secondary" size="sm" radius="full">
+              로그인
+            </Button>
           )
         }
       </div>
