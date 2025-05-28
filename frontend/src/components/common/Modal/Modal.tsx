@@ -58,7 +58,7 @@ const Modal = ({
       >
         {isXButton && (
           <button
-            className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+            className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 hover:cursor-pointer"
             onClick={close}
           >
             <IoMdClose size={24} />
