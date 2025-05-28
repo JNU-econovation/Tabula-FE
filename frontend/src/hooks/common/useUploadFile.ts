@@ -24,7 +24,10 @@ const useUploadFile = (mode: UploadMode = 'pdf-type') => {
 
     for (const f of files) {
       const isPdf = f.type === 'application/pdf';
-      const isImage = f.type === 'image/png' || f.type === 'image/jpg' || f.type === 'image/jpeg'
+      const isImage =
+        f.type === 'image/png' ||
+        f.type === 'image/jpg' ||
+        f.type === 'image/jpeg';
 
       if (mode === 'pdf-type') {
         if (isPdf) {
@@ -69,6 +72,11 @@ const useUploadFile = (mode: UploadMode = 'pdf-type') => {
     setImageFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const resetFiles = () => {
+    setSelectedFile(null);
+    setImageFiles([]);
+  };
+
   return {
     selectedFile,
     imageFiles,
@@ -76,6 +84,7 @@ const useUploadFile = (mode: UploadMode = 'pdf-type') => {
     processFile,
     deleteFile,
     deleteImageFile,
+    resetFiles,
   };
 };
 
