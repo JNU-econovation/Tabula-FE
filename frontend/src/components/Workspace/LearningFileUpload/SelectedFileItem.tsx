@@ -1,13 +1,14 @@
-import { formatFileSize } from '@/util/formatFileSize';
 import { FaFileAlt } from 'react-icons/fa';
 import { IoMdClose } from 'react-icons/io';
 
 interface SelectedFileItemProps {
-  selectedFile: File;
-  deleteFile: () => void;
+  fileName: string;
+  content?: string;
+  deleteFile?: () => void;
 }
 const SelectedFileItem = ({
-  selectedFile,
+  fileName,
+  content,
   deleteFile,
 }: SelectedFileItemProps) => {
   return (
@@ -17,21 +18,19 @@ const SelectedFileItem = ({
       </div>
 
       <div className="flex flex-col flex-1 ml-4 max-w-80">
-        <p className="text-sm font-medium text-gray-800 truncate">
-          {selectedFile.name}
-        </p>
-        <p className="text-xs text-gray-400 mt-0.5">
-          PDF · {formatFileSize(selectedFile.size)}
-        </p>
+        <p className="text-sm font-medium text-gray-800 truncate">{fileName}</p>
+        {content && <p className="text-xs text-gray-400 mt-0.5">{content}</p>}
       </div>
 
-      <button
-        onClick={deleteFile}
-        className="ml-4 text-gray-500 hover:text-gray-800 transition-colors cursor-pointer"
-        aria-label="파일 삭제"
-      >
-        <IoMdClose size={15} />
-      </button>
+      {deleteFile && (
+        <button
+          onClick={deleteFile}
+          className="ml-4 text-gray-500 hover:text-gray-800 transition-colors cursor-pointer"
+          aria-label="파일 삭제"
+        >
+          <IoMdClose size={15} />
+        </button>
+      )}
     </div>
   );
 };
