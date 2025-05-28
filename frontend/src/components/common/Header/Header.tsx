@@ -4,9 +4,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Logo from '../../../../assets/logo.png'
 import { AuthStore } from '@/stores/authStore'
+import useModal from '@/hooks/common/useModal'
+import GuideModal from '@/components/Home/GuideModal'
 
 const Header = () => {
   const { isLogin, username } = AuthStore();
+  const { isModalOpen, openModal, closeModal } = useModal()
+
   return (
     <div className='w-full h-18 flex items-center bg-white justify-between px-8 border-b border-gray-200'>
       <Link href='/' className='flex items-center hover:scale-105 transition-transform duration-300'>
@@ -15,7 +19,7 @@ const Header = () => {
 
       <div className='flex items-center gap-9'>
         <div>
-          <button className='flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 border rounded-full hover:cursor-pointer hover:bg-[#F4F6FF] hover:shadow-[0_0_0_0.5px_#4F46E5] hover:outline-indigo-600 hover:outline-offset-0 transition-all duration-200'>
+          <button onClick={openModal} className='flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 border rounded-full hover:cursor-pointer hover:bg-[#F4F6FF] hover:shadow-[0_0_0_0.5px_#4F46E5] hover:outline-indigo-600 hover:outline-offset-0 transition-all duration-200'>
             🔍 Tabula 사용법 알아보기
           </button>
         </div>
@@ -29,6 +33,7 @@ const Header = () => {
           )
         }
       </div>
+      <GuideModal isModalOpen={isModalOpen} closeModal={closeModal} />
     </div>
   )
 }
