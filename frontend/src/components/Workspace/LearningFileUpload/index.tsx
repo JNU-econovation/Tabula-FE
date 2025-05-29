@@ -39,7 +39,7 @@ const LearningFileUpload = ({ onSubmit }: LearningFileUploadProps) => {
     <div
       className={`${isSidebarOpen && 'relative left-32'} flex flex-col items-center justify-center h-full p-3 gap-7`}
     >
-      <div className="flex flex-col items-center w-full gap-3 mt-9">
+      <div className="flex flex-col items-center w-full gap-3 mt-25">
         <h1 className="text-2xl font-bold">학습 자료 업로드 하기</h1>
         <p className="text-sm text-gray-400">
           학습을 원하는 자료를 pdf 형태로 업로드 해주세요. 해당 자료를 기반으로
