@@ -4,12 +4,7 @@ export const useLearningResultUpload = (
   folderId: string,
   spaceId: string,
   file: File | File[] | null,
-  // TODO: 추후 타입 인자 수정
 ) => {
-  // 업로드 됐을 때 파일 post 및
-  // taskId를 받아서 로딩 컴포넌트에 넣어주어야함.
-  // 업로드 시 learningResults 에 추가해주기. filename 과 응답값인 response.task_id 가 필요함.
-
   const { mutate } = useUploadLearningResultFile();
 
   const uploadLearningResultFile = async () => {

@@ -56,6 +56,10 @@ const useUploadFile = (mode: UploadMode = 'pdf-type') => {
           alert('PDF를 업로드한 상태에서는 이미지를 추가할 수 없습니다.');
           continue;
         }
+        if (imageFiles.length >= 6) {
+          alert('이미지는 최대 6개까지만 업로드할 수 있습니다.');
+          continue;
+        }
         setImageFiles((prev) => [...prev, f]);
         continue;
       }

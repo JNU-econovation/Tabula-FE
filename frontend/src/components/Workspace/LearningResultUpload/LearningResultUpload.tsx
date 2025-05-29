@@ -69,8 +69,6 @@ const LearningResultUpload = () => {
                 }
               />
             )}
-
-            {/* TODO: 로딩중일때 막기 */}
           </div>
         )}
       </div>
