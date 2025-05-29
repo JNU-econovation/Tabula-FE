@@ -1,4 +1,4 @@
-import { LEVEL1_COLORS } from '@/constants/color';
+import { KEYWORD_COLORS } from '@/constants/color';
 import { useState } from 'react';
 import { AiFillCaretDown, AiFillCaretRight } from 'react-icons/ai';
 
@@ -26,7 +26,7 @@ export const KeywordItem = ({
 
   const thisColor =
     isDepth1 && !rootColor
-      ? LEVEL1_COLORS[colorIndex % LEVEL1_COLORS.length]
+      ? KEYWORD_COLORS[colorIndex % KEYWORD_COLORS.length]
       : rootColor || '';
 
   const toggleOpen = () => {

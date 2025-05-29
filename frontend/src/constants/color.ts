@@ -15,7 +15,7 @@ export const COLOR_PALETTE = {
   ],
 };
 
-export const LEVEL1_COLORS = [
+export const KEYWORD_COLORS = [
   'bg-purple-50',
   'bg-blue-50',
   'bg-indigo-50',
