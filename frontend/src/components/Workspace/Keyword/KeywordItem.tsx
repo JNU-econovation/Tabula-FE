@@ -1,12 +1,6 @@
+import { LEVEL1_COLORS } from '@/constants/color';
 import { useState } from 'react';
 import { AiFillCaretDown, AiFillCaretRight } from 'react-icons/ai';
-
-const level1Colors = [
-  'bg-purple-50',
-  'bg-blue-50',
-  'bg-indigo-50',
-  'bg-pink-50',
-];
 
 interface KeywordNode {
   name: string;
@@ -32,7 +26,7 @@ export const KeywordItem = ({
 
   const thisColor =
     isDepth1 && !rootColor
-      ? level1Colors[colorIndex % level1Colors.length]
+      ? LEVEL1_COLORS[colorIndex % LEVEL1_COLORS.length]
       : rootColor || '';
 
   const toggleOpen = () => {
