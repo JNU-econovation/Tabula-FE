@@ -1,4 +1,4 @@
-import { getLearningResultList } from '@/api/workspace';
+import { getKeywordList, getLearningResultList } from '@/api/workspace';
 import { getWorkspaceList } from '@/api/workspace';
 import { useLearningStore } from '@/stores/useLearningStore';
 import { useQuery } from '@tanstack/react-query';
@@ -29,7 +29,6 @@ export const useGetLearningResultList = (spaceId: string) => {
     (state) => state.setLearningResult,
   );
 
-  // ✅ 데이터가 변경될 때마다 zustand 상태를 동기화
   useEffect(() => {
     if (resultList.length > 0) {
       setLearningResult(resultList);
@@ -37,4 +36,15 @@ export const useGetLearningResultList = (spaceId: string) => {
   }, [resultList, setLearningResult]);
 
   return { fileUrl, fileName, isLoading, isError, resultList };
+};
+
+export const useGetKeywordList = (spaceId: string) => {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['keyword', spaceId],
+    queryFn: () => getKeywordList(spaceId),
+  });
+
+  const keywordList = data?.response.keywords;
+
+  return { keywordList, isLoading, isError };
 };

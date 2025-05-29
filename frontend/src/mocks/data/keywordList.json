@@ -1,0 +1,110 @@
+{
+  "success": true,
+  "response": {
+    "keywords": {
+      "name": "운영체제",
+      "children": [
+        {
+          "name": "프로세스 관리",
+          "children": [
+            {
+              "name": "프로세스 상태",
+              "children": [
+                { "name": "실행" },
+                { "name": "대기" },
+                { "name": "준비" },
+                { "name": "종료" },
+                { "name": "블로킹" }
+              ]
+            },
+            {
+              "name": "문맥 교환",
+              "children": [
+                { "name": "PCB (Process Control Block)" },
+                { "name": "레지스터 저장 및 복원" }
+              ]
+            },
+            {
+              "name": "프로세스 생성 및 종료",
+              "children": [
+                { "name": "fork() 시스템 호출" },
+                { "name": "exec() 계열" },
+                { "name": "wait() 및 exit()" }
+              ]
+            },
+            {
+              "name": "스케줄링",
+              "children": [
+                { "name": "선점형" },
+                { "name": "비선점형" },
+                { "name": "FCFS" },
+                { "name": "SJF" },
+                { "name": "Round Robin" },
+                { "name": "우선순위 스케줄링" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "메모리 관리",
+          "children": [
+            {
+              "name": "가상 메모리",
+              "children": [
+                { "name": "페이징" },
+                { "name": "세그멘테이션" },
+                { "name": "스와핑" },
+                {
+                  "name": "페이지 교체 알고리즘",
+                  "children": [
+                    { "name": "FIFO" },
+                    { "name": "LRU" },
+                    { "name": "OPT" }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "메모리 할당",
+              "children": [
+                { "name": "연속 할당" },
+                { "name": "페이징 기반 할당" },
+                { "name": "세그먼트 기반 할당" },
+                { "name": "동적 메모리 할당" },
+                { "name": "외부 단편화 / 내부 단편화" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "파일 시스템",
+          "children": [
+            {
+              "name": "파일 구조",
+              "children": [{ "name": "순차 파일" }, { "name": "인덱스 파일" }]
+            },
+            {
+              "name": "디렉터리 구조",
+              "children": [
+                { "name": "단일 레벨" },
+                { "name": "2단계 구조" },
+                { "name": "트리 구조" },
+                { "name": "그래프 구조" }
+              ]
+            },
+            {
+              "name": "할당 방식",
+              "children": [
+                { "name": "연속 할당" },
+                { "name": "연결 할당" },
+                { "name": "인덱스 할당" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    "error": null
+  }
+}

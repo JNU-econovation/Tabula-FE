@@ -93,3 +93,26 @@ export const uploadResultFile = async (spaceId: string, formData: FormData) => {
 
   return response.data;
 };
+
+export interface KeywordNode {
+  name: string;
+  children?: KeywordNode[];
+}
+
+interface KeywordResponse {
+  success: boolean;
+  response: {
+    keywords: KeywordNode;
+    error: string | null;
+  };
+}
+
+export const getKeywordList = async (
+  spaceId: string,
+): Promise<KeywordResponse> => {
+  const response = await AxiosInstance.get(
+    `${END_POINT.workspaceList}${spaceId}/keywords`,
+  );
+
+  return response.data;
+};

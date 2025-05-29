@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw';
 import workspaceList from '../data/workspaceList.json';
 import learningResultList from '../data/learningResultList.json';
-
+import keywordList from '../data/keywordList.json';
 import { BASE_URL, END_POINT } from '@/api';
 
 export const workspaceHandler = [
@@ -190,4 +190,13 @@ export const workspaceHandler = [
       });
     },
   ),
+
+  http.get(`${BASE_URL}${END_POINT.workspaceList}:spaceId/keywords`, () => {
+    return HttpResponse.json(keywordList, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  }),
 ];
