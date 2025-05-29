@@ -1,12 +1,12 @@
 export const useGoogleLogin = () => {
 
-  const width = 500;
-  const height = 600;
-
-  const left = window.innerWidth / 2 + window.screenX - width / 2;
-  const top = window.innerHeight / 2 + window.screenY - height / 2;
-
   const handleLogin = () => {
+    const width = 500;
+    const height = 600;
+
+    const left = window.innerWidth / 2 + window.screenX - width / 2;
+    const top = window.innerHeight / 2 + window.screenY - height / 2;
+
     const popup = window.open(
       `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/google`,
       "_blank",
