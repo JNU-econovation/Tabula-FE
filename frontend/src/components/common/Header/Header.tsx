@@ -11,10 +11,14 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useGoogleLogin } from '@/hooks/Login/useGoogleLogin'
 import { useGoogleMessageListener } from '@/hooks/Login/useGoogleMessageListener'
+import FeedbackModal from '@/components/Mypage/FeedbackModal'
+import { useState } from 'react'
+
+type ModalType = 'guide' | 'feedback' | null
 
 const Header = () => {
   const { isLogin, username } = AuthStore();
-  const { isModalOpen, openModal, closeModal } = useModal()
+  const [modalType, setModalType] = useState<ModalType>(null)
   const router = useRouter()
   const { handleLogin } = useGoogleLogin()
   useGoogleMessageListener()
@@ -27,6 +31,8 @@ const Header = () => {
     }
   }
 
+  const closeModal = () => setModalType(null)
+
   return (
     <div className='w-full h-18 flex items-center bg-white justify-between px-8 border-b border-gray-200'>
       <div onClick={handleLogoClick} className='flex items-center hover:scale-105 transition-transform duration-300 hover:cursor-pointer'>
@@ -34,11 +40,12 @@ const Header = () => {
       </div>
 
       <div className='flex items-center gap-8'>
-        <div>
-          <Button variant="line" colorScheme="gradient" onClick={openModal} icon={<FaSearch />} size="sm" radius="full">
-            Tabula 사용법 알아보기
-          </Button>
-        </div>
+        <Button variant="line" colorScheme="primary" onClick={() => setModalType('feedback')} size="sm" radius="full" className='whitespace-pre'>
+        ✨  서비스 의견 남기러 가기
+        </Button>
+        <Button variant="line" colorScheme="gradient" onClick={() => setModalType('guide')} icon={<FaSearch />} size="sm" radius="full">
+          Tabula 사용법 알아보기
+        </Button>
         
         {isLogin && username ? (
           <Link href={'/mypage'}>
@@ -51,7 +58,13 @@ const Header = () => {
           )
         }
       </div>
-      <GuideModal isModalOpen={isModalOpen} closeModal={closeModal} />
+      {modalType === 'feedback' && (
+        <FeedbackModal username={username} onClose={closeModal} />
+      )}
+      {modalType === 'guide' && (
+        <GuideModal isModalOpen={true} closeModal={closeModal} />
+      )}
+      
     </div>
   )
 }
