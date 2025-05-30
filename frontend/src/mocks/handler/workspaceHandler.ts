@@ -2,6 +2,7 @@ import { http, HttpResponse } from 'msw';
 import workspaceList from '../data/workspaceList.json';
 import learningResultList from '../data/learningResultList.json';
 import keywordList from '../data/keywordList.json';
+import resultList from '../data/resultList.json';
 import { BASE_URL, END_POINT } from '@/api';
 
 export const workspaceHandler = [
@@ -199,4 +200,15 @@ export const workspaceHandler = [
       },
     });
   }),
+  http.get(
+    `${BASE_URL}${END_POINT.workspaceList}:spaceId/:resultId`,
+    async () => {
+      return HttpResponse.json(resultList, {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    },
+  ),
 ];
