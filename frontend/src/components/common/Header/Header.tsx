@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import Logo from '../../../../assets/logo.png'
 import { AuthStore } from '@/stores/authStore'
-import useModal from '@/hooks/common/useModal'
 import GuideModal from '@/components/Home/GuideModal'
 import { Button } from '../Button/Button'
 import { FaSearch } from 'react-icons/fa'
@@ -17,14 +16,14 @@ import { useState } from 'react'
 type ModalType = 'guide' | 'feedback' | null
 
 const Header = () => {
-  const { isLogin, username } = AuthStore();
+  const { isLogin, username, loginType } = AuthStore();
   const [modalType, setModalType] = useState<ModalType>(null)
   const router = useRouter()
   const { handleLogin } = useGoogleLogin()
   useGoogleMessageListener()
 
   const handleLogoClick = () => {
-    if (isLogin && username) {
+    if (isLogin && loginType === 'user') {
       router.push('/subject')
     } else {
       router.push('/')
@@ -48,9 +47,14 @@ const Header = () => {
         </Button>
         
         {isLogin && username ? (
-          <Link href={'/mypage'}>
-            <div className='text-[#292929] mr-5'>{username}님</div>
-          </Link>
+          username !== '게스트' ? (
+            <Link href={'/mypage'}>
+              <div className='text-[#292929] mr-5 cursor-default'>{username}님</div>
+            </Link>
+          ) : (
+            <div className='text-[#292929] mr-5 cursor-default'>게스트님</div>
+          )
+          
         ) : (
             <Button colorScheme="secondary" size="sm" radius="full" onClick={handleLogin}>
               로그인

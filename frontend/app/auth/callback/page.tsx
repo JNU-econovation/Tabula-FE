@@ -32,7 +32,8 @@ const CallbackPage = () => {
           setAuth({
             username: userName,
             accessToken,
-            refreshToken
+            refreshToken,
+            loginType: 'user'
           })
           router.replace('/')
 
