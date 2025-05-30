@@ -11,9 +11,7 @@ const Layout = ({ children }: LayoutProps) => {
     <div
       className={`flex flex-col h-screen items-center p-6 relative pt-28 ${isSidebarOpen && 'ml-40'}`}
     >
-      <div className="flex h-6/7 w-full max-w-4xl border border-gray-200 rounded-lg shadow-md overflow-hidden ">
-        {children}
-      </div>
+      {children}
     </div>
   );
 };
