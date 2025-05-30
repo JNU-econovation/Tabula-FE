@@ -2,8 +2,10 @@ import {
   deleteWorkspace,
   updateWorkspaceName,
   uploadLearningFile,
+  uploadResultFile,
 } from '@/api/workspace';
 import { useToastStore } from '@/stores/toastStore';
+import { useLearningStore } from '@/stores/useLearningStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface UpdateWorkspace {
@@ -68,6 +70,29 @@ export const useUploadLearningFile = (
     },
     onSuccess: (data) => {
       onSuccess(data);
+    },
+  });
+};
+
+export const useUploadLearningResultFile = () => {
+  const updateLearningResultList = useLearningStore(
+    (state) => state.addLoadingResult,
+  );
+  return useMutation({
+    mutationFn: ({
+      spaceId,
+      formData,
+    }: {
+      spaceId: string;
+      formData: FormData;
+    }) => uploadResultFile(spaceId, formData),
+    onSuccess: (data) => {
+      const response = data.response;
+      updateLearningResultList(response.taskId, response.fileName);
+    },
+
+    onError: (error) => {
+      console.error('Error uploading learning result file:', error);
     },
   });
 };

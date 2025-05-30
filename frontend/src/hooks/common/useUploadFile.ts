@@ -24,7 +24,10 @@ const useUploadFile = (mode: UploadMode = 'pdf-type') => {
 
     for (const f of files) {
       const isPdf = f.type === 'application/pdf';
-      const isImage = f.type === 'image/png' || f.type === 'image/jpg' || f.type === 'image/jpeg'
+      const isImage =
+        f.type === 'image/png' ||
+        f.type === 'image/jpg' ||
+        f.type === 'image/jpeg';
 
       if (mode === 'pdf-type') {
         if (isPdf) {
@@ -53,6 +56,10 @@ const useUploadFile = (mode: UploadMode = 'pdf-type') => {
           alert('PDF를 업로드한 상태에서는 이미지를 추가할 수 없습니다.');
           continue;
         }
+        if (imageFiles.length >= 6) {
+          alert('이미지는 최대 6개까지만 업로드할 수 있습니다.');
+          continue;
+        }
         setImageFiles((prev) => [...prev, f]);
         continue;
       }
@@ -69,6 +76,11 @@ const useUploadFile = (mode: UploadMode = 'pdf-type') => {
     setImageFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const resetFiles = () => {
+    setSelectedFile(null);
+    setImageFiles([]);
+  };
+
   return {
     selectedFile,
     imageFiles,
@@ -76,6 +88,7 @@ const useUploadFile = (mode: UploadMode = 'pdf-type') => {
     processFile,
     deleteFile,
     deleteImageFile,
+    resetFiles,
   };
 };
 

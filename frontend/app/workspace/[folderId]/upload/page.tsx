@@ -1,7 +1,7 @@
 'use client';
 
 import LearningFileUpload from '@/components/Workspace/LearningFileUpload';
-import LoadingProgress from '@/components/Workspace/LoadingProgress/LoadingProgress';
+import LoadingProgress from '@/components/Workspace/LearningResultUpload/LoadingProgress';
 import { UploadLearningFileResponse } from '@/hooks/query/workspace/mutation';
 import { useState } from 'react';
 

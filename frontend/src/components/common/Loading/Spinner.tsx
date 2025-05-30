@@ -10,8 +10,8 @@ export default function Spinner({ text, percent }: SpinnerProps) {
           <div key={i} className="spinner-line" />
         ))}
       </div>
-      <p className="text-lg text-gray-400">{text}</p>
-      <p className="text-lg text-gray-400">{percent}%</p>
+      <p className="text-md text-gray-400">{text}</p>
+      <p className="text-md text-gray-400">{percent}%</p>
     </div>
   );
 }
