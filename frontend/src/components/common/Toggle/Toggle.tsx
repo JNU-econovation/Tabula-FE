@@ -6,7 +6,7 @@ interface LayoutProps {
 const Toggle = ({ isToggleOn, handleToggle }: LayoutProps) => {
   return (
     <div
-      className={`${isToggleOn ? 'bg-gray-500' : 'bg-gray-300'} w-10 h-6 rounded-4xl flex items-center`}
+      className={`${isToggleOn ? 'bg-primary-500' : 'bg-gray-300'} w-10 h-6 rounded-4xl flex items-center`}
     >
       <button
         onClick={handleToggle}
