@@ -1,19 +1,24 @@
 "use client"
 
+import FeedbackModal from "@/components/Mypage/FeedbackModal"
 import FeedbackSection from "@/components/Mypage/FeedbackSection"
 import StatsSection from "@/components/Mypage/StatsSection"
 import UserInfo from "@/components/Mypage/UserInfo"
+import useModal from "@/hooks/common/useModal"
 import { AuthStore } from "@/stores/authStore"
 
 const page = () => {
   const { username } = AuthStore()
+  const { isModalOpen, openModal, closeModal } = useModal()
+
   return (
     <div className="flex flex-col items-center p-15 min-h-calc(100vh-4.5rem)">
       <div className="flex flex-col items-start gap-8 min-w-110">
         <UserInfo username={username} />
         <StatsSection />
-        <FeedbackSection />
+        <FeedbackSection onClick={openModal} />
       </div>
+      {isModalOpen && <FeedbackModal username={username} onClose={closeModal} />}
     </div>
   )
 }
