@@ -11,7 +11,6 @@ const Page = () => {
 
   const { handleLogin } = useGoogleLogin()
   const { mutate: handleGuestLogin } = useGuestLogin()
-  useGoogleMessageListener()
 
   const shouldRender = useAuthRedirect()
   if (!shouldRender) return null
