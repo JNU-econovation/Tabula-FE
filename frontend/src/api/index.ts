@@ -2,7 +2,7 @@ import { AuthStore } from '@/stores/authStore';
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { postReissue } from './login';
 
-export const BASE_URL = '/api';
+export const BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
 export const END_POINT = {
   authIssue: `/v1/auth/reissue`,
