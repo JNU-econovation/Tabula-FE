@@ -39,13 +39,15 @@
 
 @layer utilities {
   .spinner-container {
-    @apply relative w-12 h-12;
+    @apply relative;
+    width: 24px;
+    height: 24px;
   }
 
   .spinner-line {
     @apply absolute left-1/2 top-1/2;
-    width: 2px;
-    height: 10px;
+    width: 1.5px;
+    height: 9px;
     background-color: #333;
     border-radius: 1px;
     margin-left: -1px;
@@ -59,51 +61,51 @@
 
   /* 12개의 스피너 선 각도 및 지연 시간 설정 */
   .spinner-line:nth-child(1) {
-    transform: rotate(0deg) translateY(-20px);
+    transform: rotate(0deg) translateY(-15px);
     animation-delay: 0s;
   }
   .spinner-line:nth-child(2) {
-    transform: rotate(30deg) translateY(-20px);
+    transform: rotate(30deg) translateY(-15px);
     animation-delay: 0.1s;
   }
   .spinner-line:nth-child(3) {
-    transform: rotate(60deg) translateY(-20px);
+    transform: rotate(60deg) translateY(-15px);
     animation-delay: 0.2s;
   }
   .spinner-line:nth-child(4) {
-    transform: rotate(90deg) translateY(-20px);
+    transform: rotate(90deg) translateY(-15px);
     animation-delay: 0.3s;
   }
   .spinner-line:nth-child(5) {
-    transform: rotate(120deg) translateY(-20px);
+    transform: rotate(120deg) translateY(-15px);
     animation-delay: 0.4s;
   }
   .spinner-line:nth-child(6) {
-    transform: rotate(150deg) translateY(-20px);
+    transform: rotate(150deg) translateY(-15px);
     animation-delay: 0.5s;
   }
   .spinner-line:nth-child(7) {
-    transform: rotate(180deg) translateY(-20px);
+    transform: rotate(180deg) translateY(-15px);
     animation-delay: 0.6s;
   }
   .spinner-line:nth-child(8) {
-    transform: rotate(210deg) translateY(-20px);
+    transform: rotate(210deg) translateY(-15px);
     animation-delay: 0.7s;
   }
   .spinner-line:nth-child(9) {
-    transform: rotate(240deg) translateY(-20px);
+    transform: rotate(240deg) translateY(-15px);
     animation-delay: 0.8s;
   }
   .spinner-line:nth-child(10) {
-    transform: rotate(270deg) translateY(-20px);
+    transform: rotate(270deg) translateY(-15px);
     animation-delay: 0.9s;
   }
   .spinner-line:nth-child(11) {
-    transform: rotate(300deg) translateY(-20px);
+    transform: rotate(300deg) translateY(-15px);
     animation-delay: 1s;
   }
   .spinner-line:nth-child(12) {
-    transform: rotate(330deg) translateY(-20px);
+    transform: rotate(330deg) translateY(-15px);
     animation-delay: 1.1s;
   }
 }
@@ -154,7 +156,8 @@
 /* wave 애니메이션 */
 @layer utilities {
   @keyframes wave-slow {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateX(0);
     }
     50% {
@@ -163,7 +166,8 @@
   }
 
   @keyframes wave-normal {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateX(0);
     }
     50% {
@@ -172,7 +176,8 @@
   }
 
   @keyframes wave-fast {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateX(0);
     }
     50% {

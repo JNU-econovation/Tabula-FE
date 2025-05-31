@@ -19,6 +19,9 @@ const LoadingProgress = ({ taskId }: LoadingProgressProps) => {
   const { percent } = useLoadingSSE(
     `${BASE_URL}${END_POINT.workspaceList}${folderId}/progress/${taskId}`,
   );
+
+  //  서버에서 30 -> 60 -> 90 으로 보내주기떄문에 자연스럽게 늘어나도록 해야함
+
   return (
     <div
       className={`${isSidebarOpen && 'relative left-32'} w-full relative top-40`}
