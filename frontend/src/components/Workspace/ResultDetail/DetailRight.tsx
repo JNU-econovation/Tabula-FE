@@ -9,7 +9,9 @@ const DetailRight = ({ currentPageData, missingAnswer }: ResultDetail) => {
     <>
       {currentPageData ? (
         <>
-          <h2 className="text-lg font-bold text-red-600 mb-3">❌ 틀린 내용</h2>
+          <h2 className="text-lg font-bold text-red-600 mb-3 whitespace-pre">
+            ❌   틀린 내용
+          </h2>
           <ul className="space-y-4">
             {currentPageData.result.map((item) => (
               <li key={item.id} className="text-sm">
@@ -21,8 +23,8 @@ const DetailRight = ({ currentPageData, missingAnswer }: ResultDetail) => {
         </>
       ) : (
         <>
-          <h2 className="text-lg font-bold text-gray-800 mb-3">
-            💬 누락된 내용
+          <h2 className="text-lg font-bold text-gray-800 mb-3 whitespace-pre">
+            💬   누락된 내용
           </h2>
           {missingAnswer.map((miss, index) => (
             <div key={`miss-${index}`} className="mb-3 text-sm">
