@@ -58,11 +58,15 @@ const Header = () => {
           )
           
         ) : (
-            <Button colorScheme="secondary" size="sm" radius="full" onClick={handleLogin}>
-              로그인
-            </Button>
-          )
-        }
+          <Button
+            colorScheme="secondary"
+            size="sm"
+            radius="full"
+            onClick={handleLogin}
+          >
+            로그인
+          </Button>
+        )}
       </div>
       {modalType === 'feedback' && (
         <FeedbackModal username={username} onClose={closeModal} />

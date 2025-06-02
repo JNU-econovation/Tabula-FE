@@ -1,4 +1,8 @@
-import { getKeywordList, getLearningResultList } from '@/api/workspace';
+import {
+  getKeywordList,
+  getLearningResultList,
+  getResultList,
+} from '@/api/workspace';
 import { getWorkspaceList } from '@/api/workspace';
 import { useLearningStore } from '@/stores/useLearningStore';
 import { useQuery } from '@tanstack/react-query';
@@ -47,4 +51,15 @@ export const useGetKeywordList = (spaceId: string) => {
   const keywordList = data?.response.keywords;
 
   return { keywordList, isLoading, isError };
+};
+
+export const useGetResultList = (spaceId: string, resultId: string) => {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['feedbackList', spaceId, resultId],
+    queryFn: () => getResultList(spaceId, resultId),
+  });
+  const resultList = data?.response.results || [];
+  const missingAnswer = data?.response.missing_answer || [];
+
+  return { resultList, missingAnswer, isLoading, isError };
 };
