@@ -61,7 +61,7 @@ const ResultDetail = () => {
             <button
               key={i}
               onClick={() => setPage(i + 1)}
-              className={`w-8 h-8 rounded-full text-sm font-semibold ${
+              className={`cursor-pointer w-8 h-8 rounded-full text-sm font-semibold ${
                 page === i + 1
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
