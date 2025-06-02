@@ -13,8 +13,6 @@ export const useAuthRedirect = () => {
   useEffect(() => {
     if (isLogin && loginType === 'user') {
       router.replace('/subject')
-    } else if (isLogin && loginType === 'guest') {
-      router.replace('/workspace/folderId/upload')
     } else {
       setChecked(true)
     }
