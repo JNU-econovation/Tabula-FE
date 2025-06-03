@@ -4,7 +4,7 @@ import {
 } from '@/hooks/query/workspace/mutation';
 import { useState } from 'react';
 
-type LangType = 'english' | 'korean' | 'japanese';
+type LangType = 'english' | 'korean';
 
 const useLearningFile = (
   folderId: string,
@@ -43,7 +43,6 @@ const useLearningFile = (
     formData.append('file', file);
     formData.append('langType', language);
     formData.append('fileDomain', subjectName);
-
     return mutate({ folderId, formData });
   };
 
