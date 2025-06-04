@@ -23,7 +23,6 @@ const Keyword = () => {
     setIsToggleOn(false);
     closeModal();
   };
-
   return (
     <>
       <div className="fixed top-20 z-50 flex gap-2 items-center justify-center h-10 bg-primary-300 rounded-4xl px-6 shadow-lg">
@@ -35,7 +34,7 @@ const Keyword = () => {
           {!keywordList || isLoading ? (
             <div>loading...</div>
           ) : (
-            <KeywordItem keyword={keywordList} />
+            <KeywordItem keyword={keywordList[0]} />
           )}
         </div>
       </Modal>

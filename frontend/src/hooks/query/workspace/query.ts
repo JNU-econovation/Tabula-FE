@@ -59,7 +59,7 @@ export const useGetResultList = (spaceId: string, resultId: string) => {
     queryFn: () => getResultList(spaceId, resultId),
   });
   const resultList = data?.response.results || [];
-  const missingAnswer = data?.response.missing_answer || [];
+  const missingAnswer = data?.response.missingAnswer || [];
 
   return { resultList, missingAnswer, isLoading, isError };
 };
