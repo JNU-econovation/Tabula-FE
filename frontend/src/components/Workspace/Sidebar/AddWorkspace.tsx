@@ -1,9 +1,12 @@
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { FaCirclePlus } from 'react-icons/fa6';
 
 const AddWorkspace = () => {
+  const { folderId } = useParams();
+
   return (
-    <Link href="upload" className="w-full">
+    <Link href={`/workspace/${folderId}/upload`} className="w-full">
       <div className="group cursor-pointer flex gap-4 items-center hover:bg-primary-100 rounded-md py-1 transition ease-in-out duration-100 h-10 flex-none">
         <button>
           <FaCirclePlus

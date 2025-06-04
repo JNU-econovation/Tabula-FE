@@ -10,6 +10,7 @@ import useModal from '@/hooks/common/useModal';
 
 import { useEditSpaceName } from '@/hooks/workspace/useEditSpaceName';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 
@@ -19,6 +20,7 @@ interface WorkspaceItemProps {
 }
 
 const WorkspaceItem = ({ spaceId, spaceName }: WorkspaceItemProps) => {
+  const folderId = useParams().folderId as string;
   const {
     spaceNameValue,
     updateWorkspaceName,
@@ -43,7 +45,7 @@ const WorkspaceItem = ({ spaceId, spaceName }: WorkspaceItemProps) => {
   return (
     <div className="relative flex items-center justify-between h-8 rounded-md hover:bg-gray-200">
       <Link
-        href={`${spaceId}`}
+        href={`/workspace/${folderId}/${spaceId}`}
         className="flex-1 flex items-center px-4 py-2"
         onClick={(e) => {
           if (isEditing) {

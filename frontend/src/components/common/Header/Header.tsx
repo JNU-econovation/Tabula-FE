@@ -57,11 +57,15 @@ const Header = () => {
             <div className='text-[#292929] mr-5 cursor-default'>게스트님</div>
           )
         ) : (
-            <Button colorScheme="secondary" size="sm" radius="full" onClick={handleLogin}>
-              로그인
-            </Button>
-          )
-        }
+          <Button
+            colorScheme="secondary"
+            size="sm"
+            radius="full"
+            onClick={handleLogin}
+          >
+            로그인
+          </Button>
+        )}
       </div>
       {modalType === 'feedback' && (
         <FeedbackModal username={username} onClose={closeModal} />

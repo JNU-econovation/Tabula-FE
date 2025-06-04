@@ -54,7 +54,7 @@ export interface UploadLearningFileRequest {
 }
 
 export interface UploadLearningFileResponse {
-  task_id: string;
+  spaceId: string;
 }
 
 export const useUploadLearningFile = (
@@ -69,7 +69,7 @@ export const useUploadLearningFile = (
       addToast('파일 업로드에 실패했습니다.', 3, 'error');
     },
     onSuccess: (data) => {
-      onSuccess(data);
+      onSuccess(data.response);
     },
   });
 };

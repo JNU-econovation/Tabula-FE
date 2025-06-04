@@ -42,20 +42,14 @@ export const uploadLearningFile = async (
   formData: FormData,
 ) => {
   const response = await AxiosInstanceFormData.post(
-    `${END_POINT.workspaceList}${folderId}`,
+    `${END_POINT.workspaceList}${folderId}/upload`,
     formData,
   );
 
   return response.data;
 };
 
-interface getLearningResultListResponse {
-  success: boolean;
-  response: ResponseData;
-  error: string | null;
-}
-
-interface ResponseData {
+interface Data {
   fileUrl: string;
   fileName: string;
   results: ResultItem[];
@@ -72,6 +66,12 @@ export interface ResultItem {
 export interface ResultImage {
   id: number;
   resultImageUrl: string;
+}
+
+export interface getLearningResultListResponse {
+  success: boolean;
+  response: Data;
+  error: string | null;
 }
 
 export const getLearningResultList = async (
@@ -112,6 +112,39 @@ export const getKeywordList = async (
 ): Promise<KeywordResponse> => {
   const response = await AxiosInstance.get(
     `${END_POINT.workspaceList}${spaceId}/keywords`,
+  );
+  return response.data;
+};
+
+export interface FeedbackItem {
+  id: number;
+  wrong: string;
+  feedback: string;
+}
+
+export interface PageResult {
+  page: number;
+  resultImageUrl: string;
+  result: FeedbackItem[];
+}
+
+interface ResponseData {
+  results: PageResult[];
+  missing_answer: string[];
+}
+
+interface getResultListResponse {
+  success: boolean;
+  response: ResponseData;
+  error: string | null;
+}
+
+export const getResultList = async (
+  spaceId: string,
+  resultId: string,
+): Promise<getResultListResponse> => {
+  const response = await AxiosInstance.get(
+    `${END_POINT.workspaceList}${spaceId}/${resultId}`,
   );
 
   return response.data;

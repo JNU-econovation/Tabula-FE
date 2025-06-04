@@ -1,5 +1,5 @@
 interface SelectLanguageProps {
-  language: 'english' | 'korean' | 'japanese';
+  language: 'english' | 'korean';
   handleLanguageChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   showLabel?: boolean;
 }
@@ -10,9 +10,11 @@ const SelectLanguage = ({
   showLabel = true,
 }: SelectLanguageProps) => {
   return (
-    <span className={`flex items-center ${
-    showLabel ? 'w-full gap-7' : 'mr-5 gap-0'
-    }`}>
+    <span
+      className={`flex items-center ${
+        showLabel ? 'w-full gap-7' : 'mr-5 gap-0'
+      }`}
+    >
       {showLabel && <p>자료 언어 선택</p>}
       <select
         className="bg-gray-100 rounded-xl px-2 py-2 text-sm text-gray-700 
@@ -24,7 +26,6 @@ const SelectLanguage = ({
       >
         <option value="korean">한국어</option>
         <option value="english">영어</option>
-        <option value="japanese">일본어</option>
       </select>
     </span>
   );
