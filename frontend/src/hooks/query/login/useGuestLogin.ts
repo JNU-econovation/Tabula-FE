@@ -12,14 +12,14 @@ export const useGuestLogin = () => {
   return useMutation({
     mutationFn: postGuestAuth,
     onSuccess: (data) => {
-      const { accessToken, refreshToken } = data.response
+      const { accessToken, folderId } = data.response
       setAuth({
         username: '게스트',
         accessToken,
-        refreshToken,
+        refreshToken: null,
         loginType: 'guest'
       })
-      router.replace('/workspace')
+      router.replace(`/workspace/${folderId}/upload`)
       addToast('환영합니다! 게스트 모드로 Tabula를 체험해보세요.', 3, 'default')
     },
     onError: () => {
