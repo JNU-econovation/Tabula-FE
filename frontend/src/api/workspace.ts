@@ -102,7 +102,7 @@ export interface KeywordNode {
 interface KeywordResponse {
   success: boolean;
   response: {
-    keywords: KeywordNode;
+    keywords: [KeywordNode];
     error: string | null;
   };
 }
@@ -130,7 +130,7 @@ export interface PageResult {
 
 interface ResponseData {
   results: PageResult[];
-  missing_answer: string[];
+  missingAnswer: string[];
 }
 
 interface getResultListResponse {

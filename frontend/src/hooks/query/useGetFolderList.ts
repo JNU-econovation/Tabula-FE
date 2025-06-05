@@ -7,8 +7,14 @@ export interface FolderProps {
   colorIndex: number;
 }
 
+export interface FolderResponse {
+  success: boolean;
+  response: FolderProps[];
+  error: any;
+}
+
 export const useGetFolderList = () => {
-  return useQuery<FolderProps[]>({
+  return useQuery<FolderResponse>({
     queryKey: ['folder'],
     queryFn: getFolderList,
   });

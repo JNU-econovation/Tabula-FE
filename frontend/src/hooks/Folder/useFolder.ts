@@ -72,8 +72,8 @@ export const useFolder = ({ folderId, isAddCard, initialTitle = "", initialColor
         return
       }
       
-      if(!isAddCard && trimTitle === initialTitle.trim()) {
-        addToast("이전 폴더 이름과 동일합니다")
+      if(!isAddCard && trimTitle === initialTitle.trim() && selectedColor === initialColor) {
+        addToast("이전 내용과 동일합니다")
         return
       }
 
