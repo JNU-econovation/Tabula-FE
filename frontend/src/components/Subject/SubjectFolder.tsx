@@ -24,7 +24,7 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({
   folderId
 }) => {
   const { isModalOpen, openModal, closeModal } = useModal()
-  const baseColor = isAddCard ? COLOR_PALETTE.folderColors[0] : COLOR_PALETTE.folderColors[colorIndex]
+  const baseColor = isAddCard ? COLOR_PALETTE.folderColors[0] : COLOR_PALETTE.folderColors[colorIndex ?? 0]
   const hoverColor = darkenColor(baseColor, 0.15)
 
   const {
@@ -64,7 +64,7 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({
       {isAddCard ? (
         <div className="text-5xl text-primary-600">+</div>
       ) : (
-        <div className="absolute bottom-[-40px] text-center text-gray-700 group-hover:font-semibold">{title}</div>
+        <div className="absolute bottom-[-40px] text-center text-gray-700 group-hover:font-semibold">{title ?? '새 폴더'}</div>
       )}
 
       {!isAddCard && (
