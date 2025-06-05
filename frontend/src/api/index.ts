@@ -1,6 +1,7 @@
 import { AuthStore } from '@/stores/authStore';
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { postReissue } from './login';
+import { useToastStore } from '@/stores/toastStore';
 
 export const BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -16,6 +17,7 @@ export const AxiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
+    'ngrok-skip-browser-warning': true,
     Accept: 'application/json',
   },
   timeout: 3000,
@@ -25,6 +27,7 @@ export const AxiosInstanceFormData = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'multipart/form-data',
+    'ngrok-skip-browser-warning': true,
     Accept: 'application/json',
   },
   timeout: 3000,
@@ -37,6 +40,23 @@ const addAccessToken = (config: InternalAxiosRequestConfig) => {
     }
     return config
 }
+
+// const handleTokenErrorRedirct = (instance: ReturnType<typeof axios.create>) => {
+//   instance.interceptors.response.use(
+//     (response) => response,
+//     async (error: AxiosError) => {
+//       if (error.response?.status === 401) {
+//         const { addToast } = useToastStore.getState();
+//         addToast('로그인 세션이 만료되었습니다. 다시 로그인해주세요.')
+//         AuthStore.getState().logout()
+//         localStorage.removeItem('auth-storage')
+//         window.location.href = '/' // 홈으로 강제 이동 (추후 로그인 페이지 생성시 대체)
+//         return Promise.reject(error)
+//       }
+//       return Promise.reject(error)
+//     }
+//   );
+// }
 
 const handleTokenRefresh = (instance: ReturnType<typeof axios.create>) => {
   instance.interceptors.response.use(
@@ -82,6 +102,9 @@ const handleTokenRefresh = (instance: ReturnType<typeof axios.create>) => {
 
 AxiosInstance.interceptors.request.use(addAccessToken, (error) => Promise.reject(error))
 AxiosInstanceFormData.interceptors.request.use(addAccessToken, (error) => Promise.reject(error))
+// handleTokenErrorRedirct(AxiosInstance)
+// handleTokenErrorRedirct(AxiosInstanceFormData)
 
+// 백엔드 토큰 리프레쉬 로직 개발 이후 handleTokenRefresh 제거하고 아래 함수 활성화 할 것
 handleTokenRefresh(AxiosInstance)
 handleTokenRefresh(AxiosInstanceFormData)
