@@ -1,4 +1,4 @@
-import { AxiosInstance, AxiosInstanceFormData, END_POINT } from '@/api';
+import { AxiosAIInstanceFormData, AxiosInstance, END_POINT } from '@/api';
 import axios from 'axios';
 
 interface WorkspaceList {
@@ -42,18 +42,10 @@ export const uploadLearningFile = async (
   folderId: string,
   formData: FormData,
 ) => {
-  const response = await AxiosInstanceFormData.post(
+  const response = await AxiosAIInstanceFormData.post(
     `${END_POINT.workspaceList}${folderId}/upload`,
     formData,
   );
-  //tabula.co.kr/v1/ai/spaces/682e20881dcbda075ced647a/upload
-
-  // const response = await AxiosInstanceFormData.post(
-  //   `https://tabula.co.kr/v1/ai/spaces/682e20881dcbda075ced647a/upload`,
-  //   formData,
-  // );
-
-  console.log('response', response);
 
   if (response.status == 413) {
     throw new Error(
@@ -99,9 +91,8 @@ export const getLearningResultList = async (
   return response.data;
 };
 
-//TODO: 추후 업로드 파일 여러개 넣을 수 있는 거 수정해야함
 export const uploadResultFile = async (spaceId: string, formData: FormData) => {
-  const response = await AxiosInstanceFormData.post(
+  const response = await AxiosAIInstanceFormData.post(
     `${END_POINT.workspaceList}${spaceId}/result`,
     formData,
   );

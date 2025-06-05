@@ -1,4 +1,4 @@
-import { BASE_URL, END_POINT } from '@/api';
+import { BASE_URL_AI, END_POINT } from '@/api';
 import Loading from '@/components/common/Loading/Loading';
 import { useResultLoadingSSE } from '@/hooks/query/workspace/sse';
 import { useParams } from 'next/navigation';
@@ -10,7 +10,7 @@ const LoadingSpinner = ({ taskId }: LoadingSpinnerProps) => {
   const { folderId } = useParams();
 
   const { percent } = useResultLoadingSSE(
-    `${BASE_URL}${END_POINT.workspaceList}${folderId}/progress/${taskId}`,
+    `${BASE_URL_AI}${END_POINT.workspaceList}${folderId}/progress/${taskId}`,
   );
   return (
     <div>
