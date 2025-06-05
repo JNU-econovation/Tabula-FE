@@ -155,3 +155,19 @@ export const getResultList = async (
 
   return response.data;
 };
+
+interface getFolderNameResponse {
+  response: {
+    folderName: string;
+  };
+}
+
+export const getFolderName = async (
+  folderId: string,
+): Promise<getFolderNameResponse> => {
+  const response = await AxiosInstance.get(
+    `${END_POINT.workspaceList}${folderId}/name`,
+  );
+
+  return response.data;
+};
