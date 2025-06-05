@@ -88,7 +88,7 @@ export const useUploadLearningResultFile = () => {
     }) => uploadResultFile(spaceId, formData),
     onSuccess: (data) => {
       const response = data.response;
-      updateLearningResultList(response.taskId, response.fileName);
+      updateLearningResultList(response.resultId, response.fileName);
     },
 
     onError: (error) => {

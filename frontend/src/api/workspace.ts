@@ -104,11 +104,10 @@ export interface KeywordNode {
   name: string;
   children?: KeywordNode[];
 }
-
 interface KeywordResponse {
   success: boolean;
   response: {
-    keywords: [KeywordNode];
+    keywords: KeywordNode;
     error: string | null;
   };
 }
