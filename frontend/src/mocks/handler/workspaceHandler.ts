@@ -20,13 +20,13 @@ export const workspaceHandler = [
     async ({ request, params }) => {
       const { id } = params;
       const data = (await request.json()) as {
-        newSpaceName: string;
+        spaceName: string;
       };
-      const { newSpaceName } = data;
+      const { spaceName } = data;
 
       const updatedWorkspaceList = workspaceList.response.map((workspace) => {
         if (id && workspace.spaceId == Number(id)) {
-          return { ...workspace, spaceName: newSpaceName };
+          return { ...workspace, spaceName: spaceName };
         }
         return workspace;
       });

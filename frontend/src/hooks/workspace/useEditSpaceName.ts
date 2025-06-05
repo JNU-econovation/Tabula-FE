@@ -30,7 +30,7 @@ export const useEditSpaceName = (spaceName: string, spaceId: string) => {
 
     await updateWorkspaceMutation({
       spaceId,
-      newSpaceName: spaceNameValue,
+      spaceName: spaceNameValue,
     });
     setIsEditing(false);
   };

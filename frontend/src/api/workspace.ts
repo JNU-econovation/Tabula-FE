@@ -29,10 +29,10 @@ export const deleteWorkspace = async (spaceId: string) => {
 
 export const updateWorkspaceName = async (
   spaceId: string,
-  newSpaceName: string,
+  spaceName: string,
 ) => {
   const data = await AxiosInstance.put(`${END_POINT.workspaceList}${spaceId}`, {
-    newSpaceName,
+    spaceName,
   });
 
   return data.data;
