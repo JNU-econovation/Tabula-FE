@@ -1,4 +1,5 @@
 import {
+  getFolderName,
   getKeywordList,
   getLearningResultList,
   getResultList,
@@ -62,4 +63,15 @@ export const useGetResultList = (spaceId: string, resultId: string) => {
   const missingAnswer = data?.response.missingAnswer || [];
 
   return { resultList, missingAnswer, isLoading, isError };
+};
+
+export const useGetFolderName = (folderId: string) => {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['folderName', folderId],
+    queryFn: () => getFolderName(folderId),
+  });
+
+  const folderName = data?.response.folderName || '';
+
+  return { folderName, isLoading, isError };
 };

@@ -1,7 +1,10 @@
 'use client';
 
 import Sidebar from '@/components/Workspace/Sidebar';
-import { useGetWorkspaceList } from '@/hooks/query/workspace/query';
+import {
+  useGetFolderName,
+  useGetWorkspaceList,
+} from '@/hooks/query/workspace/query';
 import { useParams } from 'next/navigation';
 import { createContext, useState } from 'react';
 
@@ -12,7 +15,7 @@ export const SidebarContext = createContext({
 const layout = ({ children }: { children: React.ReactNode }) => {
   const { folderId } = useParams();
   const { workspaceList, isLoading } = useGetWorkspaceList(folderId as string);
-  const folderName = '폴더 이름'; // TODO: 폴더 이름 api 추가 시 연동
+  const { folderName } = useGetFolderName(folderId as string);
   const [isOpen, setIsOpen] = useState(true);
 
   const handleToggle = () => {
