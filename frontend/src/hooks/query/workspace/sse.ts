@@ -14,7 +14,7 @@ interface ProgressData {
   message?: string;
 }
 
-export const useLoadingSSE = (url: string, spaceId: string) => {
+export const useLoadingSSE = (url: string) => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const [percent, setPercent] = useState(0);
@@ -22,6 +22,7 @@ export const useLoadingSSE = (url: string, spaceId: string) => {
   useSSE<ResponseType, ProgressData>({
     url,
     onSuccess: (response) => {
+      const spaceId= response.spaceId
       queryClient.invalidateQueries({ queryKey: ['workspaceList'] });
       router.push(`./${spaceId}`);
     },

@@ -43,7 +43,7 @@ export const uploadLearningFile = async (
   formData: FormData,
 ) => {
   const response = await AxiosAIInstanceFormData.post(
-    `${END_POINT.workspaceList}${folderId}/upload`,
+    `${END_POINT.aiWorkspaceList}${folderId}/upload`,
     formData,
   );
 
@@ -93,7 +93,7 @@ export const getLearningResultList = async (
 
 export const uploadResultFile = async (spaceId: string, formData: FormData) => {
   const response = await AxiosAIInstanceFormData.post(
-    `${END_POINT.workspaceList}${spaceId}/result`,
+    `${END_POINT.aiResult}${spaceId}/result`,
     formData,
   );
 

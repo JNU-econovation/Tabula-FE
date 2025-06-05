@@ -12,6 +12,8 @@ export const END_POINT = {
   workspaceList: `/v1/spaces/`,
   folderList: `/v1/folders`,
   mypage: `/v1/user/info`,
+  aiWorkspaceList:`/v1/ai/spaces/`,
+  aiResult:`/v1/ai/results/`,
 };
 
 export const AxiosInstance = axios.create({
@@ -136,12 +138,17 @@ AxiosInstance.interceptors.request.use(addAccessToken, (error) =>
 AxiosInstanceFormData.interceptors.request.use(addAccessToken, (error) =>
   Promise.reject(error),
 );
+AxiosAIInstanceFormData.interceptors.request.use(addAccessToken, (error) =>
+  Promise.reject(error),
+);
 // handleTokenErrorRedirct(AxiosInstance)
 // handleTokenErrorRedirct(AxiosInstanceFormData)
 
 // 백엔드 토큰 리프레쉬 로직 개발 이후 handleTokenRefresh 제거하고 아래 함수 활성화 할 것
 handleTokenRefresh(AxiosInstance);
 handleTokenRefresh(AxiosInstanceFormData);
+handleTokenRefresh(AxiosAIInstanceFormData)
 
 handleCustomErrors(AxiosInstance)
+handleCustomErrors(AxiosAIInstanceFormData)
 handleCustomErrors(AxiosAIInstanceFormData)

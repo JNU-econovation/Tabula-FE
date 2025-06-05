@@ -10,7 +10,7 @@ const LoadingSpinner = ({ taskId }: LoadingSpinnerProps) => {
   const { folderId } = useParams();
 
   const { percent } = useResultLoadingSSE(
-    `${BASE_URL_AI}${END_POINT.workspaceList}${folderId}/progress/${taskId}`,
+    `${BASE_URL_AI}${END_POINT.aiResult}${folderId}/progress/${taskId}`,
   );
   return (
     <div>
