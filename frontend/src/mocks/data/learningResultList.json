@@ -10,11 +10,11 @@
         "resultImages": [
           {
             "id": 1,
-            "resultImageUrl": "https://picsum.photos/200/300?random=1"
+            "postImageUrl": "https://picsum.photos/200/300?random=1"
           },
           {
             "id": 2,
-            "resultImageUrl": "https://picsum.photos/200/300?random=2"
+            "postImageUrl": "https://picsum.photos/200/300?random=2"
           }
         ]
       },
@@ -24,11 +24,11 @@
         "resultImages": [
           {
             "id": 1,
-            "resultImageUrl": "https://picsum.photos/200/300?random=3"
+            "postImageUrl": "https://picsum.photos/200/300?random=3"
           },
           {
             "id": 2,
-            "resultImageUrl": "https://picsum.photos/200/300?random=4"
+            "postImageUrl": "https://picsum.photos/200/300?random=4"
           }
         ]
       }

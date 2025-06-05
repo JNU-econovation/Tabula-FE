@@ -126,11 +126,11 @@ export const workspaceHandler = [
                     // results의 id는 이미지 순서 의미
                     {
                       id: 1111,
-                      resultImageUrl: 'https://picsum.photos/200/300?random=5',
+                      postImageUrl: 'https://picsum.photos/200/300?random=5',
                     },
                     {
                       id: 2222,
-                      resultImageUrl: 'https://picsum.photos/200/300?random=5',
+                      postImageUrl: 'https://picsum.photos/200/300?random=5',
                     },
                   ],
                 },

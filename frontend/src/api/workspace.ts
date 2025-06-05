@@ -72,7 +72,7 @@ export interface ResultItem {
 
 export interface ResultImage {
   id: number;
-  resultImageUrl: string;
+  postImageUrl: string;
 }
 
 export interface getLearningResultListResponse {
@@ -129,7 +129,7 @@ export interface FeedbackItem {
 
 export interface PageResult {
   page: number;
-  resultImageUrl: string;
+  postImageUrl: string;
   result: FeedbackItem[];
 }
 
