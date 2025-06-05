@@ -8,12 +8,12 @@ import MenuItem from "../common/FloatingMenu/MenuItem";
 import { useFolder } from "@/hooks/Folder/useFolder";
 import { useFolderFloatingMenu } from "@/hooks/Folder/useFolderFloatingMenu";
 import useModal from "@/hooks/common/useModal";
+import { useRouter } from "next/navigation";
 
 interface SubjectFolderProps {
   title?: string;
   isAddCard?: boolean;
   colorIndex?: number;
-  onClick?: () => void;
   folderId?: string;
 }
 
@@ -21,7 +21,6 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({
   title,
   isAddCard,
   colorIndex = 0,
-  onClick,
   folderId
 }) => {
   const { isModalOpen, openModal, closeModal } = useModal()
@@ -36,6 +35,7 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({
   })
 
   const { openMenuId, toggleMenu, menuRef, moreButtonRef } = useFolderFloatingMenu()
+  const router = useRouter()
 
   return (
     <div className={`relative w-45 h-60 flex justify-center rounded-lg shadow-md mb-14 group
@@ -56,8 +56,8 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({
       }}
       onClick={() => {
         if (isAddCard) openModal();
-        else if (onClick) {
-          onClick()
+        else if (openMenuId !== folderId) {
+          router.push(`/workspace/${folderId}/upload`)
         }
       }}
     >
