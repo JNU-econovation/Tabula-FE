@@ -1,6 +1,7 @@
 import { AuthStore } from '@/stores/authStore';
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { postReissue } from './login';
+import { useToastStore } from '@/stores/toastStore';
 
 export const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 export const BASE_URL_AI = process.env.NEXT_PUBLIC_AI_API_URL;
@@ -110,6 +111,25 @@ const handleTokenRefresh = (instance: ReturnType<typeof axios.create>) => {
   );
 };
 
+const handleCustomErrors = (instance: ReturnType<typeof axios.create>) => {
+  instance.interceptors.response.use(
+    (response) => response,
+    async (error: AxiosError) => {
+      const errorData = error.response?.data as any;
+
+      if (errorData?.error?.code === 'MEMBER_404_1') {
+        const { addToast } = useToastStore.getState()
+        addToast('존재하지 않는 회원입니다. 다시 로그인해주세요')
+        AuthStore.getState().logout()
+        window.location.href = '/' // 추후 로그인 페이지 생기면 교체
+        return Promise.reject(error)
+      }
+
+      return Promise.reject(error)
+    }
+  )
+}
+
 AxiosInstance.interceptors.request.use(addAccessToken, (error) =>
   Promise.reject(error),
 );
@@ -122,3 +142,6 @@ AxiosInstanceFormData.interceptors.request.use(addAccessToken, (error) =>
 // 백엔드 토큰 리프레쉬 로직 개발 이후 handleTokenRefresh 제거하고 아래 함수 활성화 할 것
 handleTokenRefresh(AxiosInstance);
 handleTokenRefresh(AxiosInstanceFormData);
+
+handleCustomErrors(AxiosInstance)
+handleCustomErrors(AxiosAIInstanceFormData)
