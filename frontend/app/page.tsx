@@ -16,7 +16,7 @@ const Page = () => {
   if (!shouldRender) return null
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4.5rem)] px-4 text-center">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh)] px-4 text-center">
       <div className="text-4xl font-semibold text-gray-900 z-10 transform -translate-y-13">
         <div className="text-4xl font-semibold">백지에서 시작하는 진정한 학습,</div>
         <div className="text-4xl font-semibold mt-4 mb-6">TABULA와 함께하세요!</div>
