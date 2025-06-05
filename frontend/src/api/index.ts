@@ -75,9 +75,10 @@ const handleTokenRefresh = (instance: ReturnType<typeof axios.create>) => {
   instance.interceptors.response.use(
     (response) => response,
     async (error: AxiosError) => {
+      const errorData = error.response?.data as any;
       const originalRequest = error.config as any;
 
-      if (error.response?.status === 401 && !originalRequest._isRetry) {
+      if (errorData?.error?.code == 'SECURITY_401_2' && !originalRequest._isRetry) {
         originalRequest._isRetry = true;
 
         try {
@@ -88,7 +89,7 @@ const handleTokenRefresh = (instance: ReturnType<typeof axios.create>) => {
             throw new Error('No refresh token available');
           }
 
-          const { data } = await postReissue(refreshToken);
+          const data = await postReissue(refreshToken);
           const newAccessToken = data.response.accessToken;
           const newRefreshToken = data.response.refreshToken;
 
@@ -150,5 +151,5 @@ handleTokenRefresh(AxiosInstanceFormData);
 handleTokenRefresh(AxiosAIInstanceFormData)
 
 handleCustomErrors(AxiosInstance)
-handleCustomErrors(AxiosAIInstanceFormData)
+handleCustomErrors(AxiosInstanceFormData)
 handleCustomErrors(AxiosAIInstanceFormData)
