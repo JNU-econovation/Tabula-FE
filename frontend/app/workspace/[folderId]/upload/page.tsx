@@ -19,7 +19,7 @@ const page = () => {
         <div className={`w-full flex justify-center items-center p-8 relative`}>
           <LearningFileUpload
             onSubmit={(data: UploadLearningFileResponse) => {
-              handleTaskId(data.task_id);
+              handleTaskId(data.spaceId);
               setStep('loading');
             }}
           />

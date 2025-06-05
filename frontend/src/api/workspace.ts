@@ -1,4 +1,5 @@
 import { AxiosInstance, AxiosInstanceFormData, END_POINT } from '@/api';
+import axios from 'axios';
 
 interface WorkspaceList {
   spaceId: string;
@@ -45,6 +46,20 @@ export const uploadLearningFile = async (
     `${END_POINT.workspaceList}${folderId}/upload`,
     formData,
   );
+  //tabula.co.kr/v1/ai/spaces/682e20881dcbda075ced647a/upload
+
+  // const response = await AxiosInstanceFormData.post(
+  //   `https://tabula.co.kr/v1/ai/spaces/682e20881dcbda075ced647a/upload`,
+  //   formData,
+  // );
+
+  console.log('response', response);
+
+  if (response.status == 413) {
+    throw new Error(
+      '파일에 너무 많은 양의 내용이 들어가 있어요. 파일을 분할하여 업로드 해주세요.',
+    );
+  }
 
   return response.data;
 };
