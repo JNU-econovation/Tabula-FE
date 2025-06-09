@@ -4,7 +4,7 @@
     "results": [
       {
         "page": 1,
-        "resultImageUrl": "https://picsum.photos/200/300?random=1",
+        "postImageUrl": "https://picsum.photos/200/300?random=1",
         "result": [
           { "id": 1, "wrong": "메모리", "feedback": "메모리 관리 설명 누락" },
           {
@@ -31,7 +31,7 @@
       },
       {
         "page": 2,
-        "resultImageUrl": "https://picsum.photos/200/300?random=5",
+        "postImageUrl": "https://picsum.photos/200/300?random=5",
         "result": [
           { "id": 1, "wrong": "메모리2", "feedback": "메모리 관리 설명 누락2" },
           {

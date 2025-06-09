@@ -10,7 +10,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface UpdateWorkspace {
   spaceId: string;
-  newSpaceName: string;
+  spaceName: string;
 }
 
 export const useUpdateWorkspaceName = () => {
@@ -18,8 +18,8 @@ export const useUpdateWorkspaceName = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ spaceId, newSpaceName }: UpdateWorkspace) =>
-      updateWorkspaceName(spaceId, newSpaceName),
+    mutationFn: ({ spaceId, spaceName }: UpdateWorkspace) =>
+      updateWorkspaceName(spaceId, spaceName),
     onError: (error) => {
       addToast('워크스페이스 이름 변경에 실패했습니다.', 3, 'error');
       console.error('Error updating workspace name:', error);
@@ -88,7 +88,7 @@ export const useUploadLearningResultFile = () => {
     }) => uploadResultFile(spaceId, formData),
     onSuccess: (data) => {
       const response = data.response;
-      updateLearningResultList(response.taskId, response.fileName);
+      updateLearningResultList(response.resultId, response.fileName);
     },
 
     onError: (error) => {

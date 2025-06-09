@@ -9,7 +9,7 @@ interface AuthState {
   username: string | null;
   accessToken: string | null;
   refreshToken: string | null;
-  setAuth: (data: {username: string; accessToken: string; refreshToken: string; loginType: LoginType }) => void;
+  setAuth: (data: {username: string; accessToken: string; refreshToken: string | null; loginType: LoginType }) => void;
   logout: () => void;
 }
 

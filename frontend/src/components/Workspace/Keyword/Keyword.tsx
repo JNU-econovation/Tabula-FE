@@ -34,7 +34,7 @@ const Keyword = () => {
           {!keywordList || isLoading ? (
             <div>loading...</div>
           ) : (
-            <KeywordItem keyword={keywordList[0]} />
+            <KeywordItem keyword={keywordList} />
           )}
         </div>
       </Modal>

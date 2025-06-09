@@ -20,13 +20,13 @@ export const workspaceHandler = [
     async ({ request, params }) => {
       const { id } = params;
       const data = (await request.json()) as {
-        newSpaceName: string;
+        spaceName: string;
       };
-      const { newSpaceName } = data;
+      const { spaceName } = data;
 
       const updatedWorkspaceList = workspaceList.response.map((workspace) => {
         if (id && workspace.spaceId == Number(id)) {
-          return { ...workspace, spaceName: newSpaceName };
+          return { ...workspace, spaceName: spaceName };
         }
         return workspace;
       });
@@ -126,11 +126,11 @@ export const workspaceHandler = [
                     // results의 id는 이미지 순서 의미
                     {
                       id: 1111,
-                      resultImageUrl: 'https://picsum.photos/200/300?random=5',
+                      postImageUrl: 'https://picsum.photos/200/300?random=5',
                     },
                     {
                       id: 2222,
-                      resultImageUrl: 'https://picsum.photos/200/300?random=5',
+                      postImageUrl: 'https://picsum.photos/200/300?random=5',
                     },
                   ],
                 },

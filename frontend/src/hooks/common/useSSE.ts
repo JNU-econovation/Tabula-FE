@@ -132,7 +132,7 @@ export const useSSE = <T = any, P = any>(config: SSEConfig<T, P>) => {
           onSuccess?.(response);
         } else if (parsedData.error) {
           console.error('❌ Server error (complete event):', parsedData.error);
-          alert('Error: 서버 에러임 (complete) ' + parsedData.error);
+          // alert('Error: 서버 에러임 (complete) ' + parsedData.error);
           setState((prev) => ({
             ...prev,
             error: parsedData.error,
@@ -143,7 +143,7 @@ export const useSSE = <T = any, P = any>(config: SSEConfig<T, P>) => {
       } catch (error) {
         console.error('💥 JSON Parse Error (complete event):', error);
         console.error('💥 Raw data:', e.data);
-        alert('Error: SSE data 파싱 에러 (complete)');
+        // alert('Error: SSE data 파싱 에러 (complete)');
         setState((prev) => ({
           ...prev,
           error: error,
@@ -162,7 +162,7 @@ export const useSSE = <T = any, P = any>(config: SSEConfig<T, P>) => {
       try {
         const parsedData = JSON.parse(e.data);
         console.error('🔍 Parsed SSE error data:', parsedData);
-        alert('Error: SSE 서버 에러 이벤트 ' + parsedData.error);
+        // alert('Error: SSE 서버 에러 이벤트 ' + parsedData.error);
         setState((prev) => ({
           ...prev,
           error: parsedData.error,
@@ -172,7 +172,7 @@ export const useSSE = <T = any, P = any>(config: SSEConfig<T, P>) => {
       } catch (error) {
         console.error('💥 JSON Parse Error (error event):', error);
         console.error('💥 Raw data:', e.data);
-        alert('Error: SSE error data 파싱 에러');
+        // alert('Error: SSE error data 파싱 에러');
         setState((prev) => ({
           ...prev,
           error: error,
@@ -189,7 +189,7 @@ export const useSSE = <T = any, P = any>(config: SSEConfig<T, P>) => {
     eventSource.onerror = (error) => {
       // 이 onerror는 네트워크 오류, 서버 연결 끊김 등 일반적인 연결 오류를 처리합니다.
       console.error('🔥 SSE Connection Error:', error);
-      alert('Error: SSE 연결 에러');
+      // alert('Error: SSE 연결 에러');
       setState((prev) => ({
         ...prev,
         error,

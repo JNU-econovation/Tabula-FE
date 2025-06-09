@@ -19,7 +19,7 @@ export const KeywordItem = ({
   colorIndex?: number;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const hasChildren = keyword.children && keyword.children.length > 0;
+  const hasChildren = keyword?.children && keyword.children.length > 0;
 
   const isDepth1 = depth === 1;
   const isRoot = depth === 0;
@@ -48,7 +48,7 @@ export const KeywordItem = ({
             {isOpen ? <AiFillCaretDown /> : <AiFillCaretRight />}
           </span>
         )}
-        <span>{keyword.name}</span>
+        <span>{keyword?.name}</span>
       </div>
 
       {hasChildren && (isRoot || isOpen) && (

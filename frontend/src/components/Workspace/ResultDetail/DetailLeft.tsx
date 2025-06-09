@@ -9,7 +9,7 @@ const DetailLeft = ({ currentPageData }: DetailLeftProps) => {
     <div className="w-full h-full overflow-hidden">
       {currentPageData ? (
         <img
-          src={currentPageData?.resultImageUrl}
+          src={currentPageData?.postImageUrl}
           alt="Result Image"
           className="w-full h-full object-cover"
         />

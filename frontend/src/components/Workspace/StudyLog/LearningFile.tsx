@@ -18,7 +18,8 @@ const LearningFile = ({ fileName }: LearningFileProps) => {
         <p>
           학습 과정 중 막히는 부분이 있다면 ‘키워드 확인하기' 를 이용해주세요!
         </p>
-        <p>모르는 부분에 ㅁ 표시를 하면 채점의 정확도를 높일 수 있어요 ☺️</p>
+        <p>백지 학습시에는 2분할로 나눠서 작성해주세요.</p>
+        <p>자세한 예시는 'Tabula 사용법 알아보기'를 참고해주세요 ☺️</p>
       </ChatBubble>
     </div>
   );

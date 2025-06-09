@@ -14,7 +14,7 @@ interface ProgressData {
   message?: string;
 }
 
-export const useLoadingSSE = (url: string, spaceId: string) => {
+export const useLoadingSSE = (url: string) => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const [percent, setPercent] = useState(0);
@@ -22,6 +22,7 @@ export const useLoadingSSE = (url: string, spaceId: string) => {
   useSSE<ResponseType, ProgressData>({
     url,
     onSuccess: (response) => {
+      const spaceId= response.spaceId
       queryClient.invalidateQueries({ queryKey: ['workspaceList'] });
       router.push(`./${spaceId}`);
     },
@@ -58,6 +59,7 @@ interface ResultResponseType {
 export const useResultLoadingSSE = (url: string) => {
   const { completeLoadingResult } = useLearningStore();
   const [percent, setPercent] = useState(0);
+  const queryClient = useQueryClient();
 
   useSSE<ResultResponseType, ProgressData>({
     url,
@@ -65,9 +67,10 @@ export const useResultLoadingSSE = (url: string) => {
       console.log('SSE Success:', response);
       completeLoadingResult({
         resultId: response.resultId,
-        resultFileName: response.resultFileName,
+        resultFileName: "",
         resultImages: response.results || [],
       });
+      
     },
     onError: (error) => {
       console.error('SSE Error:', error);

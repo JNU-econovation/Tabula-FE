@@ -29,10 +29,10 @@ export const deleteWorkspace = async (spaceId: string) => {
 
 export const updateWorkspaceName = async (
   spaceId: string,
-  newSpaceName: string,
+  spaceName: string,
 ) => {
   const data = await AxiosInstance.put(`${END_POINT.workspaceList}${spaceId}`, {
-    newSpaceName,
+    spaceName,
   });
 
   return data.data;
@@ -43,7 +43,7 @@ export const uploadLearningFile = async (
   formData: FormData,
 ) => {
   const response = await AxiosAIInstanceFormData.post(
-    `${END_POINT.workspaceList}${folderId}/upload`,
+    `${END_POINT.aiWorkspaceList}${folderId}/upload`,
     formData,
   );
 
@@ -72,7 +72,7 @@ export interface ResultItem {
 
 export interface ResultImage {
   id: number;
-  resultImageUrl: string;
+  postImageUrl: string;
 }
 
 export interface getLearningResultListResponse {
@@ -93,7 +93,7 @@ export const getLearningResultList = async (
 
 export const uploadResultFile = async (spaceId: string, formData: FormData) => {
   const response = await AxiosAIInstanceFormData.post(
-    `${END_POINT.workspaceList}${spaceId}/result`,
+    `${END_POINT.aiResult}${spaceId}/result`,
     formData,
   );
 
@@ -104,11 +104,10 @@ export interface KeywordNode {
   name: string;
   children?: KeywordNode[];
 }
-
 interface KeywordResponse {
   success: boolean;
   response: {
-    keywords: [KeywordNode];
+    keywords: KeywordNode;
     error: string | null;
   };
 }
@@ -130,7 +129,7 @@ export interface FeedbackItem {
 
 export interface PageResult {
   page: number;
-  resultImageUrl: string;
+  postImageUrl: string;
   result: FeedbackItem[];
 }
 

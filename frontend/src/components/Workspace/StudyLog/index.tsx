@@ -31,7 +31,7 @@ const StudyLog = () => {
       <LearningFile fileName={fileName} />
       {learningResult.map((result, index) => {
         return (
-          <div key={result.resultId} className="w-[60%]">
+          <div key={index} className="w-[60%]">
             <ChatBubble isUser={true}>
               <div className="w-64">
                 <SelectedFileItem fileName={`백지 학습 ${index + 1}`} />
@@ -44,7 +44,7 @@ const StudyLog = () => {
                   return (
                     <img
                       key={image.id}
-                      src={image.resultImageUrl}
+                      src={image.postImageUrl}
                       alt={`Result ${index + 1}`}
                       className="w-40 h-50 rounded-sm shadow-lg"
                     />

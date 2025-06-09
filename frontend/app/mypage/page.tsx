@@ -18,7 +18,7 @@ const page = () => {
   if (!shouldRender) return null
 
   return (
-    <div className="flex flex-col items-center p-15 min-h-calc(100vh-4.5rem)">
+    <div className="flex flex-col items-center px-15 py-30 min-h-calc(100vh)">
       <div className="flex flex-col items-start gap-6 min-w-110">
         <UserInfo username={username} />
         <StatsSection />
