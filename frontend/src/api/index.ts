@@ -20,7 +20,6 @@ export const AxiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
-    'ngrok-skip-browser-warning': true,
     Accept: 'application/json',
   },
   timeout: 3000,
@@ -30,7 +29,6 @@ export const AxiosInstanceFormData = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'multipart/form-data',
-    'ngrok-skip-browser-warning': true,
     Accept: 'application/json',
   },
   timeout: 3000,
@@ -40,7 +38,6 @@ export const AxiosAIInstanceFormData = axios.create({
   baseURL: BASE_URL_AI,
   headers: {
     'Content-Type': 'multipart/form-data',
-    'ngrok-skip-browser-warning': true,
     Accept: 'application/json',
   },
   timeout: 3000,
