@@ -43,7 +43,7 @@ const StudyLog = () => {
                 {result.resultImages.map((image, index) => {
                   return (
                     <img
-                      key={image.id}
+                      key={index}
                       src={image.postImageUrl}
                       alt={`Result ${index + 1}`}
                       className="w-40 h-50 rounded-sm shadow-lg"
