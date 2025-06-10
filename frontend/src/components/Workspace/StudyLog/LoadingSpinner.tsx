@@ -5,12 +5,14 @@ import { useParams } from 'next/navigation';
 
 interface LoadingSpinnerProps {
   taskId: string | null;
+  spaceId: string;
 }
-const LoadingSpinner = ({ taskId }: LoadingSpinnerProps) => {
+const LoadingSpinner = ({ spaceId, taskId }: LoadingSpinnerProps) => {
   const { folderId } = useParams();
 
   const { percent } = useResultLoadingSSE(
     `${BASE_URL_AI}${END_POINT.aiResult}${folderId}/progress/${taskId}`,
+    spaceId,
   );
   return (
     <div>

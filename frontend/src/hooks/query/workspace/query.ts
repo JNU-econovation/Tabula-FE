@@ -19,10 +19,11 @@ export const useGetWorkspaceList = (folderId: string) => {
 
   return { workspaceList, isLoading, isError };
 };
-
 export const useGetLearningResultList = (spaceId: string) => {
+  const { setLearningResult } = useLearningStore(spaceId);
+
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['learningResultList'],
+    queryKey: ['learningResultList', spaceId],
     queryFn: () => getLearningResultList(spaceId),
   });
 
@@ -30,15 +31,11 @@ export const useGetLearningResultList = (spaceId: string) => {
   const fileName = data?.response?.fileName || '';
   const resultList = data?.response?.results || [];
 
-  const setLearningResult = useLearningStore(
-    (state) => state.setLearningResult,
-  );
-
   useEffect(() => {
     if (resultList.length > 0) {
       setLearningResult(resultList);
     }
-  }, [resultList, setLearningResult]);
+  }, [resultList, setLearningResult, spaceId]);
 
   return { fileUrl, fileName, isLoading, isError, resultList };
 };

@@ -18,13 +18,12 @@ const LoadingProgress = ({ taskId }: LoadingProgressProps) => {
   const { isSidebarOpen } = useContext(SidebarContext);
   const { percent } = useLoadingSSE(
     `${BASE_URL_AI}${END_POINT.aiWorkspaceList}${folderId}/progress/${taskId}`,
-   
   );
 
   return (
     <div
       className={`${isSidebarOpen && 'relative left-32'} w-full relative top-40`}
-    >uploaid
+    >
       <Loading type="progress" percent={percent} text="로딩중 입니다." />
     </div>
   );
