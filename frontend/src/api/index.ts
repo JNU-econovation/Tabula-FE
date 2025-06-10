@@ -12,8 +12,8 @@ export const END_POINT = {
   workspaceList: `/v1/spaces/`,
   folderList: `/v1/folders`,
   mypage: `/v1/user/info`,
-  aiWorkspaceList:`/v1/ai/spaces/`,
-  aiResult:`/v1/ai/results/`,
+  aiWorkspaceList: `/v1/ai/spaces/`,
+  aiResult: `/v1/ai/results/`,
 };
 
 export const AxiosInstance = axios.create({
@@ -21,8 +21,9 @@ export const AxiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
+    withCredentials: true,
   },
-  timeout: 3000,
+  timeout: 10000,
 });
 
 export const AxiosInstanceFormData = axios.create({
@@ -30,8 +31,9 @@ export const AxiosInstanceFormData = axios.create({
   headers: {
     'Content-Type': 'multipart/form-data',
     Accept: 'application/json',
+    withCredentials: true,
   },
-  timeout: 3000,
+  timeout: 10000,
 });
 
 export const AxiosAIInstanceFormData = axios.create({
@@ -39,8 +41,9 @@ export const AxiosAIInstanceFormData = axios.create({
   headers: {
     'Content-Type': 'multipart/form-data',
     Accept: 'application/json',
+    withCredentials: true,
   },
-  timeout: 3000,
+  timeout: 10000,
 });
 
 const addAccessToken = (config: InternalAxiosRequestConfig) => {
@@ -75,7 +78,10 @@ const handleTokenRefresh = (instance: ReturnType<typeof axios.create>) => {
       const errorData = error.response?.data as any;
       const originalRequest = error.config as any;
 
-      if (errorData?.error?.code == 'SECURITY_401_2' && !originalRequest._isRetry) {
+      if (
+        errorData?.error?.code == 'SECURITY_401_2' &&
+        !originalRequest._isRetry
+      ) {
         originalRequest._isRetry = true;
 
         try {
@@ -118,17 +124,17 @@ const handleCustomErrors = (instance: ReturnType<typeof axios.create>) => {
       const errorData = error.response?.data as any;
 
       if (errorData?.error?.code === 'MEMBER_404_1') {
-        const { addToast } = useToastStore.getState()
-        addToast('존재하지 않는 회원입니다. 다시 로그인해주세요')
-        AuthStore.getState().logout()
-        window.location.href = '/' // 추후 로그인 페이지 생기면 교체
-        return Promise.reject(error)
+        const { addToast } = useToastStore.getState();
+        addToast('존재하지 않는 회원입니다. 다시 로그인해주세요');
+        AuthStore.getState().logout();
+        window.location.href = '/'; // 추후 로그인 페이지 생기면 교체
+        return Promise.reject(error);
       }
 
-      return Promise.reject(error)
-    }
-  )
-}
+      return Promise.reject(error);
+    },
+  );
+};
 
 AxiosInstance.interceptors.request.use(addAccessToken, (error) =>
   Promise.reject(error),
@@ -145,8 +151,8 @@ AxiosAIInstanceFormData.interceptors.request.use(addAccessToken, (error) =>
 // 백엔드 토큰 리프레쉬 로직 개발 이후 handleTokenRefresh 제거하고 아래 함수 활성화 할 것
 handleTokenRefresh(AxiosInstance);
 handleTokenRefresh(AxiosInstanceFormData);
-handleTokenRefresh(AxiosAIInstanceFormData)
+handleTokenRefresh(AxiosAIInstanceFormData);
 
-handleCustomErrors(AxiosInstance)
-handleCustomErrors(AxiosInstanceFormData)
-handleCustomErrors(AxiosAIInstanceFormData)
+handleCustomErrors(AxiosInstance);
+handleCustomErrors(AxiosInstanceFormData);
+handleCustomErrors(AxiosAIInstanceFormData);
