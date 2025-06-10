@@ -13,11 +13,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <TanStackProvider>
-          <MockInitComponent>
-            <Header />
-            {children}
-            <Toast />
-          </MockInitComponent>
+          <Header />
+          {children}
+          <Toast />
         </TanStackProvider>
       </body>
     </html>
