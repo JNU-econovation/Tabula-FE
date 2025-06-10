@@ -24,10 +24,12 @@ const ResultDetail = () => {
     currentPageData,
     handleNextPage,
     handlePrevPage,
+    isLastPage,
   } = useResultPage({
     resultList,
     missingAnswer,
   });
+
   return (
     <>
       <Layout>
@@ -40,10 +42,14 @@ const ResultDetail = () => {
           </button>
 
           <div className="w-1/2 bg-white p-4">
-            <DetailLeft currentPageData={currentPageData} />
+            <DetailLeft
+              currentPageData={currentPageData}
+              isLastPage={isLastPage}
+            />
           </div>
           <div className="w-1/2 h-full bg-gray-50 p-6 overflow-y-auto">
             <DetailRight
+              isLastPage={isLastPage}
               currentPageData={currentPageData}
               missingAnswer={missingAnswer}
             />

@@ -65,8 +65,12 @@ export const useUploadLearningFile = (
   return useMutation({
     mutationFn: ({ folderId, formData }: UploadLearningFileRequest) =>
       uploadLearningFile(folderId, formData),
-    onError: (error) => {
-      addToast('파일 업로드에 실패했습니다.', 3, 'error');
+    onError: (error: any) => {
+      addToast(
+        error.response.data.error.reason || '파일 업로드에 실패했습니다.',
+        3,
+        'error',
+      );
     },
     onSuccess: (data) => {
       onSuccess(data.response);
@@ -74,10 +78,10 @@ export const useUploadLearningFile = (
   });
 };
 
-export const useUploadLearningResultFile = () => {
-  const updateLearningResultList = useLearningStore(
-    (state) => state.addLoadingResult,
-  );
+export const useUploadLearningResultFile = (workspaceId: string) => {
+  const { addLoadingResult } = useLearningStore(workspaceId);
+  const addToast = useToastStore.getState().addToast;
+
   return useMutation({
     mutationFn: ({
       spaceId,
@@ -88,11 +92,16 @@ export const useUploadLearningResultFile = () => {
     }) => uploadResultFile(spaceId, formData),
     onSuccess: (data) => {
       const response = data.response;
-      updateLearningResultList(response.resultId, response.fileName);
+      addLoadingResult(response.resultId, response.fileName);
     },
 
-    onError: (error) => {
-      console.error('Error uploading learning result file:', error);
+    onError: (error: any) => {
+      // TODO: 추후 에러 핸들링 개선
+      addToast(
+        error.response.data.error.reason || '파일 업로드에 실패했습니다.',
+        3,
+        'error',
+      );
     },
   });
 };
