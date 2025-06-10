@@ -13,7 +13,7 @@ import Keyword from '@/components/Workspace/Keyword/Keyword';
 const StudyLog = () => {
   const { spaceId } = useParams();
   const { fileName } = useGetLearningResultList(spaceId as string);
-  const { learningResult } = useLearningStore();
+  const { learningResult } = useLearningStore(spaceId as string);
 
   useEffect(() => {
     const scrollToBottom = () => {

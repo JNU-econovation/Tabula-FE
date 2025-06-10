@@ -15,13 +15,13 @@ const Feedback = ({ status, id, children }: FeedbackProps) => {
     <div>
       {status === 'LOADING' ? (
         <div className="flex flex-col items-center gap-3">
-          <LoadingSpinner taskId={id} />
+          <LoadingSpinner taskId={id} spaceId={spaceId as string} />
         </div>
       ) : (
         <div className="flex flex-col gap-3">
           <p>채점이 완료되었어요.</p>
           <p>자세히보기를 통해 채점결과에 대한 피드백을 확인할 수 있어요.</p>
-          <div className="flex gap-5">{children}</div>
+          <div className="flex flex-wrap gap-5">{children}</div>
           <Link href={`/workspace/${folderId}/${spaceId}/${id}`}>
             <Button
               variant="line"

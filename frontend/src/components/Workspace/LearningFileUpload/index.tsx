@@ -29,6 +29,7 @@ const LearningFileUpload = ({ onSubmit }: LearningFileUploadProps) => {
     handleLanguageChange,
     handleSubjectNameChange,
     resetSubjectName,
+    isPending,
   } = useLearningFile(
     folderId as string,
     selectedFile as File | null,
@@ -66,9 +67,11 @@ const LearningFileUpload = ({ onSubmit }: LearningFileUploadProps) => {
             deleteFile={deleteFile}
           />
           <Button
+            disabled={isPending}
             size="md"
             colorScheme="gradient"
             onClick={() => {
+              if (isPending) return;
               inputRef.current && uploadLearningFile(inputRef.current);
             }}
           >

@@ -15,6 +15,7 @@ interface SidebarProps {
   handleToggle: () => void;
   workspaceList: WorkspaceType[];
   folderName: string;
+  spaceId?: string;
 }
 
 const Sidebar = ({
@@ -22,6 +23,7 @@ const Sidebar = ({
   handleToggle,
   workspaceList,
   folderName,
+  spaceId,
 }: SidebarProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -53,6 +55,7 @@ const Sidebar = ({
                 key={item.spaceId}
                 spaceId={item.spaceId}
                 spaceName={item.spaceName}
+                isActive={item.spaceId == spaceId}
               />
             ))}
           </div>

@@ -1,22 +1,31 @@
+'use client';
 import { Button } from '@/components/common/Button/Button';
 import Modal from '@/components/common/Modal/Modal';
 import { useDeleteWorkspace } from '@/hooks/query/workspace/mutation';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 interface DeleteWorkspaceModalProps {
   spaceId: string;
   isModalOpen: boolean;
+  isActive?: boolean;
   closeModal: () => void;
 }
 const DeleteWorkspaceModal = ({
   spaceId,
   isModalOpen,
   closeModal,
+  isActive,
 }: DeleteWorkspaceModalProps) => {
   const { mutate: deleteWorkspaceMutation } = useDeleteWorkspace();
+  const router = useRouter();
+
   const handleDelete = () => {
     deleteWorkspaceMutation(spaceId);
     closeModal();
+    if (isActive) {
+      router.replace('upload');
+    }
   };
 
   return (

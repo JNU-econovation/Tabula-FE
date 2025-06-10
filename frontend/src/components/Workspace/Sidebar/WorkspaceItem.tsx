@@ -17,9 +17,14 @@ import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 interface WorkspaceItemProps {
   spaceId: string;
   spaceName: string;
+  isActive?: boolean;
 }
 
-const WorkspaceItem = ({ spaceId, spaceName }: WorkspaceItemProps) => {
+const WorkspaceItem = ({
+  spaceId,
+  spaceName,
+  isActive,
+}: WorkspaceItemProps) => {
   const folderId = useParams().folderId as string;
   const {
     spaceNameValue,
@@ -43,7 +48,9 @@ const WorkspaceItem = ({ spaceId, spaceName }: WorkspaceItemProps) => {
   };
 
   return (
-    <div className="relative flex items-center justify-between h-8 rounded-md hover:bg-gray-200">
+    <div
+      className={`relative flex items-center justify-between h-8 rounded-md hover:bg-gray-200 ${isActive ? 'bg-gray-200' : ''}`}
+    >
       <Link
         href={`/workspace/${folderId}/${spaceId}`}
         className="flex-1 flex items-center px-4 py-2"
@@ -106,6 +113,7 @@ const WorkspaceItem = ({ spaceId, spaceName }: WorkspaceItemProps) => {
         spaceId={spaceId}
         isModalOpen={isModalOpen}
         closeModal={closeModal}
+        isActive={isActive}
       />
     </div>
   );

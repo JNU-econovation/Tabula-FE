@@ -13,7 +13,7 @@ export const SidebarContext = createContext({
 });
 
 const layout = ({ children }: { children: React.ReactNode }) => {
-  const { folderId } = useParams();
+  const { folderId, spaceId } = useParams();
   const { workspaceList, isLoading } = useGetWorkspaceList(folderId as string);
   const { folderName } = useGetFolderName(folderId as string);
   const [isOpen, setIsOpen] = useState(true);
@@ -32,6 +32,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
               handleToggle={handleToggle}
               workspaceList={workspaceList}
               folderName={folderName}
+              spaceId={spaceId as string}
             />
             {children}
           </SidebarContext.Provider>

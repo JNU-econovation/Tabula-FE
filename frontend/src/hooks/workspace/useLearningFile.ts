@@ -11,7 +11,7 @@ const useLearningFile = (
   file: File | null,
   onSuccess: (data: UploadLearningFileResponse) => void,
 ) => {
-  const { mutate } = useUploadLearningFile(onSuccess);
+  const { mutate, isPending } = useUploadLearningFile(onSuccess);
   const [subjectName, setSubjectName] = useState('');
   const [language, setLanguage] = useState<LangType>('korean');
 
@@ -53,6 +53,7 @@ const useLearningFile = (
     handleLanguageChange,
     handleSubjectNameChange,
     resetSubjectName,
+    isPending,
   };
 };
 

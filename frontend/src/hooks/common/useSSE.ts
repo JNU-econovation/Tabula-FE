@@ -62,8 +62,7 @@ export const useSSE = <T = any, P = any>(config: SSEConfig<T, P>) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    //TODO: 추후 headers 선택할 수 있도록 개선 필요.
-    // 게스트모드와 일반모드 다르게
+
     eventSourceRef.current = eventSource;
 
     setState((prev) => ({
@@ -74,35 +73,26 @@ export const useSSE = <T = any, P = any>(config: SSEConfig<T, P>) => {
     }));
 
     eventSource.addEventListener('progress', (e: any) => {
-      console.log('📬 SSE Progress Event Received:', e.data);
       try {
         const parsedData = JSON.parse(e.data);
-        console.log('🔍 Parsed SSE progress data:', parsedData);
 
         if (parsedData.success) {
           const response = parsedData.response;
           const progress = response.progress;
 
-          console.log('📊 Progress value:', progress);
-          console.log('📝 Status:', response.status);
-
           onProgress?.(response);
-          // 'progress' 이벤트에서는 아직 완료되지 않았으므로 disconnect하지 않음
         } else if (parsedData.error) {
-          console.error('❌ Server error (progress event):', parsedData.error);
-          alert('Error: 서버 에러임 (progress) ' + parsedData.error);
+          alert(parsedData.error);
           setState((prev) => ({
             ...prev,
             error: parsedData.error,
             isError: true,
           }));
           onError?.(parsedData.error);
-          onComplete?.(); // 에러 시 완료 처리
+          onComplete?.();
           disconnect();
         }
       } catch (error) {
-        console.error('💥 JSON Parse Error (progress event):', error);
-        console.error('💥 Raw data:', e.data);
         alert('Error: SSE data 파싱 에러 (progress)');
         setState((prev) => ({
           ...prev,
@@ -110,6 +100,7 @@ export const useSSE = <T = any, P = any>(config: SSEConfig<T, P>) => {
           isError: true,
           isSuccess: false,
         }));
+        alert(error);
         onError?.(error);
         onComplete?.();
         disconnect();
@@ -117,10 +108,8 @@ export const useSSE = <T = any, P = any>(config: SSEConfig<T, P>) => {
     });
 
     eventSource.addEventListener('complete', (e: any) => {
-      console.log('🎉 SSE Complete Event Received:', e.data);
       try {
         const parsedData = JSON.parse(e.data);
-        console.log('🔍 Parsed SSE complete data:', parsedData);
 
         if (parsedData.success) {
           const response = parsedData.response;
@@ -131,8 +120,6 @@ export const useSSE = <T = any, P = any>(config: SSEConfig<T, P>) => {
           }));
           onSuccess?.(response);
         } else if (parsedData.error) {
-          console.error('❌ Server error (complete event):', parsedData.error);
-          // alert('Error: 서버 에러임 (complete) ' + parsedData.error);
           setState((prev) => ({
             ...prev,
             error: parsedData.error,
@@ -141,9 +128,6 @@ export const useSSE = <T = any, P = any>(config: SSEConfig<T, P>) => {
           onError?.(parsedData.error);
         }
       } catch (error) {
-        console.error('💥 JSON Parse Error (complete event):', error);
-        console.error('💥 Raw data:', e.data);
-        // alert('Error: SSE data 파싱 에러 (complete)');
         setState((prev) => ({
           ...prev,
           error: error,
@@ -152,17 +136,16 @@ export const useSSE = <T = any, P = any>(config: SSEConfig<T, P>) => {
         }));
         onError?.(error);
       } finally {
-        onComplete?.(); // 완료 콜백 호출
-        disconnect(); // 연결 해제
+        onComplete?.();
+        disconnect();
       }
     });
 
     eventSource.addEventListener('error', (e: any) => {
-      console.error('❌ SSE Error Event Received:', e.data);
       try {
         const parsedData = JSON.parse(e.data);
         console.error('🔍 Parsed SSE error data:', parsedData);
-        // alert('Error: SSE 서버 에러 이벤트 ' + parsedData.error);
+
         setState((prev) => ({
           ...prev,
           error: parsedData.error,
@@ -170,9 +153,6 @@ export const useSSE = <T = any, P = any>(config: SSEConfig<T, P>) => {
         }));
         onError?.(parsedData.error);
       } catch (error) {
-        console.error('💥 JSON Parse Error (error event):', error);
-        console.error('💥 Raw data:', e.data);
-        // alert('Error: SSE error data 파싱 에러');
         setState((prev) => ({
           ...prev,
           error: error,
@@ -187,9 +167,6 @@ export const useSSE = <T = any, P = any>(config: SSEConfig<T, P>) => {
     });
 
     eventSource.onerror = (error) => {
-      // 이 onerror는 네트워크 오류, 서버 연결 끊김 등 일반적인 연결 오류를 처리합니다.
-      console.error('🔥 SSE Connection Error:', error);
-      // alert('Error: SSE 연결 에러');
       setState((prev) => ({
         ...prev,
         error,

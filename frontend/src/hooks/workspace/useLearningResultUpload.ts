@@ -5,7 +5,7 @@ export const useLearningResultUpload = (
   spaceId: string,
   file: File | File[] | null,
 ) => {
-  const { mutate } = useUploadLearningResultFile();
+  const { mutate, isPending } = useUploadLearningResultFile(spaceId);
 
   const uploadLearningResultFile = async () => {
     if (!file) {
@@ -36,5 +36,6 @@ export const useLearningResultUpload = (
   };
   return {
     uploadLearningResultFile,
+    isPending,
   };
 };

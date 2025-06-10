@@ -23,13 +23,13 @@ const LearningResultUpload = () => {
     resetFiles,
   } = useUploadFile('multi-type');
 
-  const { uploadLearningResultFile } = useLearningResultUpload(
+  const { uploadLearningResultFile, isPending } = useLearningResultUpload(
     folderId as string,
     spaceId as string,
     selectedFile || imageFiles,
   );
 
-  const { isLoading } = useLearningStore();
+  const { isLoading } = useLearningStore(spaceId as string);
 
   const isImageMode = imageFiles.length > 0;
   const isPdfMode = selectedFile && !isImageMode;
@@ -59,6 +59,7 @@ const LearningResultUpload = () => {
             ) : (
               <Button
                 onClick={() => {
+                  if (isPending) return;
                   resetFiles();
                   uploadLearningResultFile();
                 }}
