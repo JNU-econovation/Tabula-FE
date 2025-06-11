@@ -13,6 +13,7 @@ import SubjectNameInput from '@/components/Workspace/LearningFileUpload/SubjectN
 import SelectedFileItem from '@/components/Workspace/LearningFileUpload/SelectedFileItem';
 import { UploadLearningFileResponse } from '@/hooks/query/workspace/mutation';
 import { formatFileSize } from '@/util/formatFileSize';
+import Loading from '@/components/common/Loading/Loading';
 
 interface LearningFileUploadProps {
   onSubmit: (data: UploadLearningFileResponse) => void;
@@ -75,9 +76,15 @@ const LearningFileUpload = ({ onSubmit }: LearningFileUploadProps) => {
               inputRef.current && uploadLearningFile(inputRef.current);
             }}
           >
-            <div className="flex items-center gap-2">
-              <CiLocationArrow1 size={30} />
-              <p>학습 자료 학습하러 가기</p>
+            <div className="flex items-center gap-2 w-44">
+              {isPending ? (
+                <Loading type="spinner" />
+              ) : (
+                <>
+                  <CiLocationArrow1 size={30} />
+                  <p>학습 자료 학습하러 가기</p>
+                </>
+              )}
             </div>
           </Button>
         </>
