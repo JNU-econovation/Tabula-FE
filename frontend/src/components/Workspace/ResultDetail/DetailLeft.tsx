@@ -12,7 +12,7 @@ const DetailLeft = ({ currentPageData, isLastPage }: DetailLeftProps) => {
         <img
           src={currentPageData?.postImageUrl}
           alt="Result Image"
-          className="w-full h-full object-cover"
+          className="w-full"
         />
       ) : (
         <div className="w-full h-full flex items-center justify-center bg-gray-200">

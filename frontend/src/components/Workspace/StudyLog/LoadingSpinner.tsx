@@ -16,7 +16,11 @@ const LoadingSpinner = ({ spaceId, taskId }: LoadingSpinnerProps) => {
   );
   return (
     <div>
-      <Loading type="spinner" text="로딩중 입니다." percent={percent} />
+      <Loading
+        type="spinner"
+        text="ai가 채점을 하고 있습니다. 잠시만 기다려주세요!"
+        percent={percent}
+      />
     </div>
   );
 };

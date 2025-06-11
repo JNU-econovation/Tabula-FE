@@ -1,6 +1,6 @@
 interface SpinnerProps {
-  text: string;
-  percent: number;
+  text?: string;
+  percent?: number;
 }
 export default function Spinner({ text, percent }: SpinnerProps) {
   return (
@@ -10,8 +10,8 @@ export default function Spinner({ text, percent }: SpinnerProps) {
           <div key={i} className="spinner-line" />
         ))}
       </div>
-      <p className="text-md text-gray-400">{text}</p>
-      <p className="text-md text-gray-400">{percent}%</p>
+      {text && <p className="text-md text-gray-400">{text}</p>}
+      {percent && <p className="text-md text-gray-400">{percent}%</p>}
     </div>
   );
 }
