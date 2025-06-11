@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 hover:cursor-pointer [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-blue-500 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all outline-none focus-visible:border-blue-500 aria-invalid:border-destructive [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -20,8 +20,8 @@ const buttonVariants = cva(
         purple: '',
       },
       disabled: {
-        true: '',
-        false: '',
+        true: 'hover:pointer-events-none disabled:opacity-50 hover:cursor-not-allowed cursor-not-allowed',
+        false: 'hover:cursor-pointer',
       },
       size: {
         sm: 'h-9 gap-1.5 px-5 has-[>svg]:px-2.5 text-sm',
@@ -42,6 +42,7 @@ const buttonVariants = cva(
       colorScheme: 'primary',
       size: 'md',
       radius: 'md',
+      disabled: false,
     },
     compoundVariants: [
       {
@@ -131,11 +132,11 @@ const Button = React.forwardRef<
 
     return (
       <Comp
-        ref={ref}
         data-slot="button"
+        disabled={disabled}
         className={
           cn(
-            buttonVariants({ variant, colorScheme, size, radius }),
+            buttonVariants({ variant, colorScheme, size, radius, disabled }),
             className,
           ) as string
         }
