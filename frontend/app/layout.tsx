@@ -13,13 +13,20 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <TanStackProvider>
-          <MockInitComponent>
-            <Header />
-            {children}
-            <Toast />
-          </MockInitComponent>
+          <Header />
+          {children}
+          <Toast />
         </TanStackProvider>
       </body>
     </html>
   );
+}
+
+export const metadata = {
+  title: "Tabula",
+  description: "Tabula와 함께 백지학습으로 메타인지 능력을 향상시키세요.",
+  keywords: ['tabula', '백지학습', '메타인지', 'AI 학습 플랫폼'],
+  icons: {
+    icon: "/favicon.png",
+  },
 }
