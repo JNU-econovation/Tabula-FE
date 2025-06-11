@@ -16,7 +16,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   const { folderId, spaceId } = useParams();
   const { workspaceList, isLoading } = useGetWorkspaceList(folderId as string);
   const { folderName } = useGetFolderName(folderId as string);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
