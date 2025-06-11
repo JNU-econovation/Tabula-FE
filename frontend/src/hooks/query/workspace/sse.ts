@@ -1,5 +1,6 @@
 import { ResultImage, ResultItem } from '@/api/workspace';
 import { useSSE } from '@/hooks/common/useSSE';
+import { useToastStore } from '@/stores/toastStore';
 import { useLearningStore } from '@/stores/useLearningStore';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
@@ -18,6 +19,7 @@ export const useLoadingSSE = (url: string) => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const [percent, setPercent] = useState(0);
+  const addToast = useToastStore((state) => state.addToast);
 
   useSSE<ResponseType, ProgressData>({
     url,
@@ -27,7 +29,9 @@ export const useLoadingSSE = (url: string) => {
       router.push(`./${spaceId}`);
     },
     onError: (error) => {
-      console.error('SSE Error:', error);
+      console.error(
+        error.message ? error.message : 'An error occurred during SSE',
+      );
     },
     onProgress: (response) => {
       let progress = 0;

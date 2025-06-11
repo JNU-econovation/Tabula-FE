@@ -1,4 +1,3 @@
-// stores/learningStore.ts
 import { ResultItem } from '@/api/workspace';
 import { useCallback } from 'react';
 import { create } from 'zustand';
@@ -141,9 +140,7 @@ export const useBaseLearningStore = create<LearningState>()(
   })),
 );
 
-// 워크스페이스별 데이터를 가져오는 selector 훅
 export const useLearningStore = (workspaceId: string) => {
-  // 기본 데이터를 useMemo로 캐싱
   const defaultData = useMemo(
     () => ({
       learningResult: [],
@@ -152,7 +149,6 @@ export const useLearningStore = (workspaceId: string) => {
     [],
   );
 
-  // 워크스페이스 데이터 selector
   const workspaceData = useBaseLearningStore(
     useCallback(
       (state) => state.workspaceData[workspaceId] || defaultData,
@@ -160,7 +156,6 @@ export const useLearningStore = (workspaceId: string) => {
     ),
   );
 
-  // 액션들 selector - 이것도 useMemo로 캐싱
   const actions = useMemo(
     () => ({
       setLearningResult: (newList: ResultItem[]) =>
