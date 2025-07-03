@@ -18,8 +18,8 @@ const page = () => {
   if (!shouldRender) return null
 
   return (
-    <div className="flex flex-col items-center px-15 py-30 min-h-calc(100vh)">
-      <div className="flex flex-col items-start gap-6 min-w-110">
+    <div className="flex flex-col items-center px-4 sm:px-6 md:px-10 lg:px-15 pt-24 sm:pt-30 pb-8 overflow-x-hidden">
+      <div className="flex flex-col w-full items-start gap-6 max-w-md">
         <UserInfo username={username} />
         <StatsSection />
         <div>

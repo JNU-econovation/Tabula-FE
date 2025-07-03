@@ -200,11 +200,15 @@
 
 /* 학습 통계 캘린더 스타일링 */
 /* 년/월 헤더 */
+.calendar-custom {
+  @apply w-full max-w-full overflow-hidden box-border;
+}
 .calendar-custom .react-calendar__navigation {
   @apply mb-8 flex justify-center items-center gap-2 text-base font-semibold;
 }
 
 .calendar-custom .react-calendar__month-view__days {
+  @apply grid grid-cols-7;
   min-height: 240px;
 }
 
