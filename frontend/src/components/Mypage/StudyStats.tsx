@@ -47,7 +47,7 @@ const StudyStats = () => {
       {isLoading ? (
         <div>로딩중 ...</div>
       ) : (
-        <div className='flex flex-col gap-1 mt-4 rounded-xl border border-gray-200 shadow-md p-4 w-fit'>
+        <div className='flex flex-col gap-1 mt-4 rounded-xl border border-gray-200 shadow-md p-4 w-full max-w-full overflow-hidden'>
           <Calendar
             value={value}
             formatDay={(locale, date) => date.toLocaleDateString('en', { day: 'numeric' })}
@@ -64,7 +64,7 @@ const StudyStats = () => {
               setValue(activeStartDate!)
             }}
             nextLabel={isNextMonthAfterToday() ? null : undefined}
-            className='calendar-custom'
+            className='calendar-custom w-full max-w-full'
             tileContent={({ date }) => {
               const dateStr = getLocalDateStr(date)
               const cnt = studyStatsMap[dateStr] ?? 0
