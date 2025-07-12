@@ -4,7 +4,7 @@ const WaveBackground = () => {
   return (
     <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
       <svg
-        className="relative block w-[200%] h-full"
+        className="relative block w-[200%] h-[180px] sm:h-[250px] md:h-[300px] lg:h-[350px] xl:h-[400px]"
         viewBox="0 0 2880 320"
         preserveAspectRatio="none"
       >

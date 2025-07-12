@@ -6,7 +6,7 @@ interface LogoutSectionProps {
 
 const LogoutSection = ({ onClick }: LogoutSectionProps) => {
   return (
-    <div onClick={onClick} className="flex w-full justify-between items-center group cursor-pointer hover:bg-gray-100 p-4 rounded transition-colors duration-400">
+    <div onClick={onClick} className="flex w-full justify-between items-center group cursor-pointer hover:bg-gray-100 px-2 py-4 sm:px-4 rounded transition-colors duration-400 overflow-hidden max-w-full">
       <div className="flex flex-col gap-1">
         <div className="text-xl">로그아웃</div>
       </div>

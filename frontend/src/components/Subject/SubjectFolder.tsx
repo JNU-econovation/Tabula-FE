@@ -38,7 +38,7 @@ const SubjectFolder: React.FC<SubjectFolderProps> = ({
   const router = useRouter()
 
   return (
-    <div className={`relative w-45 h-60 flex justify-center rounded-lg shadow-md mb-14 group
+    <div className={`relative w-full h-auto max-w-45 aspect-[3/4] flex justify-center rounded-lg shadow-md mb-14 group
       ${isAddCard ? "border-dashed border-2 border-primary-600 items-center hover:bg-violet-100" : ""}`}
       style={{
         backgroundColor: isAddCard ? '' : baseColor,

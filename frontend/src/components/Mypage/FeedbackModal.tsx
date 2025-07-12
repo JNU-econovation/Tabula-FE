@@ -3,6 +3,7 @@ import emailjs, { send } from '@emailjs/browser'
 import { useToastStore } from "@/stores/toastStore"
 import Modal from "../common/Modal/Modal"
 import { Button } from "../common/Button/Button"
+import Loading from "../common/Loading/Loading"
 
 interface FeedbackModalProps {
   username: string | null;
@@ -12,11 +13,15 @@ interface FeedbackModalProps {
 const FeedbackModal = ({ username, onClose }: FeedbackModalProps ) => {
   const addToast = useToastStore((state) => state.addToast)
   const [message, setMessage] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+
   const date = new Date()
   const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`
 
   const sendEmail = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    setIsLoading(true)
 
     try {
       await emailjs.send(
@@ -32,7 +37,6 @@ const FeedbackModal = ({ username, onClose }: FeedbackModalProps ) => {
       onClose()
       addToast('피드백이 성공적으로 전송되었습니다. 의견 남겨주셔서 감사합니다!', 3, 'default')
     } catch (error) {
-      console.error('이메일 전송 실패: ', error)
       addToast('피드백 전송에 실패했습니다. 다시 시도해주세요.')
     }
   }
@@ -51,8 +55,8 @@ const FeedbackModal = ({ username, onClose }: FeedbackModalProps ) => {
         <div className="text-xs text-gray-500 w-full text-right">
           {message.length} / 300자
         </div>
-        <Button size="sm" className="mt-2" onClick={sendEmail}>
-          피드백 전송
+        <Button size="sm" className="mt-2" onClick={sendEmail} disabled={isLoading}>
+          {isLoading ? <Loading type="spinner" /> : '피드백 전송'}
         </Button>
       </form>
     </Modal>
