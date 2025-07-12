@@ -29,7 +29,7 @@ const StudyStats = () => {
     const classes = []
 
     const level = Math.min(cnt, 3)
-    classes.push(`study-level-${level}`)
+    classes.push(`study-level-${level} group`)
 
     if (dateStr === todayStr) {
       classes.push('today')
@@ -65,6 +65,20 @@ const StudyStats = () => {
             }}
             nextLabel={isNextMonthAfterToday() ? null : undefined}
             className='calendar-custom'
+            tileContent={({ date }) => {
+              const dateStr = getLocalDateStr(date)
+              const cnt = studyStatsMap[dateStr] ?? 0
+            
+              return cnt > 0 ? (
+                <div className='relative'>
+                  <div
+                    className="flex whitespace-nowrap absolute top-2 left-1/2 -translate-x-4/5 text-[10px] text-white bg-gray-600 bg-opacity-40 rounded px-1 opacity-0 group-hover:opacity-100 transition-opacity duration-100"
+                  >
+                    {cnt >= 3 ? '3회+' : `${cnt}회`}
+                  </div>
+                </div>
+              ) : null
+            }}
           />
           <div className='flex items-center mt-4'>
             {levels.map((level) =>
