@@ -21,7 +21,7 @@ const GuideModal = ({ isModalOpen, closeModal }: GuideModalProps) => {
             <h3 className="text-lg font-semibold w-full bg-secondary-100">🔍 키워드 확인하기</h3>
             <li>
               학습 중 막히는 부분이 있다면 <span className="font-semibold">'키워드 확인하기'</span> 토글을 통해 도움 받을 수 있어요.
-              <Image src={KeywordImage} alt="키워드 확인하기 버튼" width={160} className="flex items-center my-2 ml-4" />
+              <Image src={KeywordImage} alt="키워드 확인하기 버튼" width={160} priority className="flex items-center my-2 ml-4" />
             </li>
             <h3 className="text-lg font-semibold w-full bg-secondary-100">📝 백지학습 작성 팁</h3>
             <li>
@@ -29,7 +29,7 @@ const GuideModal = ({ isModalOpen, closeModal }: GuideModalProps) => {
             </li>
             <li>
               아래 예시 사진과 같이 <span className="font-semibold">2분할</span> 기준으로 작성해주세요.
-              <Image src={LearningEx} alt="백지학습 2분할 예시 사진" width={400} className="ml-4 my-2" />
+              <Image src={LearningEx} alt="백지학습 2분할 예시 사진" width={400} priority className="ml-4 my-2" />
             </li>
           </ul>
         </div>
