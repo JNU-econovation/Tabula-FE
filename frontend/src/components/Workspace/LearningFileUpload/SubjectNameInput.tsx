@@ -18,7 +18,7 @@ const SubjectNameInput = ({
     <span className="flex items-center w-full gap-4">
       <p>학습 자료 과목명</p>
       <div
-        className="px-4 py-2 bg-gray-50 text-sm rounded-md w-[340px] 
+        className="px-4 py-2 bg-gray-50 text-sm rounded-md w-[240px] md:w-[340px]
                      border border-gray-300 
                      outline-none 
                      focus-within:border-primary-400 focus-within:bg-primary-50 
