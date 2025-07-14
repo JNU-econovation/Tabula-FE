@@ -36,7 +36,7 @@ const LearningResultUpload = () => {
 
   return (
     <div
-      className={`w-[60%] relative border rounded-xl border-gray-300 bg-white shadow-lg mx-10 sm:mx-20 md:mx-30 xl:mx-40 ${isPdfMode ? 'px-4' : 'pl-4 pr-4 pb-4 pt-2'}`}
+      className={`w-full md:w-[60%] relative border rounded-xl border-gray-300 bg-white shadow-lg mx-10 sm:mx-20 md:mx-30 xl:mx-40 ${isPdfMode ? 'px-4' : 'pl-4 pr-4 pb-4 pt-2'}`}
     >
       <div
         className={`flex relative items-center ${isPdfMode ? 'mb-3 ml-2' : 'mb-3 ml-2`'}`}

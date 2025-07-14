@@ -105,10 +105,16 @@ const Upload = ({
               Choose a file or drag & drop it here
             </p>
           )}
-          <p className="text-sm text-gray-400 mb-2 whitespace-">
-            {height === 'xs'
-              ? 'pdf 또는 png / jpg 파일을 업로드 해 주세요  (png / jpg는 여러 장 업로드 가능)'
-              : 'pdf 파일을 업로드 해 주세요'}
+          <p className="text-xs sm:text-sm text-gray-400 mb-2 whitespace-">
+            {height === 'xs' ? (
+              <>
+                pdf 또는 png / jpg 파일을 업로드 해 주세요
+                <br className="block sm:hidden" />
+                (png / jpg는 여러 장 업로드 가능)
+              </>
+            ) : (
+              'pdf 파일을 업로드 해 주세요'
+            )}
           </p>
         </div>
         <button

@@ -11,7 +11,7 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="relative w-full overflow-x-hidden">
       <div
         className={`flex flex-col items-center min-h-[calc(100vh-4.5rem)] py-40 ${
-          isSidebarOpen && 'relative left-20'
+          isSidebarOpen && 'relative sm:left-20 lg:left-32'
         } gap-10 pb-60 transition-all duration-300`}
       >
         {children}

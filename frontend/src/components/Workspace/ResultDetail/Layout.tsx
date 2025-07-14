@@ -9,7 +9,7 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div
-      className={`flex flex-col h-screen items-center p-6 relative pt-28 ${isSidebarOpen && 'ml-40'}`}
+      className={`flex flex-col h-screen items-center p-6 relative pt-28 ${isSidebarOpen && 'sm:ml-20 lg:ml-40'}`}
     >
       {children}
     </div>
