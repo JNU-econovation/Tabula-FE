@@ -109,7 +109,7 @@ const Upload = ({
             {height === 'xs' ? (
               <>
                 pdf 또는 png / jpg 파일을 업로드 해 주세요
-                <br className="block sm:hidden" />
+                <br className="block lg:hidden" />
                 (png / jpg는 여러 장 업로드 가능)
               </>
             ) : (
