@@ -6,6 +6,7 @@ import { useGetKeywordList } from '@/hooks/query/workspace/query';
 import { useParams } from 'next/navigation';
 import { useContext, useState } from 'react';
 import { SidebarContext } from '../../../../app/workspace/[folderId]/layout';
+import clsx from 'clsx';
 
 const Keyword = () => {
   const { spaceId } = useParams();
@@ -27,12 +28,16 @@ const Keyword = () => {
   };
   return (
     <>
-      {!isSidebarOpen && (
-        <div className="fixed top-20 z-50 flex gap-2 items-center justify-center h-10 bg-primary-300 rounded-4xl px-6 shadow-lg">
-          <p className="text-white">키워드 확인하기</p>
-          <Toggle handleToggle={handleToggle} isToggleOn={isToggleOn} />
-        </div>
-      )}
+      <div
+        className={clsx(
+          'fixed top-20 z-50 gap-2 items-center justify-center h-10 bg-primary-300 rounded-4xl px-6 shadow-lg',
+          'flex',
+          isSidebarOpen && 'sm:flex hidden',
+        )}
+      >
+        <p className="text-white">키워드 확인하기</p>
+        <Toggle handleToggle={handleToggle} isToggleOn={isToggleOn} />
+      </div>
 
       <Modal isOpen={isModalOpen} close={close} size="lg">
         <div className="h-[27rem] w-full flex flex-col ">
