@@ -7,7 +7,8 @@ export const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 export const BASE_URL_AI = process.env.NEXT_PUBLIC_AI_API_URL;
 
 export const END_POINT = {
-  authIssue: `/v1/auth/reissue`,
+  authReissue: `/v1/auth/reissue`,
+  authIsuue: `/v1/auth/issue`,
   guestLogin: `/v1/auth/guest`,
   workspaceList: `/v1/spaces/`,
   folderList: `/v1/folders`,
@@ -20,6 +21,7 @@ export const AxiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
+    'ngrok-skip-browser-warning': true,
     Accept: 'application/json',
     withCredentials: true,
   },

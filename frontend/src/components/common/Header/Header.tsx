@@ -9,7 +9,6 @@ import { FaSearch } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useGoogleLogin } from '@/hooks/Login/useGoogleLogin'
-import { useGoogleMessageListener } from '@/hooks/Login/useGoogleMessageListener'
 import FeedbackModal from '@/components/Mypage/FeedbackModal'
 import { useState } from 'react'
 
@@ -20,7 +19,6 @@ const Header = () => {
   const [modalType, setModalType] = useState<ModalType>(null)
   const router = useRouter()
   const { handleLogin } = useGoogleLogin()
-  useGoogleMessageListener()
 
   const handleLogoClick = () => {
     if (isLogin && loginType === 'user') {
