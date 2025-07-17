@@ -1,5 +1,6 @@
+import { JSX } from 'react';
 interface SpinnerProps {
-  text?: string;
+  text?: string | JSX.Element;
   percent?: number;
 }
 export default function Spinner({ text, percent }: SpinnerProps) {

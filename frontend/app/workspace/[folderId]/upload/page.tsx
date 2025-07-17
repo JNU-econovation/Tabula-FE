@@ -1,5 +1,6 @@
 'use client';
 
+import Loading from '@/components/common/Loading/Loading';
 import LearningFileUpload from '@/components/Workspace/LearningFileUpload';
 import LoadingProgress from '@/components/Workspace/LearningResultUpload/LoadingProgress';
 import { UploadLearningFileResponse } from '@/hooks/query/workspace/mutation';

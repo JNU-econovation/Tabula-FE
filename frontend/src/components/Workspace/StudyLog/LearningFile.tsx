@@ -7,7 +7,7 @@ interface LearningFileProps {
 
 const LearningFile = ({ fileName }: LearningFileProps) => {
   return (
-    <div className="w-[60%]">
+    <div className="w-[70%] lg:w-[60%]">
       <ChatBubble isUser={true}>
         <div className="w-64">
           <SelectedFileItem fileName="학습자료" content={fileName} />

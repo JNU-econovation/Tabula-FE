@@ -1,6 +1,7 @@
+import { JSX } from 'react';
 interface ProgressbarProps {
   percent: number;
-  text: string;
+  text: string | JSX.Element;
 }
 
 const ProgressBar = ({ text, percent }: ProgressbarProps) => {

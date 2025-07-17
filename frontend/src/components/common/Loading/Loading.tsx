@@ -1,14 +1,15 @@
 import ProgressBar from '@/components/common/Loading/ProgressBar';
 import Spinner from '@/components/common/Loading/Spinner';
+import { JSX } from 'react';
 
 interface LoadingProps {
   type?: 'progress' | 'spinner';
-  text?: string;
+  text?: string | JSX.Element;
   percent?: number;
 }
 const Loading = ({ type = 'progress', percent, text }: LoadingProps) => {
   return (
-    <div className="w-full flex items-center justify-center p-8 relative">
+    <div className="w-full flex items-center justify-center p-8 relative break-words whitespace-normal">
       {type === 'progress' && text && percent && (
         <ProgressBar text={text} percent={percent} />
       )}

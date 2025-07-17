@@ -24,12 +24,18 @@ const LoadingProgress = ({ taskId }: LoadingProgressProps) => {
 
   return (
     <div
-      className={`${isSidebarOpen && 'relative left-32'} w-full relative top-40 flex flex-col items-center justify-center p-3 gap-1`}
+      className={`${isSidebarOpen && 'relative sm:left-20 lg:left-32'} w-full relative top-40 flex flex-col items-center justify-center p-3 gap-1`}
     >
       <Loading
         type="progress"
         percent={percent}
-        text="학습자료를 읽는 중 입니다. 조금만 기다려주세요..."
+        text={
+          <>
+            학습자료를 읽는 중 입니다.
+            <br className="block sm:hidden" />
+            조금만 기다려주세요...
+          </>
+        }
       />
     </div>
   );
