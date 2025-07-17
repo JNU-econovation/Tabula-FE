@@ -3,7 +3,7 @@
 import { Button } from "@/components/common/Button/Button"
 import { useRouter } from "next/navigation"
 
-const LoginErrorPage = () => {
+const LoginError = () => {
   const router = useRouter()
 
   return (
@@ -23,4 +23,4 @@ const LoginErrorPage = () => {
   )
 }
 
-export default LoginErrorPage
+export default LoginError

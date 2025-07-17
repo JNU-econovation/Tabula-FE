@@ -4,7 +4,6 @@ import { Button } from "@/components/common/Button/Button";
 import WaveBackground from "@/components/Home/WaveBackground";
 import { useAuthRedirect } from "@/hooks/Login/useAuthRedirect";
 import { useGoogleLogin } from "@/hooks/Login/useGoogleLogin";
-import { useGoogleMessageListener } from "@/hooks/Login/useGoogleMessageListener";
 import { useGuestLogin } from "@/hooks/query/login/useGuestLogin";
 
 const Page = () => {
