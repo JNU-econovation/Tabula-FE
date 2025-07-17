@@ -71,6 +71,9 @@ const addAccessToken = (config: InternalAxiosRequestConfig) => {
 //   );
 // }
 
+let isRefreshing = false;
+let refreshFailCount = 0
+
 const handleTokenRefresh = (instance: ReturnType<typeof axios.create>) => {
   instance.interceptors.response.use(
     (response) => response,
@@ -80,9 +83,12 @@ const handleTokenRefresh = (instance: ReturnType<typeof axios.create>) => {
 
       if (
         errorData?.error?.code == 'SECURITY_401_2' &&
-        !originalRequest._isRetry
+        !originalRequest._isRetry &&
+        !isRefreshing &&
+        refreshFailCount < 2
       ) {
         originalRequest._isRetry = true;
+        isRefreshing = true;
 
         try {
           const authState = AuthStore.getState();
@@ -107,9 +113,14 @@ const handleTokenRefresh = (instance: ReturnType<typeof axios.create>) => {
 
           return instance(originalRequest);
         } catch (e) {
+          refreshFailCount++;
           AuthStore.getState().logout();
           window.location.href = '/'; // 추후 로그인 페이지 생기면 교체
+          const { addToast } = useToastStore.getState();
+          addToast('세션이 만료되어 로그아웃합니다. 다시 로그인 해주세요.')
           return Promise.reject(e);
+        } finally {
+          isRefreshing = false;
         }
       }
       return Promise.reject(error);
