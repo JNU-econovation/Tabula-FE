@@ -7,7 +7,7 @@ interface DetailLeftProps {
 
 const DetailLeft = ({ currentPageData, isLastPage }: DetailLeftProps) => {
   return (
-    <div className="w-full h-full overflow-hidden">
+    <div className="w-full h-full overflow-scroll">
       {currentPageData && !isLastPage ? (
         <img
           src={currentPageData?.postImageUrl}
