@@ -3,19 +3,15 @@ import { useState } from 'react';
 
 interface ResultListItem {
   resultList: PageResult[];
-  missingAnswer: string[];
 }
 
-const useResultPage = ({ resultList, missingAnswer }: ResultListItem) => {
+const useResultPage = ({ resultList }: ResultListItem) => {
   const [page, setPage] = useState(1);
 
-  const totalPageCount = resultList.length + (missingAnswer.length > 0 ? 1 : 0);
+  const totalPageCount = resultList.length;
 
-  const isLastPage = page === totalPageCount && missingAnswer.length > 0;
-
-  const currentPageData = !isLastPage
-    ? resultList.find((item) => item.page === page)
-    : null;
+  const isLastPage = page === totalPageCount;
+  const currentPageData = resultList.find((item) => item.page === page);
 
   const handleNextPage = () => {
     setPage((prev) => (prev < totalPageCount ? prev + 1 : 1));

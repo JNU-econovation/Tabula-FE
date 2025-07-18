@@ -2,17 +2,11 @@ import { PageResult } from '@/api/workspace';
 
 interface ResultDetail {
   currentPageData?: PageResult | null;
-  missingAnswer: string[];
-  isLastPage?: boolean;
 }
-const DetailRight = ({
-  isLastPage,
-  currentPageData,
-  missingAnswer,
-}: ResultDetail) => {
+const DetailRight = ({ currentPageData }: ResultDetail) => {
   return (
     <>
-      {!isLastPage && currentPageData ? (
+      {currentPageData && (
         <>
           <h2 className="text-lg font-bold text-red-600 mb-3 whitespace-pre">
             ❌ 틀린 내용
@@ -25,17 +19,6 @@ const DetailRight = ({
               </li>
             ))}
           </ul>
-        </>
-      ) : (
-        <>
-          <h2 className="text-lg font-bold text-gray-800 mb-3 whitespace-pre">
-            💬 누락된 내용
-          </h2>
-          {missingAnswer.map((miss, index) => (
-            <div key={`miss-${index}`} className="mb-3 text-sm">
-              • {miss}
-            </div>
-          ))}
         </>
       )}
     </>
