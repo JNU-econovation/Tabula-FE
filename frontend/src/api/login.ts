@@ -1,22 +1,31 @@
-import { AxiosInstance, END_POINT } from "."
+import { AxiosInstance, END_POINT } from '.';
 
-export const getAuth = async () => {
-  const response = await AxiosInstance.get(END_POINT.authIsuue, {
-    withCredentials: true,
-  })
-  return response.data
-}
+export const postAuth = async (code: string) => {
+  const response = await AxiosInstance.post(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/auth/google/token`,
+    {
+      // 수정
+      code,
+    },
+  );
+  return response.data;
+};
 
 export const postReissue = async (refreshToken: string) => {
-  const response = await AxiosInstance.post(END_POINT.authReissue, {}, {
-    headers: {
-      'Refresh-Token': `${refreshToken}`
-    }
-  })
-  return response.data
-}
+  const response = await AxiosInstance.post(
+    END_POINT.authIssue,
+    // 수정
+    {},
+    {
+      headers: {
+        'Refresh-Token': `${refreshToken}`,
+      },
+    },
+  );
+  return response.data;
+};
 
 export const postGuestAuth = async () => {
-  const response = await AxiosInstance.post(END_POINT.guestLogin)
-  return response.data
-}
+  const response = await AxiosInstance.post(END_POINT.guestLogin);
+  return response.data;
+};

@@ -10,6 +10,7 @@ interface ModalProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
   color?: 'white' | 'blue';
   isXButton?: boolean;
+  location?: 'center' | 'bottom';
 }
 
 const Modal = ({
@@ -19,6 +20,7 @@ const Modal = ({
   children,
   color,
   isXButton = true,
+  location = 'center',
 }: React.PropsWithChildren<ModalProps>) => {
   usePreventScroll(isOpen);
 
@@ -34,6 +36,7 @@ const Modal = ({
           lg: 'w-128 min-h-96',
           xl: 'w-160 min-h-128',
         },
+        
         color: {
           white: 'bg-white',
           blue: 'bg-[#EEF3FF]',
@@ -49,7 +52,7 @@ const Modal = ({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/30"
+      className={`fixed inset-0 z-50 flex justify-center ${location === 'bottom' ? 'items-end' : 'items-center'} bg-black/30`}
       onClick={close}
     >
       <div
