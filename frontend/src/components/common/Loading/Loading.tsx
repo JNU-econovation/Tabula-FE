@@ -10,10 +10,10 @@ interface LoadingProps {
 const Loading = ({ type = 'progress', percent, text }: LoadingProps) => {
   return (
     <div className="w-full flex items-center justify-center p-8 relative break-words whitespace-normal">
-      {type === 'progress' && text && percent && (
+      {type === 'progress' && text && typeof percent === 'number' && (
         <ProgressBar text={text} percent={percent} />
       )}
-      {type === 'spinner' && text && percent && (
+      {type === 'spinner' && text && typeof percent === 'number' && (
         <Spinner text={text} percent={percent} />
       )}
       {type === 'spinner' && !text && <Spinner />}
