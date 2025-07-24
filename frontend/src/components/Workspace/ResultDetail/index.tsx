@@ -27,6 +27,11 @@ const ResultDetail = () => {
   );
 
   const { isModalOpen, openModal, closeModal } = useModal();
+  const {
+    isModalOpen: isWrongModalOpen,
+    openModal: openWrongModal,
+    closeModal: closeWrongModal,
+  } = useModal();
 
   const {
     page,
@@ -44,6 +49,9 @@ const ResultDetail = () => {
     <>
       <Layout>
         <div className="absolute top-20 right-10 flex items-center gap-2">
+          {/* <Button size="sm" colorScheme="secondary" onClick={openWrongModal}>
+            틀린 내용 보기
+          </Button> */}
           <Button size="sm" colorScheme="secondary" onClick={openModal}>
             누락된 내용
           </Button>
@@ -61,14 +69,17 @@ const ResultDetail = () => {
 
           {/* 만약 패드 혹은 폰 사이즈라면 DetailLeft 는 그대로, DetailRight 는 특정 버튼 클릭 시 모달 형태로 아래에서 위로 올라와야함 */}
 
-          {/* 누락된 내용일 경우
-  
-*/}
+          {/* 누락된 내용일 경우*/}
+
           <div className="w-3/5 bg-white p-1">
             <DetailLeft currentPageData={currentPageData} />
           </div>
           <div className="w-2/5 h-full bg-gray-50 p-6 overflow-y-auto">
-            <DetailRight currentPageData={currentPageData} />
+            <DetailRight
+              currentPageData={currentPageData}
+              isWrongModalOpen={isWrongModalOpen}
+              closeWrongModal={closeWrongModal}
+            />
           </div>
 
           <button

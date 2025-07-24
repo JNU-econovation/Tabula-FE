@@ -5,12 +5,14 @@ import WaveBackground from '@/components/Home/WaveBackground';
 import { useAuthRedirect } from '@/hooks/Login/useAuthRedirect';
 import { useGoogleLogin } from '@/hooks/Login/useGoogleLogin';
 import { useGuestLogin } from '@/hooks/query/login/useGuestLogin';
+import { useGoogleMessageListener } from '@/hooks/Login/useGoogleMessageListener';
 
 const Page = () => {
   const { handleLogin } = useGoogleLogin();
   const { mutate: handleGuestLogin } = useGuestLogin();
 
   const shouldRender = useAuthRedirect();
+  useGoogleMessageListener();
 
   if (!shouldRender) return null;
 
