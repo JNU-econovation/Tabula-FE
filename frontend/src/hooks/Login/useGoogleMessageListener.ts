@@ -36,5 +36,5 @@ export const useGoogleMessageListener = () => {
 
     window.addEventListener('message', receiveMessage);
     return () => window.removeEventListener('message', receiveMessage);
-  }, [setAuth, router, addToast]);
+  }, [setAuth, router]);
 };
