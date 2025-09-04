@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "response": {
+    "fileUrl": "https://picsum.photos/200/300?random=5",
+    "fileName": "운영체제의 이해",
+    "results": [
+      {
+        "resultId": "11",
+        "resultFileName": "첫번쨰 학습",
+        "resultImages": [
+          {
+            "id": 1,
+            "postImageUrl": "https://picsum.photos/200/300?random=1"
+          },
+          {
+            "id": 2,
+            "postImageUrl": "https://picsum.photos/200/300?random=2"
+          }
+        ]
+      },
+      {
+        "resultId": "22",
+        "resultFileName": "두번쨰 학습",
+        "resultImages": [
+          {
+            "id": 1,
+            "postImageUrl": "https://picsum.photos/200/300?random=3"
+          },
+          {
+            "id": 2,
+            "postImageUrl": "https://picsum.photos/200/300?random=4"
+          }
+        ]
+      }
+    ]
+  },
+  "error": null
+}

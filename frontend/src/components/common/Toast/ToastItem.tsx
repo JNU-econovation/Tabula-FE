@@ -1,0 +1,22 @@
+import { ToastProps } from "@/stores/toastStore"
+import { AiOutlineNotification } from "react-icons/ai"
+import { LuCircleAlert } from "react-icons/lu"
+
+const ToastItem: React.FC<ToastProps> = ({ id, text, type = "error", isExit }) => {
+  return (
+    <div
+      key={id}
+      className={`flex items-center gap-3 px-4 sm:px-5 py-2 text-sm sm:text-base text-white shadow-md rounded-md 
+        w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl
+        ${type === "error" ? "bg-[#EE8282]" : "bg-gray-500"}
+        ${isExit === true ? "toast-exit" : "toast-enter" } 
+        opacity-100 will-change-opacity 
+      `}>
+      {type === "error" && <LuCircleAlert className=" text-xl font-bold flex-shrink-0" />}
+      {type === "default" && <AiOutlineNotification className=" text-xl font-bold flex-shrink-0" />}
+      <div className="whitespace-nowrap break-normal">{text}</div>
+    </div>
+  )
+}
+
+export default ToastItem

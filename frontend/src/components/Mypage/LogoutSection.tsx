@@ -1,0 +1,18 @@
+import { IoIosArrowRoundForward } from "react-icons/io"
+
+interface LogoutSectionProps {
+  onClick: () => void
+}
+
+const LogoutSection = ({ onClick }: LogoutSectionProps) => {
+  return (
+    <div onClick={onClick} className="flex w-full justify-between items-center group cursor-pointer hover:bg-gray-100 px-2 py-4 sm:px-4 rounded transition-colors duration-400 overflow-hidden max-w-full">
+      <div className="flex flex-col gap-1">
+        <div className="text-xl">로그아웃</div>
+      </div>
+      <div className="flex text-4xl text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-400"><IoIosArrowRoundForward /></div>
+    </div>
+  )
+}
+
+export default LogoutSection
