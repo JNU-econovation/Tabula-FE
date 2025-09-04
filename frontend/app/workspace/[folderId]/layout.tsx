@@ -1,5 +1,6 @@
 'use client';
 
+import Analytics from '@/components/Analytics';
 import Sidebar from '@/components/Workspace/Sidebar';
 import {
   useGetFolderName,
@@ -24,6 +25,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="flex flex-1 h-full">
+      <Analytics />
       {!isLoading && (
         <div className="grid-rows-2 gap-4 w-full">
           <SidebarContext.Provider value={{ isSidebarOpen: isOpen }}>
