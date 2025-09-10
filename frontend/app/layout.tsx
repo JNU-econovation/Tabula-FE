@@ -3,6 +3,7 @@ import './globals.css';
 import Header from '@/components/common/Header/Header';
 import TanStackProvider from '@/components/TanStackProvider';
 import Analytics from '@/components/Analytics';
+import { Suspense } from 'react';
 
 export default function RootLayout({
   children,
@@ -12,7 +13,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Analytics />
+        <Suspense fallback={null}>
+          <Analytics />
+        </Suspense>
         <TanStackProvider>
           <Header />
           {children}
