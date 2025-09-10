@@ -10,12 +10,12 @@ export default function Analytics() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    if (pathname) {
+    if (pathname && GTM_ID) {
       pageview(pathname);
     }
   }, [pathname, searchParams]);
 
-  if (process.env.NEXT_PUBLIC_NETLIFY_ENV !== 'production') {
+  if (process.env.NODE_ENV !== 'production' || !GTM_ID) {
     return null;
   }
   return (
