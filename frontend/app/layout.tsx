@@ -23,10 +23,13 @@ export default function RootLayout({
 }
 
 export const metadata = {
-  title: "Tabula",
-  description: "Tabula와 함께 백지학습으로 메타인지 능력을 향상시키세요.",
+  title: 'Tabula',
+  description: 'Tabula와 함께 백지학습으로 메타인지 능력을 향상시키세요.',
   keywords: ['tabula', '백지학습', '메타인지', 'AI 학습 플랫폼'],
   icons: {
-    icon: "/favicon.png",
+    icon: '/favicon.png',
   },
-}
+  verification: {
+    google: '0Qk0CmA_OWMFiZS3AyNvveHbfpDK-lHg2kyfgA5gHGs',
+  },
+};

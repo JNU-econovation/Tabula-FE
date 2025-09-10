@@ -107,16 +107,20 @@ const ResultDetail = () => {
         </div>
       </Layout>
       <Modal close={closeModal} isOpen={isModalOpen} size="lg">
-        <div>
-          <h2 className="text-lg font-bold text-gray-800 mb-3 whitespace-pre">
-            💬 누락된 내용
-          </h2>
-          {missingAnswer.map((miss, index) => (
-            <div key={`miss-${index}`} className="mb-3 text-sm">
-              • {miss}
-            </div>
-          ))}
-        </div>
+        {missingAnswer.length === 0 ? (
+          <div className="text-center text-gray-500">누락된 내용이 없어요!</div>
+        ) : (
+          <div>
+            <h2 className="text-lg font-bold text-gray-800 mb-3 whitespace-pre">
+              💬 누락된 내용
+            </h2>
+            {missingAnswer.map((miss, index) => (
+              <div key={`miss-${index}`} className="mb-3 text-sm">
+                • {miss}
+              </div>
+            ))}
+          </div>
+        )}
       </Modal>
     </>
   );
