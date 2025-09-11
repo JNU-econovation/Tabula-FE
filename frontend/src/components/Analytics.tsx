@@ -10,7 +10,7 @@ export default function Analytics() {
 
   useEffect(() => {
     if (!pathname) return;
-    window.gtag?.('config', GA_ID as string, {
+    (window as any).gtag?.('config', GA_ID, {
       page_path: pathname,
     });
   }, [pathname]);
