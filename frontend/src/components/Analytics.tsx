@@ -1,44 +1,43 @@
 'use client';
 
-import { GTM_ID, pageview } from '@/lib/gtag';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { GA_ID } from '@/lib/gtag';
+import { usePathname } from 'next/navigation';
 import Script from 'next/script';
 import { useEffect } from 'react';
 
 export default function Analytics() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
-    if (pathname && GTM_ID) {
-      pageview(pathname);
-    }
-  }, [pathname, searchParams]);
+    if (!pathname) return;
+    window.gtag?.('config', GA_ID as string, {
+      page_path: pathname,
+    });
+  }, [pathname]);
 
-  if (process.env.NODE_ENV !== 'production' || !GTM_ID) {
+  if (process.env.NODE_ENV !== 'production' || !GA_ID) {
     return null;
   }
   return (
     <>
-      <noscript>
-        <iframe
-          src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-          height="0"
-          width="0"
-          style={{ display: 'none', visibility: 'hidden' }}
-        />
-      </noscript>
+      {/* GA4 라이브러리 불러오기 */}
       <Script
-        id="gtm-script"
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        strategy="afterInteractive"
+      />
+      {/* 초기화 */}
+      <Script
+        id="ga4-init"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer', '${GTM_ID}');
-  `,
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
         }}
       />
     </>
