@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/common/Button/Button';
+import PopupModal from '@/components/Home/PopupModal';
 import WaveBackground from '@/components/Home/WaveBackground';
 import { useAuthRedirect } from '@/hooks/Login/useAuthRedirect';
 import { useGoogleLogin } from '@/hooks/Login/useGoogleLogin';
@@ -57,6 +58,7 @@ const Page = () => {
       <div className="absolute bottom-0 left-0 w-full z-0">
         <WaveBackground />
       </div>
+      <PopupModal />
     </div>
   );
 };
