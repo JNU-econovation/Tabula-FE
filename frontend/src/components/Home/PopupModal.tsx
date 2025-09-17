@@ -2,7 +2,7 @@ import Modal from '@/components/common/Modal/Modal';
 import useModal from '@/hooks/common/useModal';
 import Image from 'next/image';
 import { useState } from 'react';
-import ClickFeedback from '../../../assets/click_feedback.png';
+import Starbucks from '../../../assets/starbucks.png';
 
 const PopupModal = () => {
   const { isModalOpen, closeModal } = useModal(true);
@@ -20,7 +20,7 @@ const PopupModal = () => {
 
   return (
     <Modal isOpen={isModalOpen} close={closeModal} size="xl" isXButton={false}>
-      <div className="relative flex flex-col h-full gap-10 text-center">
+      <div className="relative flex flex-col h-full text-center">
         <div className="flex-1 flex flex-col gap-8 overflow-y-auto p-6 sm:p-8">
           <div className="flex flex-col gap-4">
             <h3 className="text-2xl sm:text-3xl font-bold text-indigo-600">
@@ -38,8 +38,9 @@ const PopupModal = () => {
             </p>
           </div>
         </div>
-
-        <Image src={ClickFeedback} alt="서비스 의견 남기러 가기 이미지" />
+        <div className="flex justify-center">
+          <Image src={Starbucks} alt="스타벅스 쿠폰" />
+        </div>
 
         <div className="sticky bottom-0 left-0 w-full bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <label className="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-300">
