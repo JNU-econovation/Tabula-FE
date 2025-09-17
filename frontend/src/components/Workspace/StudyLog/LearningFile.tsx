@@ -20,6 +20,9 @@ const LearningFile = ({ fileName }: LearningFileProps) => {
         </p>
         <p>백지 학습시에는 2분할로 나눠서 작성해주세요.</p>
         <p>자세한 예시는 'Tabula 사용법 알아보기'를 참고해주세요 ☺️</p>
+        <br />
+        <p>이제 학습 결과물을 올려볼까요?✨</p>
+        <p>또렷한 글씨, 스캔본·전자 필기본일수록 인식률이 높아집니다.</p>
       </ChatBubble>
     </div>
   );
