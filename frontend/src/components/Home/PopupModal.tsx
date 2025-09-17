@@ -22,8 +22,8 @@ const PopupModal = () => {
     <Modal isOpen={isModalOpen} close={closeModal} size="xl" isXButton={false}>
       <div className="relative flex flex-col h-full text-center">
         <div className="flex-1 flex flex-col gap-8 overflow-y-auto p-6 sm:p-8">
-          <div className="flex flex-col gap-4">
-            <h3 className="text-2xl sm:text-3xl font-bold text-indigo-600">
+          <div className="flex flex-col gap-2">
+            <h3 className="text-2xl sm:text-3xl font-bold text-indigo-600 mb-8">
               🚀 지금은 서비스 운영 기간입니다!
             </h3>
             <p className="text-slate-700 dark:text-slate-200 text-base sm:text-lg">
@@ -42,7 +42,7 @@ const PopupModal = () => {
           <Image src={Starbucks} alt="스타벅스 쿠폰" />
         </div>
 
-        <div className="sticky bottom-0 left-0 w-full bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-4 sticky bottom-0 left-0 w-full bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <label className="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-300">
             <input
               type="checkbox"
