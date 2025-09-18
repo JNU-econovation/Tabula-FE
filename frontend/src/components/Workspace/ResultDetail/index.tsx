@@ -110,8 +110,8 @@ const ResultDetail = () => {
         {missingAnswer.length === 0 ? (
           <div className="text-center text-gray-500">누락된 내용이 없어요!</div>
         ) : (
-          <div>
-            <h2 className="text-lg font-bold text-gray-800 mb-3 whitespace-pre max-h-[40rem] overflow-auto">
+          <div className="max-h-[40rem] overflow-auto">
+            <h2 className="text-lg font-bold text-gray-800 mb-3 whitespace-pre">
               💬 누락된 내용
             </h2>
             {missingAnswer.map((miss, index) => (
