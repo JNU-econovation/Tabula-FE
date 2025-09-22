@@ -1,7 +1,8 @@
 import { ResultItem } from '@/api/workspace';
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { devtools } from 'zustand/middleware';
+import { useMemo } from 'react';
 
 interface WorkspaceData {
   learningResult: ResultItem[];
@@ -26,125 +27,117 @@ interface LearningState {
 }
 
 export const useBaseLearningStore = create<LearningState>()(
-  devtools(
-    persist(
-      (set) => ({
-        workspaceData: {},
+  devtools((set) => ({
+    workspaceData: {},
 
-        initWorkspace: (workspaceId) => {
-          set((state) => ({
-            workspaceData: {
-              ...state.workspaceData,
-              [workspaceId]: {
-                learningResult: [],
-                isLoading: false,
-              },
-            },
-          }));
+    initWorkspace: (workspaceId) => {
+      set((state) => ({
+        workspaceData: {
+          ...state.workspaceData,
+          [workspaceId]: {
+            learningResult: [],
+            isLoading: false,
+          },
         },
+      }));
+    },
 
-        setLearningResult: (workspaceId, newList) => {
-          set((state) => ({
-            workspaceData: {
-              ...state.workspaceData,
-              [workspaceId]: {
-                ...state.workspaceData[workspaceId],
-                learningResult: newList,
-                isLoading: false,
-              },
-            },
-          }));
+    setLearningResult: (workspaceId, newList) => {
+      set((state) => ({
+        workspaceData: {
+          ...state.workspaceData,
+          [workspaceId]: {
+            ...state.workspaceData[workspaceId],
+            learningResult: newList,
+            isLoading: false,
+          },
         },
+      }));
+    },
 
-        resetResults: (workspaceId) => {
-          set((state) => ({
-            workspaceData: {
-              ...state.workspaceData,
-              [workspaceId]: {
-                ...state.workspaceData[workspaceId],
-                learningResult: [],
-                isLoading: false,
-              },
-            },
-          }));
+    resetResults: (workspaceId) => {
+      set((state) => ({
+        workspaceData: {
+          ...state.workspaceData,
+          [workspaceId]: {
+            ...state.workspaceData[workspaceId],
+            learningResult: [],
+            isLoading: false,
+          },
         },
+      }));
+    },
 
-        addLoadingResult: (workspaceId, taskId, fileName) => {
-          set((state) => {
-            const workspace = state.workspaceData[workspaceId] || {
-              learningResult: [],
-              isLoading: false,
-            };
+    addLoadingResult: (workspaceId, taskId, fileName) => {
+      set((state) => {
+        const workspace = state.workspaceData[workspaceId] || {
+          learningResult: [],
+          isLoading: false,
+        };
 
-            return {
-              workspaceData: {
-                ...state.workspaceData,
-                [workspaceId]: {
-                  ...workspace,
-                  learningResult: [
-                    ...workspace.learningResult,
-                    {
-                      resultId: taskId,
-                      resultFileName: fileName,
-                      resultImages: [],
-                      resultStatus: 'LOADING',
-                    },
-                  ],
-                  isLoading: true,
+        return {
+          workspaceData: {
+            ...state.workspaceData,
+            [workspaceId]: {
+              ...workspace,
+              learningResult: [
+                ...workspace.learningResult,
+                {
+                  resultId: taskId,
+                  resultFileName: fileName,
+                  resultImages: [],
+                  resultStatus: 'LOADING',
                 },
-              },
-            };
-          });
-        },
+              ],
+              isLoading: true,
+            },
+          },
+        };
+      });
+    },
 
-        completeLoadingResult: (workspaceId, completedResult) => {
-          set((state) => {
-            const workspace = state.workspaceData[workspaceId] || {
-              learningResult: [],
-              isLoading: false,
-            };
+    completeLoadingResult: (workspaceId, completedResult) => {
+      set((state) => {
+        const workspace = state.workspaceData[workspaceId] || {
+          learningResult: [],
+          isLoading: false,
+        };
 
-            const updatedResults: ResultItem[] = workspace.learningResult.map(
-              (item: ResultItem) =>
-                item.resultStatus === 'LOADING'
-                  ? {
-                      ...completedResult,
-                      resultStatus: 'COMPLETED',
-                    }
-                  : item,
-            );
+        const updatedResults: ResultItem[] = workspace.learningResult.map(
+          (item: ResultItem) =>
+            item.resultStatus === 'LOADING'
+              ? {
+                  ...completedResult,
+                  resultStatus: 'COMPLETED',
+                }
+              : item,
+        );
 
-            const hasLoadingItems: boolean = updatedResults.some(
-              (item: ResultItem) => item.resultStatus === 'LOADING',
-            );
+        const hasLoadingItems: boolean = updatedResults.some(
+          (item: ResultItem) => item.resultStatus === 'LOADING',
+        );
 
-            return {
-              workspaceData: {
-                ...state.workspaceData,
-                [workspaceId]: {
-                  ...workspace,
-                  learningResult: updatedResults,
-                  isLoading: hasLoadingItems,
-                },
-              },
-            };
-          });
-        },
+        return {
+          workspaceData: {
+            ...state.workspaceData,
+            [workspaceId]: {
+              ...workspace,
+              learningResult: updatedResults,
+              isLoading: hasLoadingItems,
+            },
+          },
+        };
+      });
+    },
 
-        clearWorkspace: (workspaceId) => {
-          set((state) => {
-            const newWorkspaceData = { ...state.workspaceData };
-            delete newWorkspaceData[workspaceId];
-            return { workspaceData: newWorkspaceData };
-          });
-        },
-      }),
-      {
-        name: 'learning-storage', // localStorage key
-        partialize: (state) => ({ workspaceData: state.workspaceData }), // 필요한 것만 저장
-      },
-    ),
-  ),
+    clearWorkspace: (workspaceId) => {
+      set((state) => {
+        const newWorkspaceData = { ...state.workspaceData };
+        delete newWorkspaceData[workspaceId];
+        return { workspaceData: newWorkspaceData };
+      });
+    },
+  })),
 );
 
 export const useLearningStore = (workspaceId: string) => {
