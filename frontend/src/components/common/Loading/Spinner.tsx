@@ -12,7 +12,8 @@ export default function Spinner({ text, percent }: SpinnerProps) {
         ))}
       </div>
       {text && <p className="text-md text-gray-400">{text}</p>}
-      {percent && <p className="text-md text-gray-400">{percent}%</p>}
+      {percent == 0 ||
+        (percent && <p className="text-md text-gray-400">{percent}%</p>)}
     </div>
   );
 }

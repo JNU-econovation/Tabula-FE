@@ -3,8 +3,9 @@
 import Loading from '@/components/common/Loading/Loading';
 import LearningFileUpload from '@/components/Workspace/LearningFileUpload';
 import LoadingProgress from '@/components/Workspace/LearningResultUpload/LoadingProgress';
+import { usePreventRefresh } from '@/hooks/common/usePreventRefresh';
 import { UploadLearningFileResponse } from '@/hooks/query/workspace/mutation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const page = () => {
   const [step, setStep] = useState<'upload' | 'loading' | 'result'>('upload');
@@ -12,7 +13,16 @@ const page = () => {
 
   const handleTaskId = (id: string) => {
     setTaskId(id);
+    localStorage.setItem('taskId', id);
   };
+
+  useEffect(() => {
+    const savedTaskId = localStorage.getItem('taskId');
+    if (savedTaskId) {
+      setTaskId(savedTaskId);
+      setStep('loading');
+    }
+  }, []);
 
   return (
     <>

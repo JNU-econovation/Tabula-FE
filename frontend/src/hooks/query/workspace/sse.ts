@@ -27,11 +27,14 @@ export const useLoadingSSE = (url: string) => {
       const spaceId = response.spaceId;
       queryClient.invalidateQueries({ queryKey: ['workspaceList'] });
       router.push(`./${spaceId}`);
+      localStorage.removeItem('taskId');
     },
     onError: (error) => {
       console.error(
         error.message ? error.message : 'An error occurred during SSE',
       );
+      localStorage.removeItem('taskId');
+      addToast('학습자료 업로드에 실패했어요.');
     },
     onProgress: (response) => {
       let progress = 0;
