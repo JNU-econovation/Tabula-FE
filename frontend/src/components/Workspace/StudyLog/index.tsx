@@ -9,7 +9,6 @@ import { useLearningStore } from '@/stores/useLearningStore';
 import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 import Keyword from '@/components/Workspace/Keyword/Keyword';
-import StudyLogLoader from '@/components/Workspace/StudyLog/StudyLogLoader';
 
 const StudyLog = () => {
   const { spaceId } = useParams();
