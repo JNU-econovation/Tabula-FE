@@ -33,22 +33,21 @@ export const useGetLearningResultList = (spaceId: string) => {
   const fileName = data?.response?.fileName || '';
   const resultList = data?.response?.results || [];
 
+  // 기존 로직
   // useEffect(() => {
   //   if (resultList.length > 0) {
   //     setLearningResult(resultList);
   //   }
   // }, [resultList, setLearningResult, spaceId]);
 
+  //TODO: 리팩토링 필요
   useEffect(() => {
     if (resultList.length > 0) {
-      // 1. 서버에서 가져온 결과 세팅
       setLearningResult(resultList);
 
-      // 2. 로컬스토리지 기반 LOADING 복원
       if (hasLoading(spaceId)) {
         const taskId = getTaskId(spaceId);
         if (taskId) {
-          // setLearningResult 이후에 호출되도록 0ms 딜레이
           setTimeout(() => {
             addLoadingResult(taskId, '백지 학습 진행중...');
           }, 0);
