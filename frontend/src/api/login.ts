@@ -13,7 +13,7 @@ export const postAuth = async (code: string) => {
 
 export const postReissue = async (refreshToken: string) => {
   const response = await AxiosInstance.post(
-    END_POINT.authIssue,
+    END_POINT.authReissue,
     // 수정
     {},
     {

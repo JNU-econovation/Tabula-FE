@@ -7,9 +7,8 @@ export const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 export const BASE_URL_AI = process.env.NEXT_PUBLIC_AI_API_URL;
 
 export const END_POINT = {
-  // authReissue: `/v1/auth/reissue`,
   // authIsuue: `/v1/auth/issue`,
-  authIssue: `/v1/auth/reissue`,
+  authReissue: `/v1/auth/reissue`,
   guestLogin: `/v1/auth/guest`,
   workspaceList: `/v1/spaces/`,
   folderList: `/v1/folders`,
@@ -51,7 +50,7 @@ export const AxiosAIInstanceFormData = axios.create({
 const addAccessToken = (config: InternalAxiosRequestConfig) => {
   const accessToken = AuthStore.getState().accessToken;
   if (accessToken && config.headers) {
-    config.headers.set('Authorization', `Bearer ${accessToken}`);
+    config.headers['Authorization'] = `Bearer ${accessToken}`;
   }
   return config;
 };
@@ -73,8 +72,19 @@ const addAccessToken = (config: InternalAxiosRequestConfig) => {
 //   );
 // }
 
-// let isRefreshing = false;
-// let refreshFailCount = 0
+let isRefreshing = false;
+let failedQueue: any[] = [];
+
+const processQueue = (error: any, token: string | null = null) => {
+  failedQueue.forEach((prom) => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(token);
+    }
+  });
+  failedQueue = [];
+};
 
 const handleTokenRefresh = (instance: ReturnType<typeof axios.create>) => {
   instance.interceptors.response.use(
@@ -83,14 +93,29 @@ const handleTokenRefresh = (instance: ReturnType<typeof axios.create>) => {
       const errorData = error.response?.data as any;
       const originalRequest = error.config as any;
 
-      if (
+      if (errorData?.error?.code == 'SECURITY_401_1') {
+        const { addToast } = useToastStore.getState();
+        AuthStore.getState().logout();
+        window.location.href = '/';
+        addToast('로그인 정보가 올바르지 않습니다. 다시 로그인해주세요.');
+        return Promise.reject(error);
+      }
+      else if (
         errorData?.error?.code == 'SECURITY_401_2' &&
         !originalRequest._isRetry
-        // !isRefreshing &&
-        // refreshFailCount < 2
       ) {
+        if (isRefreshing) {
+          return new Promise((resolve, reject) => {
+            failedQueue.push({ resolve, reject })
+          }).then((token) => {
+            originalRequest.headers['Authorization'] = `Bearer ${token}`;
+            return instance(originalRequest);
+          })
+          .catch((err) => Promise.reject(err));
+        }
+        
         originalRequest._isRetry = true;
-        // isRefreshing = true;
+        isRefreshing = true;
 
         try {
           const authState = AuthStore.getState();
@@ -113,18 +138,17 @@ const handleTokenRefresh = (instance: ReturnType<typeof axios.create>) => {
 
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 
+          processQueue(null, newAccessToken)
+
           return instance(originalRequest);
         } catch (e) {
-          // refreshFailCount++;
+          processQueue(e, null)
           AuthStore.getState().logout();
           window.location.href = '/'; // 추후 로그인 페이지 생기면 교체
-          // const { addToast } = useToastStore.getState();
-          // addToast('세션이 만료되어 로그아웃합니다. 다시 로그인 해주세요.');
           return Promise.reject(e);
+        } finally {
+          isRefreshing = false;
         }
-        // finally {
-        // isRefreshing = false;
-        // }
       }
       return Promise.reject(error);
     },
