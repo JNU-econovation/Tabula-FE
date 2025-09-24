@@ -34,9 +34,10 @@ export const useLoadingSSE = (url: string) => {
       console.error(
         error.message ? error.message : 'An error occurred during SSE',
       );
-      localStorage.removeItem('taskId');
       addToast('학습자료 업로드에 실패했어요.');
+      localStorage.removeItem('taskId');
     },
+
     onProgress: (response) => {
       let progress = 0;
       if (typeof response === 'number') {
