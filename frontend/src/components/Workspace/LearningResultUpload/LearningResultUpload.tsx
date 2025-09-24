@@ -31,7 +31,7 @@ const LearningResultUpload = () => {
   );
 
   const { isLoading } = useLearningStore(spaceId as string);
-  const { hasLoading } = useLoadingStore();
+  // const { hasLoading } = useLoadingStore();
 
   const isImageMode = imageFiles.length > 0;
   const isPdfMode = selectedFile && !isImageMode;
@@ -51,7 +51,7 @@ const LearningResultUpload = () => {
         )}
         {(selectedFile || imageFiles.length > 0) && (
           <div className={`absolute right-0 ${isPdfMode ? 'top-8' : ''}`}>
-            {isLoading || hasLoading(spaceId as string) ? (
+            {isLoading ? (
               <Button
                 colorScheme="gray"
                 size="icon"

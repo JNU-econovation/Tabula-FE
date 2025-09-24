@@ -27,7 +27,6 @@ const StudyLog = () => {
 
   return (
     <Layout>
-      {/* <StudyLogLoader /> */}
       <Keyword />
       <LearningFile fileName={fileName} />
       {learningResult.map((result, index) => {

@@ -68,7 +68,7 @@ interface ResultResponseType {
 export const useResultLoadingSSE = (url: string, spaceId: string) => {
   const { completeLoadingResult } = useLearningStore(spaceId);
   const [percent, setPercent] = useState(0);
-  const { removeTask } = useLoadingStore.getState();
+  // const { removeTask } = useLoadingStore.getState();
 
   useSSE<ResultResponseType, ProgressData>({
     url,
@@ -79,7 +79,7 @@ export const useResultLoadingSSE = (url: string, spaceId: string) => {
         resultFileName: '',
         resultImages: response.results || [],
       });
-      removeTask(spaceId);
+      // removeTask(spaceId);
     },
     onError: (error) => {
       console.error('SSE Error:', error);
