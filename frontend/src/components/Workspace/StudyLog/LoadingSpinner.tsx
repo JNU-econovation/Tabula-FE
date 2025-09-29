@@ -1,5 +1,6 @@
 import { BASE_URL_AI, END_POINT } from '@/api';
 import Loading from '@/components/common/Loading/Loading';
+import { usePreventRefresh } from '@/hooks/common/usePreventRefresh';
 import { useResultLoadingSSE } from '@/hooks/query/workspace/sse';
 import { useParams } from 'next/navigation';
 
@@ -9,6 +10,8 @@ interface LoadingSpinnerProps {
 }
 const LoadingSpinner = ({ spaceId, taskId }: LoadingSpinnerProps) => {
   const { folderId } = useParams();
+
+  usePreventRefresh();
 
   const { percent } = useResultLoadingSSE(
     `${BASE_URL_AI}${END_POINT.aiResult}${folderId}/progress/${taskId}`,
