@@ -25,6 +25,12 @@ const GuideModal = ({ isModalOpen, closeModal }: GuideModalProps) => {
             </li>
             <h3 className="text-lg font-semibold w-full bg-secondary-100">📝 백지학습 작성 팁</h3>
             <li>
+              또렷하고 <span className="font-semibold">정갈한 글씨</span>로 작성한 경우 가장 좋은 결과가 나옵니다.
+            </li>
+            <li>
+              <span className="font-semibold">스캔본이나 전자 필기본</span> 업로드 시 인식률이 더욱 향상됩니다.
+            </li>
+            <li>
               기호보다는 <span className="font-semibold">텍스트</span> 위주로 작성해주세요.
             </li>
             <li>
