@@ -1,17 +1,24 @@
 'use client';
 
-import Loading from '@/components/common/Loading/Loading';
 import LearningFileUpload from '@/components/Workspace/LearningFileUpload';
 import LoadingProgress from '@/components/Workspace/LearningResultUpload/LoadingProgress';
 import { UploadLearningFileResponse } from '@/hooks/query/workspace/mutation';
 import { useState } from 'react';
 
 const page = () => {
-  const [step, setStep] = useState<'upload' | 'loading' | 'result'>('upload');
+  const [step, setStep] = useState<'upload' | 'loading'>('upload');
   const [taskId, setTaskId] = useState<string | null>(null);
 
   const handleTaskId = (id: string) => {
     setTaskId(id);
+  };
+
+  const setStepToUpload = () => {
+    setStep('upload');
+  };
+
+  const setStepToLoading = () => {
+    setStep('loading');
   };
 
   return (
@@ -21,12 +28,14 @@ const page = () => {
           <LearningFileUpload
             onSubmit={(data: UploadLearningFileResponse) => {
               handleTaskId(data.spaceId);
-              setStep('loading');
+              setStepToLoading();
             }}
           />
         </div>
       )}
-      {step === 'loading' && <LoadingProgress taskId={taskId} />}
+      {step === 'loading' && (
+        <LoadingProgress taskId={taskId} setStepToUpload={setStepToUpload} />
+      )}
     </>
   );
 };

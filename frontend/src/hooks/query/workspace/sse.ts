@@ -15,7 +15,12 @@ interface ProgressData {
   message?: string;
 }
 
-export const useLoadingSSE = (url: string) => {
+interface useLoadingSSEProps {
+  url: string;
+  onErrorCallback?: () => void;
+}
+
+export const useLoadingSSE = ({ url, onErrorCallback }: useLoadingSSEProps) => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const [percent, setPercent] = useState(0);
@@ -32,6 +37,8 @@ export const useLoadingSSE = (url: string) => {
       console.error(
         error.message ? error.message : 'An error occurred during SSE',
       );
+      addToast('AI 학습에 실패했습니다. 다시 시도해주세요');
+      onErrorCallback && onErrorCallback();
     },
     onProgress: (response) => {
       let progress = 0;
@@ -61,14 +68,13 @@ interface ResultResponseType {
 }
 
 export const useResultLoadingSSE = (url: string, spaceId: string) => {
-  const { completeLoadingResult } = useLearningStore(spaceId);
+  const { completeLoadingResult, clearLoading } = useLearningStore(spaceId);
   const [percent, setPercent] = useState(0);
-  const queryClient = useQueryClient();
+  const addToast = useToastStore((state) => state.addToast);
 
   useSSE<ResultResponseType, ProgressData>({
     url,
     onSuccess: (response) => {
-      console.log('SSE Success:', response);
       completeLoadingResult({
         resultId: response.resultId,
         resultFileName: '',
@@ -77,6 +83,8 @@ export const useResultLoadingSSE = (url: string, spaceId: string) => {
     },
     onError: (error) => {
       console.error('SSE Error:', error);
+      addToast('AI 채점에 실패했습니다. 다시 시도해주세요');
+      clearLoading();
     },
     onProgress: (response) => {
       let progress = 0;
