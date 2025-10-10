@@ -1,13 +1,12 @@
 'use client';
 
-import Loading from '@/components/common/Loading/Loading';
 import LearningFileUpload from '@/components/Workspace/LearningFileUpload';
 import LoadingProgress from '@/components/Workspace/LearningResultUpload/LoadingProgress';
 import { UploadLearningFileResponse } from '@/hooks/query/workspace/mutation';
 import { useState } from 'react';
 
 const page = () => {
-  const [step, setStep] = useState<'upload' | 'loading' | 'result'>('upload');
+  const [step, setStep] = useState<'upload' | 'loading'>('upload');
   const [taskId, setTaskId] = useState<string | null>(null);
 
   const handleTaskId = (id: string) => {
