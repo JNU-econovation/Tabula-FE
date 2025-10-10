@@ -14,20 +14,10 @@ interface FeedbackProps {
 }
 const Feedback = ({ status, id, children }: FeedbackProps) => {
   const { spaceId, folderId } = useParams();
-  // const [isDetailOpen, setIsDetailOpen] = useState(false);
-  // const handleDetailToggle = () => {
-  //   setIsDetailOpen((prev) => !prev);
-  // };
+
   return (
     <div>
-      {/* <Modal
-        isOpen={isDetailOpen}
-        close={() => setIsDetailOpen(false)}
-        size="max"
-      >
-        <ResultDetail spaceId={spaceId as string} resultId={id} />
-      </Modal> */}
-
+      <LoadingSpinner taskId={id} spaceId={spaceId as string} />
       {status === 'LOADING' ? (
         <div className="flex flex-col items-center gap-3">
           <LoadingSpinner taskId={id} spaceId={spaceId as string} />
@@ -39,9 +29,6 @@ const Feedback = ({ status, id, children }: FeedbackProps) => {
           <div className="flex flex-wrap gap-5">{children}</div>
           <Link href={`/workspace/${folderId}/${spaceId}/${id}`}>
             <Button
-              // onClick={() => {
-              //   handleDetailToggle();
-              // }}
               variant="line"
               size="md"
               style={{
