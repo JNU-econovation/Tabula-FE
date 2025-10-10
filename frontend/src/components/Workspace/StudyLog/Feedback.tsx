@@ -17,7 +17,6 @@ const Feedback = ({ status, id, children }: FeedbackProps) => {
 
   return (
     <div>
-      <LoadingSpinner taskId={id} spaceId={spaceId as string} />
       {status === 'LOADING' ? (
         <div className="flex flex-col items-center gap-3">
           <LoadingSpinner taskId={id} spaceId={spaceId as string} />
