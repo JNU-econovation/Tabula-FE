@@ -7,7 +7,7 @@ interface SpinnerProps {
 }
 export default function Spinner({ text, percent }: SpinnerProps) {
   return (
-    <div className="flex items-start gap-5">
+    <div className="flex items-start gap-5 min-w-2xl">
       <div className="spinner-container">
         {Array.from({ length: 12 }, (_, i) => (
           <div key={i} className="spinner-line" />
