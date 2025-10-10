@@ -4,7 +4,7 @@ import ResultDetail from '@/components/Workspace/ResultDetail';
 import LoadingSpinner from '@/components/Workspace/StudyLog/LoadingSpinner';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaSearchPlus } from 'react-icons/fa';
 
 interface FeedbackProps {

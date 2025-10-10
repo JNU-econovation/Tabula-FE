@@ -2,6 +2,7 @@ import { ResultImage, ResultItem } from '@/api/workspace';
 import { useSSE } from '@/hooks/common/useSSE';
 import { useToastStore } from '@/stores/toastStore';
 import { useLearningStore } from '@/stores/useLearningStore';
+import { useLoadingStore } from '@/stores/useLoadingStore';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
@@ -27,12 +28,16 @@ export const useLoadingSSE = (url: string) => {
       const spaceId = response.spaceId;
       queryClient.invalidateQueries({ queryKey: ['workspaceList'] });
       router.push(`./${spaceId}`);
+      localStorage.removeItem('taskId');
     },
     onError: (error) => {
       console.error(
         error.message ? error.message : 'An error occurred during SSE',
       );
+      addToast('학습자료 업로드에 실패했어요.');
+      localStorage.removeItem('taskId');
     },
+
     onProgress: (response) => {
       let progress = 0;
       if (typeof response === 'number') {
@@ -63,7 +68,7 @@ interface ResultResponseType {
 export const useResultLoadingSSE = (url: string, spaceId: string) => {
   const { completeLoadingResult } = useLearningStore(spaceId);
   const [percent, setPercent] = useState(0);
-  const queryClient = useQueryClient();
+  // const { removeTask } = useLoadingStore.getState();
 
   useSSE<ResultResponseType, ProgressData>({
     url,
@@ -74,6 +79,7 @@ export const useResultLoadingSSE = (url: string, spaceId: string) => {
         resultFileName: '',
         resultImages: response.results || [],
       });
+      // removeTask(spaceId);
     },
     onError: (error) => {
       console.error('SSE Error:', error);
