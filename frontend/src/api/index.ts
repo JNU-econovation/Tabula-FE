@@ -27,6 +27,16 @@ export const AxiosInstance = axios.create({
   timeout: 10000,
 });
 
+export const AxiosTemp = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    withCredentials: true,
+  },
+  timeout: 10000,
+});
+
 export const AxiosInstanceFormData = axios.create({
   baseURL: BASE_URL,
   headers: {
@@ -93,6 +103,9 @@ const handleTokenRefresh = (instance: ReturnType<typeof axios.create>) => {
       const errorData = error.response?.data as any;
       const originalRequest = error.config as any;
 
+      if (originalRequest.url?.includes(END_POINT.authReissue)) {
+        return Promise.reject(error);
+      }
       if (errorData?.error?.code == 'SECURITY_401_1') {
         const { addToast } = useToastStore.getState();
         AuthStore.getState().logout();

@@ -1,4 +1,4 @@
-import { AxiosInstance, END_POINT } from '.';
+import { AxiosInstance, AxiosTemp, END_POINT } from '.';
 
 export const postAuth = async (code: string) => {
   const response = await AxiosInstance.post(
@@ -12,7 +12,7 @@ export const postAuth = async (code: string) => {
 };
 
 export const postReissue = async (refreshToken: string) => {
-  const response = await AxiosInstance.post(
+  const response = await AxiosTemp.post(
     END_POINT.authReissue,
     // 수정
     {},
