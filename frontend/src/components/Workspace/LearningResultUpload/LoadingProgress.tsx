@@ -10,17 +10,19 @@ import { usePreventRefresh } from '@/hooks/common/usePreventRefresh';
 
 interface LoadingProgressProps {
   taskId: string | null;
+  setStepToUpload: () => void;
 }
-const LoadingProgress = ({ taskId }: LoadingProgressProps) => {
+const LoadingProgress = ({ taskId, setStepToUpload }: LoadingProgressProps) => {
   if (!taskId) {
     return null;
   }
   usePreventRefresh();
   const { folderId } = useParams();
   const { isSidebarOpen } = useContext(SidebarContext);
-  const { percent } = useLoadingSSE(
-    `${BASE_URL_AI}${END_POINT.aiWorkspaceList}${folderId}/progress/${taskId}`,
-  );
+  const { percent } = useLoadingSSE({
+    url: `${BASE_URL_AI}${END_POINT.aiWorkspaceList}${folderId}/progress/${taskId}`,
+    onErrorCallback: setStepToUpload,
+  });
 
   return (
     <div

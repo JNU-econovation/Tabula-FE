@@ -24,6 +24,7 @@ interface LearningState {
   ) => void;
   initWorkspace: (workspaceId: string) => void;
   clearWorkspace: (workspaceId: string) => void;
+  clearLoading: (workspaceId: string) => void;
 }
 
 export const useBaseLearningStore = create<LearningState>()(
@@ -137,6 +138,22 @@ export const useBaseLearningStore = create<LearningState>()(
         return { workspaceData: newWorkspaceData };
       });
     },
+    clearLoading: (workspaceId) => {
+      set((state) => {
+        const workspace = state.workspaceData[workspaceId];
+        if (!workspace) return state;
+
+        return {
+          workspaceData: {
+            ...state.workspaceData,
+            [workspaceId]: {
+              ...workspace,
+              isLoading: false,
+            },
+          },
+        };
+      });
+    },
   })),
 );
 
@@ -174,6 +191,8 @@ export const useLearningStore = (workspaceId: string) => {
         useBaseLearningStore.getState().initWorkspace(workspaceId),
       clearWorkspace: () =>
         useBaseLearningStore.getState().clearWorkspace(workspaceId),
+      clearLoading: () =>
+        useBaseLearningStore.getState().clearLoading(workspaceId),
     }),
     [workspaceId],
   );

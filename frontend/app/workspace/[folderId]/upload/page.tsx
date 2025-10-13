@@ -1,6 +1,5 @@
 'use client';
 
-import Loading from '@/components/common/Loading/Loading';
 import LearningFileUpload from '@/components/Workspace/LearningFileUpload';
 import LoadingProgress from '@/components/Workspace/LearningResultUpload/LoadingProgress';
 import { usePreventRefresh } from '@/hooks/common/usePreventRefresh';
@@ -8,7 +7,7 @@ import { UploadLearningFileResponse } from '@/hooks/query/workspace/mutation';
 import { useEffect, useState } from 'react';
 
 const page = () => {
-  const [step, setStep] = useState<'upload' | 'loading' | 'result'>('upload');
+  const [step, setStep] = useState<'upload' | 'loading'>('upload');
   const [taskId, setTaskId] = useState<string | null>(null);
 
   const handleTaskId = (id: string) => {
@@ -16,13 +15,13 @@ const page = () => {
     localStorage.setItem('taskId', id);
   };
 
-  useEffect(() => {
-    const savedTaskId = localStorage.getItem('taskId');
-    if (savedTaskId) {
-      setTaskId(savedTaskId);
-      setStep('loading');
-    }
-  }, []);
+  const setStepToUpload = () => {
+    setStep('upload');
+  };
+
+  const setStepToLoading = () => {
+    setStep('loading');
+  };
 
   return (
     <>
@@ -31,12 +30,14 @@ const page = () => {
           <LearningFileUpload
             onSubmit={(data: UploadLearningFileResponse) => {
               handleTaskId(data.spaceId);
-              setStep('loading');
+              setStepToLoading();
             }}
           />
         </div>
       )}
-      {step === 'loading' && <LoadingProgress taskId={taskId} />}
+      {step === 'loading' && (
+        <LoadingProgress taskId={taskId} setStepToUpload={setStepToUpload} />
+      )}
     </>
   );
 };
