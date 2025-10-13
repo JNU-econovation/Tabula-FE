@@ -10,14 +10,14 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useGoogleLogin } from '@/hooks/Login/useGoogleLogin';
 import FeedbackModal from '@/components/Mypage/FeedbackModal';
-import { useState } from 'react';
 import { useGoogleMessageListener } from '@/hooks/Login/useGoogleMessageListener';
-
-type ModalType = 'guide' | 'feedback' | null;
+import { useModalStore } from '@/stores/guideModalStore';
+import { useEffect } from 'react';
 
 const Header = () => {
   const { isLogin, username, loginType } = AuthStore();
-  const [modalType, setModalType] = useState<ModalType>(null);
+  const { modalType, openGuideModal, openFeedbackModal, closeModal } =
+    useModalStore();
   const router = useRouter();
   const { handleLogin } = useGoogleLogin();
   useGoogleMessageListener();
@@ -30,7 +30,9 @@ const Header = () => {
     }
   };
 
-  const closeModal = () => setModalType(null);
+  useEffect(() => {
+    closeModal();
+  }, [closeModal]);
 
   return (
     <div className="w-full h-18 flex items-center bg-white justify-between border-b border-gray-200 fixed z-5 px-4 sm:px-6 md:px-8">
@@ -45,7 +47,7 @@ const Header = () => {
         <Button
           variant="line"
           colorScheme="primary"
-          onClick={() => setModalType('feedback')}
+          onClick={openFeedbackModal}
           size="sm"
           radius="full"
           className="whitespace-pre hidden md:inline-flex"
@@ -55,7 +57,7 @@ const Header = () => {
         <Button
           variant="line"
           colorScheme="gradient"
-          onClick={() => setModalType('guide')}
+          onClick={openGuideModal}
           icon={<FaSearch />}
           size="sm"
           radius="full"

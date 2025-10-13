@@ -16,6 +16,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    type: 'spinner',
     text: 'Loading...',
     percent: 50,
   },

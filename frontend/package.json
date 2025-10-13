@@ -19,6 +19,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "event-source-polyfill": "^1.0.31",
+    "framer-motion": "^12.23.22",
     "lucide-react": "^0.503.0",
     "msw": "^2.8.2",
     "next": "^15.2.4",
