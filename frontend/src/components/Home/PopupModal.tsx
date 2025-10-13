@@ -26,12 +26,12 @@ const PopupModal = () => {
             <h3 className="text-2xl sm:text-3xl font-bold text-indigo-600 mb-8">
               🚀 지금은 서비스 운영 기간입니다!
             </h3>
-            <p className="text-slate-700 dark:text-slate-200 text-base sm:text-lg">
+            <p className="text-slate-700 text-base sm:text-lg">
               타뷸라를 더 좋은 서비스로 만들기 위해{' '}
               <span className="font-semibold ">여러분의 피드백</span>이 꼭
               필요해요.
             </p>
-            <p className="text-slate-700 dark:text-slate-200 text-base sm:text-lg">
+            <p className="text-slate-700 text-base sm:text-lg">
               이용 후 상단의{' '}
               <span className="font-bold ">“서비스 의견 남기러 가기”</span>{' '}
               버튼을 통해 의견을 남겨주세요!
@@ -42,8 +42,8 @@ const PopupModal = () => {
           <Image src={Starbucks} alt="스타벅스 쿠폰" />
         </div>
 
-        <div className="mt-4 sticky bottom-0 left-0 w-full bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <label className="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-300">
+        <div className="mt-4 sticky bottom-0 left-0 w-full bg-white border-t border-slate-200 p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <label className="inline-flex items-center gap-2 text-sm text-slate-500 ">
             <input
               type="checkbox"
               checked={dontShowAgain}
