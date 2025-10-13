@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/common/Button/Button';
+import GoogleLoginButton from '@/components/Home/GoogleLoginButton';
 import PopupModal from '@/components/Home/PopupModal';
 import WaveBackground from '@/components/Home/WaveBackground';
 import { useAuthRedirect } from '@/hooks/Login/useAuthRedirect';
@@ -29,34 +30,20 @@ const Page = () => {
         </div>
       </div>
       <div
-        className="mt-4 text-gray-500 z-10 transformtext-sm sm:text-base lg:text-md
+        className="mt-4 text-gray-500 z-10 transform text-sm sm:text-base lg:text-md
                   max-w-xs sm:max-w-md lg:max-w-2xl tracking-wide"
       >
         AI 채점과 피드백으로 부족한 부분을 보완해 자기주도 학습의 완성을 돕습니다.{" "}
         <br className="hidden lg:block" />
         스스로 배우고 성장하는 즐거움을 경험해 보세요.
       </div>
-      <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 mt-16 sm:mt-8 z-10 transform">
-        <Button
-          colorScheme="gradient"
-          size="md"
-          width={190}
-          className="z-10"
-          onClick={handleLogin}
-        >
-          로그인
-        </Button>
-        <Button
-          variant="line"
-          colorScheme="gray"
-          size="md"
-          width={190}
-          className="z-10"
-          onClick={() => handleGuestLogin()}
-        >
-          게스트로 시작하기
-        </Button>
+      <div className='mt-4 z-50'>
+        <GoogleLoginButton onClick={handleLogin} className='hover:cursor-pointer shadow-lg ring-1 ring-gray-300' />
+        <button className='text-gray-400 text-sm hover:cursor-pointer hover:underline underline-offset-2' onClick={()=>handleGuestLogin()}>
+          게스트로 로그인하기
+        </button>
       </div>
+      
       <div className="absolute bottom-0 left-0 w-full z-0">
         <WaveBackground />
       </div>
