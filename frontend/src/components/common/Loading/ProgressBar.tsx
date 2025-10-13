@@ -29,7 +29,7 @@ const ProgressBar = ({ percent }: ProgressbarProps) => {
         <div className="flex gap-1">
           시작 전에 상단의
           <div
-            className="cursor-pointer font-bold underline"
+            className="cursor-pointer font-bold underline hover:text-primary-600"
             onClick={openGuideModal}
           >
             'Tabula 사용법 알아보기'
