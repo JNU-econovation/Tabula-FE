@@ -23,6 +23,17 @@ export const AxiosInstance = axios.create({
     'Content-Type': 'application/json',
     Accept: 'application/json',
     withCredentials: true,
+    "ngrok-skip-browser-warning": "true",
+  },
+  timeout: 10000,
+});
+
+export const AxiosTemp = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    withCredentials: true,
   },
   timeout: 10000,
 });
@@ -93,6 +104,9 @@ const handleTokenRefresh = (instance: ReturnType<typeof axios.create>) => {
       const errorData = error.response?.data as any;
       const originalRequest = error.config as any;
 
+      if (originalRequest.url?.includes(END_POINT.authReissue)) {
+        return Promise.reject(error);
+      }
       if (errorData?.error?.code == 'SECURITY_401_1') {
         const { addToast } = useToastStore.getState();
         AuthStore.getState().logout();
@@ -126,6 +140,7 @@ const handleTokenRefresh = (instance: ReturnType<typeof axios.create>) => {
           }
 
           const data = await postReissue(refreshToken);
+          console.log('[reissue response]', data);
           const newAccessToken = data.response.accessToken;
           const newRefreshToken = data.response.refreshToken;
 
