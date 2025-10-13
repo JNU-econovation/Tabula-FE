@@ -23,7 +23,6 @@ export const AxiosInstance = axios.create({
     'Content-Type': 'application/json',
     Accept: 'application/json',
     withCredentials: true,
-    "ngrok-skip-browser-warning": "true",
   },
   timeout: 10000,
 });
@@ -140,7 +139,6 @@ const handleTokenRefresh = (instance: ReturnType<typeof axios.create>) => {
           }
 
           const data = await postReissue(refreshToken);
-          console.log('[reissue response]', data);
           const newAccessToken = data.response.accessToken;
           const newRefreshToken = data.response.refreshToken;
 
