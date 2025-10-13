@@ -10,7 +10,6 @@ import UploadedImagePreview from './UploadImagePreview';
 import { useLearningStore } from '@/stores/useLearningStore';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
 import { formatFileSize } from '@/util/formatFileSize';
-import { useLoadingStore } from '@/stores/useLoadingStore';
 
 const LearningResultUpload = () => {
   const { folderId, spaceId } = useParams();
@@ -31,7 +30,6 @@ const LearningResultUpload = () => {
   );
 
   const { isLoading } = useLearningStore(spaceId as string);
-  // const { hasLoading } = useLoadingStore();
 
   const isImageMode = imageFiles.length > 0;
   const isPdfMode = selectedFile && !isImageMode;

@@ -6,7 +6,6 @@ import {
 } from '@/api/workspace';
 import { useToastStore } from '@/stores/toastStore';
 import { useLearningStore } from '@/stores/useLearningStore';
-import { useLoadingStore } from '@/stores/useLoadingStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 
@@ -83,7 +82,6 @@ export const useUploadLearningFile = (
 export const useUploadLearningResultFile = (workspaceId: string) => {
   const { addLoadingResult } = useLearningStore(workspaceId);
   const addToast = useToastStore.getState().addToast;
-  const { addTask } = useLoadingStore.getState();
   const { spaceId } = useParams();
 
   return useMutation({
@@ -96,7 +94,6 @@ export const useUploadLearningResultFile = (workspaceId: string) => {
     }) => uploadResultFile(spaceId, formData),
     onSuccess: (data) => {
       const response = data.response;
-      addTask(spaceId as string, response.resultId);
       console.log(spaceId, response.resultId);
       addLoadingResult(response.resultId, response.fileName);
     },

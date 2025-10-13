@@ -2,7 +2,6 @@ import { ResultImage, ResultItem } from '@/api/workspace';
 import { useSSE } from '@/hooks/common/useSSE';
 import { useToastStore } from '@/stores/toastStore';
 import { useLearningStore } from '@/stores/useLearningStore';
-import { useLoadingStore } from '@/stores/useLoadingStore';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
@@ -41,7 +40,6 @@ export const useLoadingSSE = ({ url, onErrorCallback }: useLoadingSSEProps) => {
       );
       addToast('AI 학습에 실패했습니다. 다시 시도해주세요');
       onErrorCallback && onErrorCallback();
-
     },
 
     onProgress: (response) => {
@@ -84,7 +82,6 @@ export const useResultLoadingSSE = (url: string, spaceId: string) => {
         resultFileName: '',
         resultImages: response.results || [],
       });
-      // removeTask(spaceId);
     },
     onError: (error) => {
       console.error('SSE Error:', error);

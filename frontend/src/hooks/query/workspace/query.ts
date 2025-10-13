@@ -6,7 +6,6 @@ import {
 } from '@/api/workspace';
 import { getWorkspaceList } from '@/api/workspace';
 import { useLearningStore } from '@/stores/useLearningStore';
-import { useLoadingStore } from '@/stores/useLoadingStore';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
@@ -22,7 +21,6 @@ export const useGetWorkspaceList = (folderId: string) => {
 };
 export const useGetLearningResultList = (spaceId: string) => {
   const { setLearningResult, addLoadingResult } = useLearningStore(spaceId);
-  const { hasLoading, getTaskId } = useLoadingStore();
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['learningResultList', spaceId],
@@ -33,35 +31,11 @@ export const useGetLearningResultList = (spaceId: string) => {
   const fileName = data?.response?.fileName || '';
   const resultList = data?.response?.results || [];
 
-  // 기존 로직
-  // useEffect(() => {
-  //   if (resultList.length > 0) {
-  //     setLearningResult(resultList);
-  //   }
-  // }, [resultList, setLearningResult, spaceId]);
-
-  //TODO: 리팩토링 필요
   useEffect(() => {
     if (resultList.length > 0) {
       setLearningResult(resultList);
-
-      if (hasLoading(spaceId)) {
-        const taskId = getTaskId(spaceId);
-        if (taskId) {
-          setTimeout(() => {
-            addLoadingResult(taskId, '백지 학습 진행중...');
-          }, 0);
-        }
-      }
     }
-  }, [
-    resultList,
-    setLearningResult,
-    addLoadingResult,
-    hasLoading,
-    getTaskId,
-    spaceId,
-  ]);
+  }, [resultList, setLearningResult, spaceId]);
 
   return { fileUrl, fileName, isLoading, isError, resultList };
 };
