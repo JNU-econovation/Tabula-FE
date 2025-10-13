@@ -22,7 +22,7 @@ const LearningFile = ({ fileName }: LearningFileProps) => {
         </p>
         <p>백지 학습시에는 2분할로 나눠서 작성해주세요.</p>
         <p>자세한 예시는{' '}
-          <span onClick={openModal} className="font-medium hover:text-primary-600 cursor-pointer transition">
+          <span onClick={openModal} className="font-medium hover:text-primary-600 cursor-pointer underline underline-offset-2 transition">
             'Tabula 사용법 알아보기'
           </span>
           {' '}를 참고해주세요 ☺️
