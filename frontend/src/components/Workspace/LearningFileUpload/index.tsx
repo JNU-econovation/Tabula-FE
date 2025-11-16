@@ -23,7 +23,7 @@ const LearningFileUpload = ({ onSubmit }: LearningFileUploadProps) => {
   const { isSidebarOpen } = useContext(SidebarContext);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const { processFile, selectedFile, handleFile, deleteFile } = useUploadFile();
-  const {
+  let {
     subjectName,
     language,
     uploadLearningFile,
